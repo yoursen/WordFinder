@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:local="clr-namespace:WordFinder"
+    x:Class="WordFinder.GamePage"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{DynamicResource PrimaryBackground}">
+    <ContentPage.Resources>
+        <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+
+        <ControlTemplate x:Key="CharButtonControlTemplate">
+            <Frame BindingContext="{Binding Source={RelativeSource TemplatedParent}}"
+                CornerRadius="4"
+                WidthRequest="48"
+                HeightRequest="48"
+                Margin="4"
+                BackgroundColor="{DynamicResource Primary}">
+                <Label Text="{Binding Title}"
+                    FontFamily="MainFontMedium"
+                    FontSize="22"
+                    TextColor="{DynamicResource White}"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand"
+                    WidthRequest="48"
+                    HeightRequest="48"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"/>
+
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame"
+                        Binding="{Binding IsChecked}"
+                        Value="True">
+                        <Setter Property="BackgroundColor"
+                            Value="{DynamicResource Accent}"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                        Tapped="OnTapped">
+                    </TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+            </Frame>
+        </ControlTemplate>
+
+    </ContentPage.Resources>
+
+    <Grid VerticalOptions="CenterAndExpand">
+        <Image Source="game_background_image2.png"
+            Aspect="AspectFill"
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand"
+            Margin="-10"/>
+
+    <VerticalStackLayout VerticalOptions="Center">
+        <VerticalStackLayout VerticalOptions="Start">
+            <Label Text="Description goes here"
+            HeightRequest="100"
+                FontSize="18"
+                FontFamily="MainFont"
+                HorizontalOptions="Center"
+                VerticalOptions="Start"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Start"/>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout VerticalOptions="End"
+            Padding="10,20,10,0">
+            <VerticalStackLayout.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Right"
+                    Swiped="OnSwiped"/>
+            </VerticalStackLayout.GestureRecognizers>
+
+            <Label Text="{Binding Status}"
+                HeightRequest="75"
+                FontSize="22"
+                FontFamily="MainFontLight"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center">
+            </Label>
+
+            <toolkit:UniformItemsLayout MaxRows="5"
+                MaxColumns="5"
+                HorizontalOptions="Center"
+                BindableLayout.ItemsSource="{Binding Letters}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <local:CharButtonView ControlTemplate="{StaticResource CharButtonControlTemplate}"
+                            Title="{Binding Letter}"
+                            IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </toolkit:UniformItemsLayout>
+
+            <VerticalStackLayout Margin="0,30,0,0">
+                <HorizontalStackLayout Spacing="20"
+                    HorizontalOptions="Center">
+                    <Button Margin="0,10,0,0"
+                        WidthRequest="125"
+                        BackgroundColor="{DynamicResource Primary}"
+                        Text="Hint"/>
+                    <Button Margin="0,10,0,0"
+                        WidthRequest="125"
+                        BackgroundColor="{DynamicResource Accent}"
+                        Text="Check"/>
+                </HorizontalStackLayout>
+
+                <Button Margin="0,10,0,0"
+                    WidthRequest="125"
+                    Clicked="OnBackClicked"
+                    BackgroundColor="{DynamicResource Secondary}"
+                    Text="Main Menu"/>
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:WordFinder"
+    x:Class="WordFinder.MainPage"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <Image Source="main_background_image2.png"
+            Aspect="AspectFill"
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand"
+            Margin="-10"/>
+        <VerticalStackLayout Padding="40,0"
+            VerticalOptions="CenterAndExpand"
+            Spacing="20">
+
+            <Label Text="Word Finder"
+                Style="{StaticResource Headline}"
+                CharacterSpacing="6">
+                <Label.Shadow>
+                    <Shadow Brush="White"
+                        Offset="2,2"
+                        Radius="2"
+                        Opacity="0.5" />
+                </Label.Shadow>
+            </Label>
+
+            <Button Text="Play Game"
+                Clicked="OnButtonClicked"
+                Opacity="0.8"
+                HorizontalOptions="Fill" />
+
+            <Button Text="Leaderboard"
+                Clicked="OnButtonClicked"
+                Opacity="0.8"
+                Margin="30,0,30,0"
+                HorizontalOptions="Fill" />
+
+            <Button Text="Settings"
+                Clicked="OnButtonClicked"
+                Opacity="0.8"
+                Margin="30,0,30,0"
+                HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
