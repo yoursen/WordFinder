@@ -28,18 +28,20 @@
 
             <Button Text="Play Game"
                 Clicked="OnButtonClicked"
-                Opacity="0.8"
+                Opacity="0.9"
+                Margin="30,0,30,0"
+                BackgroundColor="{DynamicResource Accent}"
                 HorizontalOptions="Fill" />
 
             <Button Text="Leaderboard"
                 Clicked="OnButtonClicked"
-                Opacity="0.8"
+                Opacity="0.9"
                 Margin="30,0,30,0"
                 HorizontalOptions="Fill" />
 
             <Button Text="Settings"
                 Clicked="OnButtonClicked"
-                Opacity="0.8"
+                Opacity="0.9"
                 Margin="30,0,30,0"
                 HorizontalOptions="Fill" />
         </VerticalStackLayout>

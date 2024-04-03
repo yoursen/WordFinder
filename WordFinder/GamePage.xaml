@@ -102,20 +102,30 @@
                         HorizontalOptions="Center">
                         <Button Margin="0,10,0,0"
                             WidthRequest="125"
+                            Opacity="0.9"
                             BackgroundColor="{DynamicResource Primary}"
                             Text="Hint"/>
                         <Button Margin="0,10,0,0"
                             WidthRequest="125"
+                            Opacity="0.9"
                             BackgroundColor="{DynamicResource Accent}"
-                            Text="Check"/>
+                            Text="Next"/>
                     </HorizontalStackLayout>
 
-                    <Button Margin="0,10,0,0"
-                        WidthRequest="125"
-                        Clicked="OnBackClicked"
-                        BackgroundColor="{DynamicResource Secondary}"
-                        Text="Main Menu"/>
-
+                    <HorizontalStackLayout Spacing="20"
+                        HorizontalOptions="Center">
+                        <Button Margin="0,10,0,0"
+                            WidthRequest="125"
+                            Opacity="0.9"
+                            BackgroundColor="{DynamicResource Primary}"
+                            Text="Clear"/>
+                        <Button Margin="0,10,0,0"
+                            WidthRequest="125"
+                            Opacity="0.9"
+                            Clicked="OnBackClicked"
+                            BackgroundColor="{DynamicResource Primary}"
+                            Text="Main Menu"/>
+                    </HorizontalStackLayout>
                 </VerticalStackLayout>
 
             </VerticalStackLayout>

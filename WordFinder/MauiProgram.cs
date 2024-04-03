@@ -20,6 +20,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddSingleton<GamePage>();
 		builder.Services.AddSingleton<MainPageViewModel>();
+		builder.Services.AddSingleton<GamePageViewModel>();
 		builder.Services.AddSingleton<WordsDatabase>();
 #if DEBUG
 		builder.Logging.AddDebug();

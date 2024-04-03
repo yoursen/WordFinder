@@ -5,10 +5,12 @@ using CommunityToolkit.Maui.Core;
 public partial class GamePage : ContentPage
 {
     private WordsDatabase _db;
-    public GamePage(WordsDatabase db)
+    private GamePageViewModel _viewModel;
+    public GamePage(GamePageViewModel viewModel, WordsDatabase db)
     {
         InitializeComponent();
         _db = db;
+        _viewModel = viewModel;
 
         RefreshGameField();
 
