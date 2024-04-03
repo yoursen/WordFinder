@@ -2,7 +2,6 @@ namespace WordFinder;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 
-[QueryProperty(nameof(Count), "Count")]
 public partial class GamePage : ContentPage
 {
     private WordsDatabase _db;
@@ -14,7 +13,6 @@ public partial class GamePage : ContentPage
         RefreshGameField();
 
         BindingContext = this;
-        //IsBusy = true;
     }
 
     private void RefreshGameField() => Letters = GreateGameField();
@@ -40,56 +38,38 @@ public partial class GamePage : ContentPage
         set => SetValue(LettersProperty, value);
     }
 
-    public static readonly BindableProperty CountProperty =
-            BindableProperty.Create(nameof(Count), typeof(int), typeof(GamePage), 0);
+    public static readonly BindableProperty GuessWordProperty =
+            BindableProperty.Create(nameof(GuessWord), typeof(string), typeof(GamePage), "");
 
-    public int Count
+    public string GuessWord
     {
-        get => (int)GetValue(CountProperty);
-        set => SetValue(CountProperty, value);
+        get => (string)GetValue(GuessWordProperty);
+        set => SetValue(GuessWordProperty, value);
     }
 
-    public static readonly BindableProperty StatusProperty =
-            BindableProperty.Create(nameof(Status), typeof(string), typeof(GamePage), "");
+    public static readonly BindableProperty UserWordProperty =
+            BindableProperty.Create(nameof(UserWord), typeof(string), typeof(GamePage), "");
 
-    public string Status
+    public string UserWord
     {
-        get => (string)GetValue(StatusProperty);
-        set => SetValue(StatusProperty, value);
+        get => (string)GetValue(UserWordProperty);
+        set => SetValue(UserWordProperty, value);
     }
 
-    public static readonly BindableProperty RecentCountersProperty =
-            BindableProperty.Create(nameof(RecentCounters), typeof(List<CountItem>), typeof(GamePage), new List<CountItem>());
-
-    public List<CountItem> RecentCounters
-    {
-        get => (List<CountItem>)GetValue(RecentCountersProperty);
-        set => SetValue(RecentCountersProperty, value);
-    }
-
-    // private async Task Refresh()
-    // {
-    //     RecentCounters = await _db.GetItemsAsync();
-    //     OnPropertyChanged(nameof(RecentCounters));
-    // }
-
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
-       
-        // IsBusy = true;
-        // Status = "Loading...";
-        // await Refresh();
-        // Status = "Loaded";
-        //IsBusy = false;
-
-        //await ShowToast();
+        var gameWord = await _db.GetRandomWord();
+        GuessWord = gameWord.Description;
+        UserWord = new string('_', gameWord.Word.Length);
     }
 
     protected override void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
         base.OnNavigatingFrom(args);
         RefreshGameField();
+        GuessWord = string.Empty;
+        UserWord = string.Empty;
     }
 
     private async void OnBackClicked(object sender, EventArgs e) => await GoBack(sender);
@@ -98,23 +78,10 @@ public partial class GamePage : ContentPage
 
     private async Task GoBack(object sender)
     {
-        if(sender is Button btn)
+        if (sender is Button btn)
             await btn.AnimateScale();
         await Shell.Current.GoToAsync("..");
     }
-
-    // private async Task ShowToast(string msg = null)
-    // {
-    //     CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-
-    //     string text = msg ?? "Great move!";
-    //     ToastDuration duration = ToastDuration.Short;
-    //     double fontSize = 14;
-
-    //     var toast = Toast.Make(text, duration, fontSize);
-
-    //     await toast.Show(cancellationTokenSource.Token);
-    // }
 
     private async void OnTapped(object sender, EventArgs e)
     {
@@ -126,7 +93,11 @@ public partial class GamePage : ContentPage
         {
             HapticFeedback.Default.Perform(HapticFeedbackType.Click);
             ch.IsChecked = !ch.IsChecked;
-            Status += ch.Title;
+
+            if(UserWord.Contains("_"))
+                UserWord = string.Empty;
+
+            UserWord += ch.Title;
         }
 
         await frame.AnimateScale();

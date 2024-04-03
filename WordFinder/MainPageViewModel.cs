@@ -4,17 +4,15 @@ namespace WordFinder;
 
 public class MainPageViewModel
 {
-    private WordsDatabase _database;
-
     public ICommand PlayGameCommmand { get; }
 
-    public MainPageViewModel(WordsDatabase database)
+    public MainPageViewModel()
     {
-        _database = database;
         PlayGameCommmand = new Command(PlayGameCommmandHandler);
     }
 
-    private async void PlayGameCommmandHandler(){
+    private async void PlayGameCommmandHandler()
+    {
         await Shell.Current.GoToAsync("./GamePage");
     }
 }
