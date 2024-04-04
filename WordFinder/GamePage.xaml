@@ -38,7 +38,7 @@
 
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1"
-                        Tapped="OnTapped">
+                        Tapped="OnLetterTapped">
                     </TapGestureRecognizer>
                 </Frame.GestureRecognizers>
             </Frame>
@@ -55,7 +55,7 @@
 
         <VerticalStackLayout VerticalOptions="Center">
             <VerticalStackLayout VerticalOptions="Start">
-                <Label Text="{Binding GuessWord}"
+                <Label Text="{Binding GuessWord.Description}"
                     Margin="10,0,10,0"
                     HeightRequest="100"
                     FontSize="18"
@@ -109,7 +109,8 @@
                             WidthRequest="125"
                             Opacity="0.9"
                             BackgroundColor="{DynamicResource Accent}"
-                            Text="Next"/>
+                            Text="Next"
+                            Clicked="OnNextClicked"/>
                     </HorizontalStackLayout>
 
                     <HorizontalStackLayout Spacing="20"

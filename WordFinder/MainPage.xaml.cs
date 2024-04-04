@@ -3,10 +3,12 @@
 public partial class MainPage : ContentPage
 {
 	private MainPageViewModel _viewModel;
-	public MainPage(MainPageViewModel viewModel)
+	private WordsDatabase _db;
+	public MainPage(MainPageViewModel viewModel, WordsDatabase db)
 	{
 		InitializeComponent();
 		_viewModel = viewModel;
+		_db = db;
 		BindingContext = viewModel;
 	}
 
@@ -15,5 +17,11 @@ public partial class MainPage : ContentPage
 		await (sender as Button).AnimateScale();
 		_viewModel.PlayGameCommmand.Execute(null);
 	}
+
+    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+		await _db.Init();
+    }
 }
 

@@ -1,75 +1,35 @@
+using System.ComponentModel;
+
 namespace WordFinder;
 
 public class GamePageViewModel : BindableObject
 {
-    private WordsDatabase _db;
-    public GamePageViewModel(WordsDatabase db)
+    private GameModel _gameModel;
+
+    public GamePageViewModel(GameModel gameModel)
     {
-        _db = db;
+        _gameModel = gameModel;
     }
 
-    public static readonly BindableProperty LettersProperty =
-            BindableProperty.Create(nameof(Letters), typeof(GameLetter[]), typeof(GamePageViewModel), default(GameLetter[]));
+    public GameLetter[] Letters => _gameModel.Letters;
+    public GameWord GuessWord => _gameModel.GuessWord;
+    public string UserWord => _gameModel.UserWord;
 
-    public GameLetter[] Letters
+    public async Task Next() => await _gameModel.Next();
+    public void Reset() => _gameModel.Reset();
+    public void ToggleButton(CharButtonView ch) => _gameModel.ToggleButton(ch);
+    private void GameModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        => OnPropertyChanged(e.PropertyName);
+
+    public async Task OnNavigatedTo()
     {
-        get => (GameLetter[])GetValue(LettersProperty);
-        set => SetValue(LettersProperty, value);
+        _gameModel.PropertyChanged += GameModelPropertyChanged;
+        await _gameModel.Next();
     }
 
-    public static readonly BindableProperty GuessWordProperty =
-            BindableProperty.Create(nameof(GuessWord), typeof(string), typeof(GamePageViewModel), "");
-
-    public string GuessWord
+    public async Task OnNavigatedFrom()
     {
-        get => (string)GetValue(GuessWordProperty);
-        set => SetValue(GuessWordProperty, value);
-    }
-
-    public static readonly BindableProperty UserWordProperty =
-            BindableProperty.Create(nameof(UserWord), typeof(string), typeof(GamePageViewModel), "");
-
-    public string UserWord
-    {
-        get => (string)GetValue(UserWordProperty);
-        set => SetValue(UserWordProperty, value);
-    }
-
-    private void RefreshGameField() => Letters = GreateGameField();
-
-    private GameLetter[] GreateGameField()
-    {
-        var field = new List<GameLetter>();
-        for (int i = 0; i < 25; i++)
-        {
-            var letterStr = ((char)Random.Shared.Next(65, 90)).ToString();
-            var gameLetter = new GameLetter(letterStr);
-            field.Add(gameLetter);
-        }
-        return field.ToArray();
-    }
-
-    public async Task Next()
-    {
-        var gameWord = await _db.GetRandomWord();
-        GuessWord = gameWord.Description;
-        UserWord = new string('_', gameWord.Word.Length);
-
-        RefreshGameField();
-    }
-
-    public void Reset()
-    {
-        Letters = Array.Empty<GameLetter>();
-        GuessWord = string.Empty;
-        UserWord = string.Empty;
-    }
-
-    public void ToggleButton(CharButtonView ch)
-    {
-        if (UserWord.Contains("_"))
-            UserWord = string.Empty;
-
-        UserWord += ch.Title;
+        _gameModel.PropertyChanged -= GameModelPropertyChanged;
+        await _gameModel.Reset();
     }
 }

@@ -23,10 +23,5 @@ public class GameLetter : BindableObject
         set { SetValue(IsCheckedProperty, value); }
     }
 
-    public override string ToString()
-    {
-        if(!string.IsNullOrEmpty(Letter))
-            return Letter;
-        return base.ToString();
-    }
+    public override string ToString() => Letter ?? string.Empty;
 }

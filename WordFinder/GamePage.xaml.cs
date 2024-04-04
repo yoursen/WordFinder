@@ -13,13 +13,19 @@ public partial class GamePage : ContentPage
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
-        await _viewModel.Next();
+        await _viewModel.OnNavigatedTo();
     }
 
-    protected override void OnNavigatingFrom(NavigatingFromEventArgs args)
+    protected override async void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
         base.OnNavigatingFrom(args);
-        _viewModel.Reset();
+        await _viewModel.OnNavigatedFrom();
+    }
+
+    private async void OnNextClicked(object sender, EventArgs e)
+    {
+        await (sender as VisualElement).AnimateScale();
+        await _viewModel.Next();
     }
 
     private async void OnBackClicked(object sender, EventArgs e) => await GoBack(sender);
@@ -33,7 +39,7 @@ public partial class GamePage : ContentPage
         await Shell.Current.GoToAsync("..");
     }
 
-    private async void OnTapped(object sender, EventArgs e)
+    private async void OnLetterTapped(object sender, EventArgs e)
     {
         var frame = sender as ContentView;
         if (frame is null)
@@ -41,7 +47,7 @@ public partial class GamePage : ContentPage
 
         if (frame.Parent is CharButtonView ch)
         {
-            HapticFeedback.Default.Perform(HapticFeedbackType.Click);            
+            HapticFeedback.Default.Perform(HapticFeedbackType.Click);
             ch.IsChecked = !ch.IsChecked;
 
             _viewModel.ToggleButton(ch);

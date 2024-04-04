@@ -4,6 +4,7 @@ namespace WordFinder;
 
 public class GameWord
 {
+    public static GameWord Empty = new GameWord(string.Empty, string.Empty);
     public GameWord() { }
     public GameWord(string word, string description)
     {
