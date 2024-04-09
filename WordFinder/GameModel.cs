@@ -4,11 +4,13 @@ namespace WordFinder;
 
 public partial class GameModel : ObservableObject
 {
-    private const int GameLettersCount = 25;
+    private const int GridSize = 5;
     private WordsDatabase _db;
-    public GameModel(WordsDatabase db)
+    private WordFitter _wordFitter;
+    public GameModel(WordsDatabase db, WordFitter wordFitter)
     {
         _db = db;
+        _wordFitter = wordFitter;
         CreateGameField();
     }
 
@@ -18,9 +20,13 @@ public partial class GameModel : ObservableObject
 
     public async Task Next()
     {
-        GuessWord = await _db.GetRandomWord();
-        UserWord = new string('_', GuessWord.Word.Length);
-        CreateGameField();
+        bool success;
+        do
+        {
+            GuessWord = await _db.GetRandomWord();
+            UserWord = new string('_', GuessWord.Word.Length);
+            success = CreateGameField();
+        } while (!success);
     }
 
     public async Task Reset()
@@ -38,31 +44,18 @@ public partial class GameModel : ObservableObject
         UserWord += ch.Title;
     }
 
-    private void CreateGameField()
+    private bool CreateGameField()
     {
-        var letters = new GameLetter[GameLettersCount];
+        _wordFitter.Initialize(GridSize);
         if (GuessWord is not null)
         {
-            foreach (var ch in GuessWord.Word)
+            if (!_wordFitter.FitWord(GuessWord))
             {
-                var cellIndex = Random.Shared.Next(0, GameLettersCount - 1);
-                if (letters[cellIndex] is not null)
-                    continue;
-
-                letters[cellIndex] = new GameLetter(ch.ToString().ToUpper());
+                return false;
             }
         }
-
-        for (int i = 0; i < GameLettersCount; i++)
-        {
-            if (letters[i] is not null)
-                continue;
-
-            var letterStr = ((char)Random.Shared.Next(65, 90)).ToString();
-            //var gameLetter = new GameLetter(letterStr);
-            var gameLetter = new GameLetter("");
-            letters[i] = gameLetter;
-        }
-        Letters = letters;
+        _wordFitter.FitBlank();
+        Letters = _wordFitter.Flush();
+        return true;
     }
 }
