@@ -2,7 +2,7 @@ namespace WordFinder;
 
 public class GameLetter : BindableObject
 {
-    public GameLetter(){}
+    public GameLetter() { }
     public GameLetter(string letter) => Letter = letter;
 
     public static readonly BindableProperty LetterProperty =
@@ -21,6 +21,15 @@ public class GameLetter : BindableObject
     {
         get { return (bool)GetValue(IsCheckedProperty); }
         set { SetValue(IsCheckedProperty, value); }
+    }
+
+    public static readonly BindableProperty IsMainLetterProperty =
+        BindableProperty.Create(nameof(IsMainLetter), typeof(bool), typeof(GameLetter), default(bool));
+
+    public bool IsMainLetter
+    {
+        get { return (bool)GetValue(IsMainLetterProperty); }
+        set { SetValue(IsMainLetterProperty, value); }
     }
 
     public override string ToString() => Letter ?? string.Empty;

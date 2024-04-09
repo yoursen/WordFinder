@@ -79,7 +79,10 @@ public class WordFitter
                             _table[i, j] = null;
                     break;
                 }
-                _table[_row, _col] = new GameLetter(ch.ToString().ToUpper());
+                _table[_row, _col] = new GameLetter(ch.ToString().ToUpper())
+                {
+                    IsMainLetter = true
+                };
                 letterIndex++;
             }
             if (success)
@@ -98,7 +101,7 @@ public class WordFitter
                 if (_table[i, j] is not null)
                     continue;
 
-                _table[i, j] = new GameLetter(string.Empty);
+                _table[i, j] = new GameLetter(((char)Random.Shared.Next(65, 90)).ToString());
             }
         }
     }
