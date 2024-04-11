@@ -81,7 +81,8 @@ public class WordFitter
                 }
                 _table[_row, _col] = new GameLetter(ch.ToString().ToUpper())
                 {
-                    IsMainLetter = true
+                    IsMainLetter = true,
+                    LetterIndex = letterIndex
                 };
                 letterIndex++;
             }

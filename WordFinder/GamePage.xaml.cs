@@ -28,6 +28,12 @@ public partial class GamePage : ContentPage
         await _viewModel.Next();
     }
 
+    private async void OnHintClicked(object sender, EventArgs e)
+    {
+        await (sender as VisualElement).AnimateScale();
+        await _viewModel.Hint();
+    }
+
     private async void OnBackClicked(object sender, EventArgs e) => await GoBack(sender);
 
     private async void OnSwiped(object sender, SwipedEventArgs e) => await GoBack(sender);

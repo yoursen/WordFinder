@@ -16,6 +16,7 @@ public class GamePageViewModel : BindableObject
     public string UserWord => _gameModel.UserWord;
 
     public async Task Next() => await _gameModel.Next();
+    public async Task Hint() => await _gameModel.Hint();
     public void ToggleButton(CharButtonView ch) => _gameModel.ToggleButton(ch);
     private void GameModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         => OnPropertyChanged(e.PropertyName);

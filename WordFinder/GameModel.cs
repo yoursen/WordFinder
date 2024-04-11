@@ -29,6 +29,17 @@ public partial class GameModel : ObservableObject
         } while (!success);
     }
 
+    public async Task Hint()
+    {
+        var hintLetter = Letters.Where(el => el.IsMainLetter && !el.IsChecked)
+               .OrderBy(el => el.LetterIndex)
+               .FirstOrDefault();
+        if (hintLetter is not null)
+            hintLetter.IsChecked = true;
+
+        await Task.CompletedTask;
+    }
+
     public async Task Reset()
     {
         Letters = Array.Empty<GameLetter>();
