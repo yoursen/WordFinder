@@ -36,7 +36,8 @@ public partial class GamePage : ContentPage
 
     private async void OnBackClicked(object sender, EventArgs e) => await GoBack(sender);
 
-    private async void OnSwiped(object sender, SwipedEventArgs e) => await GoBack(sender);
+    private async void OnSwipedRight(object sender, SwipedEventArgs e) => await GoBack(sender);
+    private void OnSwipedLeft(object sender, SwipedEventArgs e) => _viewModel.RemoveLastLetter();
 
     private async Task GoBack(object sender)
     {
@@ -51,14 +52,18 @@ public partial class GamePage : ContentPage
         if (frame is null)
             return;
 
-        if (frame.Parent is CharButtonView ch)
+        if (frame.Parent?.BindingContext is GameLetter letter)
         {
             HapticFeedback.Default.Perform(HapticFeedbackType.Click);
-            ch.IsChecked = !ch.IsChecked;
-
-            _viewModel.ToggleButton(ch);
+            _viewModel.ToggleLetter(letter);
         }
 
         await frame.AnimateScale();
+    }
+
+    private async void OnClearClicked(object sender, EventArgs e)
+    {
+        await (sender as VisualElement).AnimateScale();
+        _viewModel.ClearUserWord();
     }
 }
