@@ -35,13 +35,13 @@ public partial class GameModel : ObservableObject
 
     public async Task Hint()
     {
-        var hintLetter = Letters.Where(el => el.IsMainLetter && !el.IsChecked)
+        var gameLetter = Letters.Where(el => el.IsMainLetter && !el.IsChecked)
                .OrderBy(el => el.LetterIndex)
                .FirstOrDefault();
-        if (hintLetter is not null)
-        {
-            hintLetter.IsChecked = true;
-        }
+
+        if (gameLetter is not null)
+            ToggleLetter(gameLetter);
+
         await Task.CompletedTask;
     }
 
@@ -52,7 +52,7 @@ public partial class GameModel : ObservableObject
         await Task.CompletedTask;
     }
 
-    public void ToggleLetter(GameLetter letter)
+    public async Task ToggleLetter(GameLetter letter)
     {
         if (letter.IsChecked)
         {
@@ -64,18 +64,17 @@ public partial class GameModel : ObservableObject
         }
         else
         {
-            var idx = _userWordLetters.IndexOf(null);
-            if (idx >= 0)
+            var firstNullIndex = _userWordLetters.IndexOf(null);
+            if (firstNullIndex >= 0)
             {
-                _userWordLetters[idx] = letter;
+                _userWordLetters[firstNullIndex] = letter;
             }
             else
             {
                 if (_userWordLetters.Count >= GuessWord.Word.Length)
-                {
                     return;
-                }
-                _userWordLetters.Add(letter);
+                else
+                    _userWordLetters.Add(letter);
             }
         }
         letter.IsChecked = !letter.IsChecked;
@@ -129,4 +128,6 @@ public partial class GameModel : ObservableObject
         }
         UserWord = sb.ToString();
     }
+
+    public bool IsGuessWordCorrect() => string.Compare(GuessWord.Word, UserWord, StringComparison.OrdinalIgnoreCase) == 0;
 }

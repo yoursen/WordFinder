@@ -16,10 +16,29 @@ public class GamePageViewModel : BindableObject
     public string UserWord => _gameModel.UserWord;
 
     public async Task Next() => await _gameModel.Next();
-    public async Task Hint() => await _gameModel.Hint();
-    public void ToggleLetter(GameLetter letter) => _gameModel.ToggleLetter(letter);
+    public async Task Hint()
+    {
+        await _gameModel.Hint();
+        await CheckWordAndDoNext();
+
+    }
+    public async Task ToggleLetter(GameLetter letter)
+    {
+        await _gameModel.ToggleLetter(letter);
+        await CheckWordAndDoNext();
+    }
+
     public void RemoveLastLetter() => _gameModel.RemoveLastLetter();
     public void ClearUserWord() => _gameModel.ClearUserWord();
+
+    private async Task CheckWordAndDoNext()
+    {
+        if (_gameModel.IsGuessWordCorrect())
+        {
+            await Next();
+        }
+    }
+
     private void GameModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         => OnPropertyChanged(e.PropertyName);
 

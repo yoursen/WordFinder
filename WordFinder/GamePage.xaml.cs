@@ -55,7 +55,7 @@ public partial class GamePage : ContentPage
         if (frame.Parent?.BindingContext is GameLetter letter)
         {
             HapticFeedback.Default.Perform(HapticFeedbackType.Click);
-            _viewModel.ToggleLetter(letter);
+            await _viewModel.ToggleLetter(letter);
         }
 
         await frame.AnimateScale();
