@@ -35,12 +35,14 @@ public partial class GameModel : ObservableObject
 
     public async Task Hint()
     {
+        await RemoveWrongLetters();
+
         var gameLetter = Letters.Where(el => el.IsMainLetter && !el.IsChecked)
                .OrderBy(el => el.LetterIndex)
                .FirstOrDefault();
 
         if (gameLetter is not null)
-            ToggleLetter(gameLetter);
+            await ToggleLetter(gameLetter);
 
         await Task.CompletedTask;
     }
@@ -79,6 +81,7 @@ public partial class GameModel : ObservableObject
         }
         letter.IsChecked = !letter.IsChecked;
         UpdateUserWord();
+        await Task.CompletedTask;
     }
 
     public void RemoveLastLetter()
@@ -130,4 +133,35 @@ public partial class GameModel : ObservableObject
     }
 
     public bool IsGuessWordCorrect() => string.Compare(GuessWord.Word, UserWord, StringComparison.OrdinalIgnoreCase) == 0;
+
+    private async Task<bool> RemoveWrongLetters()
+    {
+        var isRemoved = false;
+
+        // remove all toggled letters that are not main
+        foreach (var letter in _userWordLetters.Where(l => l?.IsChecked == true && !l.IsMainLetter).ToArray())
+        {
+            isRemoved = true;
+            await ToggleLetter(letter);
+        }
+
+        // check for position of letters
+        List<GameLetter> toRemove = new();
+        for (int i = 0; i < _userWordLetters.Count; i++)
+        {
+            if (_userWordLetters[i] is null)
+                continue;
+
+            if (string.Compare(GuessWord.Word[i].ToString(), _userWordLetters[i].Letter, StringComparison.OrdinalIgnoreCase) != 0)
+                toRemove.Add(_userWordLetters[i]);
+        }
+
+        foreach (var letter in toRemove)
+        {
+            isRemoved = true;
+            await ToggleLetter(letter);
+        }
+
+        return isRemoved;
+    }
 }
