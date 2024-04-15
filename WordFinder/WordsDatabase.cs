@@ -4,7 +4,6 @@ using WordFinder;
 public class WordsDatabase
 {
     private SQLiteAsyncConnection _database;
-    private const string RandomWordQuery = "SELECT * FROM GameWord WHERE IsPlayed = FALSE and Id = (SELECT Id FROM GameWord ORDER BY RANDOM() LIMIT 1)";
 
     public async Task Init()
     {
@@ -36,7 +35,24 @@ public class WordsDatabase
     {
         await Init();
 
+        const string RandomWordQuery = "SELECT * FROM GameWord WHERE Id = (SELECT Id FROM GameWord WHERE IsPlayed = FALSE ORDER BY RANDOM() LIMIT 1)";
         var randomWord = await _database.QueryAsync<GameWord>(RandomWordQuery);
         return randomWord.FirstOrDefault();
+    }
+
+    public async Task SetIsPlayed(int id, bool isPlayed)
+    {
+        await Init();
+
+        const string sql = $"UPDATE GameWord SET IsPlayed = ? WHERE Id = ?";
+        var res = await _database.ExecuteAsync(sql, isPlayed, id);
+    }
+
+    public async Task ResetIsPlayed()
+    {
+        await Init();
+
+        const string sql = $"UPDATE GameWord SET IsPlayed = FALSE";
+        var res = await _database.ExecuteAsync(sql);
     }
 }

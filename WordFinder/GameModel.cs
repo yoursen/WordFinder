@@ -23,14 +23,28 @@ public partial class GameModel : ObservableObject
 
     public async Task Next()
     {
-        bool success;
+        bool success = false;
         do
         {
             GuessWord = await _db.GetRandomWord();
+
+            if (GuessWord is null)
+            {
+                await _db.ResetIsPlayed();
+                success = false;
+                continue;
+            }
+            else
+            {
+                await _db.SetIsPlayed(GuessWord.Id, true);
+            }
+
             _userWordLetters.Clear();
             UpdateUserWord();
             success = CreateGameField();
         } while (!success);
+
+
     }
 
     public async Task Hint()
