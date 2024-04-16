@@ -14,7 +14,9 @@ public class GamePageViewModel : BindableObject
     public GameLetter[] Letters => _gameModel.Letters;
     public GameWord GuessWord => _gameModel.GuessWord;
     public string UserWord => _gameModel.UserWord;
+    public int Score => _gameModel.Score;
 
+    public async Task Reset() => await _gameModel.Reset();
     public async Task Next() => await _gameModel.Next();
     public async Task Hint()
     {
@@ -35,6 +37,7 @@ public class GamePageViewModel : BindableObject
     {
         if (_gameModel.IsGuessWordCorrect())
         {
+            _gameModel.Score++;
             await Next();
         }
     }
@@ -48,9 +51,8 @@ public class GamePageViewModel : BindableObject
         await _gameModel.Next();
     }
 
-    public async Task OnNavigatedFrom()
+    public void OnNavigatedFrom()
     {
         _gameModel.PropertyChanged -= GameModelPropertyChanged;
-        await _gameModel.Reset();
     }
 }

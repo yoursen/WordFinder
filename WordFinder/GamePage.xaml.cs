@@ -16,10 +16,10 @@ public partial class GamePage : ContentPage
         await _viewModel.OnNavigatedTo();
     }
 
-    protected override async void OnNavigatingFrom(NavigatingFromEventArgs args)
+    protected override void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
         base.OnNavigatingFrom(args);
-        await _viewModel.OnNavigatedFrom();
+        _viewModel.OnNavigatedFrom();
     }
 
     private async void OnNextClicked(object sender, EventArgs e)
@@ -36,13 +36,19 @@ public partial class GamePage : ContentPage
 
     private async void OnBackClicked(object sender, EventArgs e) => await GoBack(sender);
 
-    private async void OnSwipedRight(object sender, SwipedEventArgs e) => await GoBack(sender);
+    private async void OnSwipedRight(object sender, SwipedEventArgs e)
+    {
+        await Task.CompletedTask;
+    }
+
     private void OnSwipedLeft(object sender, SwipedEventArgs e) => _viewModel.RemoveLastLetter();
 
     private async Task GoBack(object sender)
     {
         if (sender is Button btn)
             await btn.AnimateScale();
+
+        await _viewModel.Reset();
         await Shell.Current.GoToAsync("..");
     }
 

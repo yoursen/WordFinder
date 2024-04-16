@@ -20,6 +20,7 @@ public partial class GameModel : ObservableObject
     [ObservableProperty] private GameWord _guessWord;
     [ObservableProperty] private string _userWord;
     [ObservableProperty] private GameLetter[] _Letters;
+    [ObservableProperty] private int _score;
 
     public async Task Next()
     {
@@ -63,8 +64,13 @@ public partial class GameModel : ObservableObject
 
     public async Task Reset()
     {
-        Letters = Array.Empty<GameLetter>();
+        foreach (var letter in Letters.Where(l => l.IsChecked))
+            letter.IsChecked = false;
+
+        UserWord = string.Empty;
         GuessWord = GameWord.Empty;
+        Score = 0;
+
         await Task.CompletedTask;
     }
 

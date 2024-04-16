@@ -53,7 +53,26 @@
             HorizontalOptions="CenterAndExpand"
             Margin="-10"/>
 
+        <VerticalStackLayout
+            VerticalOptions="Start"
+            HorizontalOptions="Start"
+            Margin="50,20,0,0"
+            >
+            <Label Text="Answers"
+                    TextColor="{DynamicResource Accent}"                        
+                    FontSize="22"
+                    FontFamily="MainFontMedium"
+                    HorizontalOptions="Center"/>
+            <Label Text="{Binding Score}"
+                    TextColor="{DynamicResource Accent}"                        
+                    FontSize="28"
+                    FontFamily="MainFontMedium"
+                    HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+
+
         <VerticalStackLayout VerticalOptions="Center">
+
             <VerticalStackLayout VerticalOptions="Start">
                 <Label Text="{Binding GuessWord.Description}"
                     Margin="10,0,10,0"
