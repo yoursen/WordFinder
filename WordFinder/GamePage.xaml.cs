@@ -67,9 +67,6 @@ public partial class GamePage : ContentPage
         await frame.AnimateScale();
     }
 
-    private async void OnClearClicked(object sender, EventArgs e)
-    {
-        await (sender as VisualElement).AnimateScale();
-        _viewModel.ClearUserWord();
-    }
+    private void OnClearClicked(object sender, EventArgs e) => _viewModel.ClearUserWord();
+    private void OnClearLastLetter(object sender, EventArgs e) => _viewModel.RemoveLastLetter();
 }

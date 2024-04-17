@@ -11,6 +11,7 @@
 
         <ControlTemplate x:Key="CharButtonControlTemplate">
             <Frame BindingContext="{Binding Source={RelativeSource TemplatedParent}}"
+                BorderColor="Transparent"
                 CornerRadius="4"
                 WidthRequest="48"
                 HeightRequest="48"
@@ -94,7 +95,7 @@
             </Grid>
 
             <Label Text="{Binding GuessWord.Description}"
-                HeightRequest="125"
+                HeightRequest="75"
                 Margin="10,0,10,0"
                 FontSize="18"
                 FontFamily="MainFont"
@@ -107,19 +108,42 @@
             <VerticalStackLayout>
                 <!-- user word and matrix -->
                 <VerticalStackLayout>
-                    <Label Text="{Binding UserWord}"
-                        CharacterSpacing="3"
-                        HeightRequest="75"
-                        FontSize="22"
-                        FontFamily="MainFont"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        HorizontalTextAlignment="Center"
-                        VerticalTextAlignment="Center">
-                    </Label>
+
+                    <!-- user word and buttons -->
+                    <Grid ColumnDefinitions="48,*,48" Margin="50,0,50,0">
+                        <ImageButton Clicked="OnClearClicked"
+                            Grid.Column="0">
+                            <ImageButton.Source>
+                                <FontImageSource Glyph="&#xf644;"
+                                    Color="{DynamicResource Primary}"
+                                    FontFamily="{OnPlatform iOS=Ionicons3, Android=ionicons3.ttf#}"
+                                    Size="48" />
+                            </ImageButton.Source>
+                        </ImageButton>
+
+                        <Label Text="{Binding UserWord}"
+                            Grid.Column="1"
+                            CharacterSpacing="3"
+                            FontSize="22"
+                            FontFamily="MainFont"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center">
+                        </Label>
+
+                        <ImageButton Clicked="OnClearLastLetter"
+                            Grid.Column="2">
+                            <ImageButton.Source>
+                                <FontImageSource Glyph="&#xf644;"
+                                    Color="{DynamicResource Primary}"
+                                    FontFamily="{OnPlatform iOS=Ionicons, Android=ionicons.ttf#}"
+                                    Size="44" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                    </Grid>
 
                     <toolkit:UniformItemsLayout MaxRows="5"
                         MaxColumns="5"
+                        Margin="0,10,0,0"
                         HorizontalOptions="Center"
                         BindableLayout.ItemsSource="{Binding Letters}">
                         <BindableLayout.ItemTemplate>
@@ -133,36 +157,23 @@
                 </VerticalStackLayout>
 
                 <!-- bottom nagivation buttons -->
-                <VerticalStackLayout Margin="0,20,0,0">
-                    <HorizontalStackLayout Spacing="20"
-                        HorizontalOptions="Center">
-                        <Button Margin="0,10,0,0"
-                            WidthRequest="125"
-                            BackgroundColor="{DynamicResource Primary}"
-                            Text="Hint"
-                            Clicked="OnHintClicked"/>
-                        <Button Margin="0,10,0,0"
-                            WidthRequest="125"
-                            BackgroundColor="{DynamicResource Accent}"
-                            Text="Next"
-                            Clicked="OnNextClicked"/>
-                    </HorizontalStackLayout>
-
-                    <HorizontalStackLayout Spacing="20"
-                        HorizontalOptions="Center">
-                        <Button Margin="0,10,0,0"
-                            WidthRequest="125"
-                            BackgroundColor="{DynamicResource Primary}"
-                            Clicked="OnClearClicked"
-                            Text="Clear"/>
-                        <Button Margin="0,10,0,0"
-                            WidthRequest="125"
-                            Clicked="OnBackClicked"
-                            BackgroundColor="{DynamicResource Primary}"
-                            Text="Main Menu"/>
-                    </HorizontalStackLayout>
-                </VerticalStackLayout>
+                <HorizontalStackLayout Spacing="20"
+                    Margin="0,20,0,0"
+                    HorizontalOptions="Center">
+                    <Button Margin="0,10,0,0"
+                        WidthRequest="125"
+                        BackgroundColor="{DynamicResource Primary}"
+                        Text="Hint"
+                        Clicked="OnHintClicked"/>
+                    <Button Margin="0,10,0,0"
+                        WidthRequest="125"
+                        BackgroundColor="{DynamicResource Accent}"
+                        Text="Next"
+                        Clicked="OnNextClicked"/>
+                </HorizontalStackLayout>
             </VerticalStackLayout>
+
+            <Frame HeightRequest="25"/>
         </FlexLayout>
     </Grid>
 </ContentPage>
