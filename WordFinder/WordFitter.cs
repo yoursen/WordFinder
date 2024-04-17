@@ -53,14 +53,6 @@ public class WordFitter
         if (gameWord is null)
             return false;
 
-        // TODO: create unit tests for TableService
-        // _table[0, 2] = new GameLetter("T");
-        // _table[4, 2] = new GameLetter("B");
-        // _table[2, 0] = new GameLetter("L");
-        // _table[2, 4] = new GameLetter("R");
-        // _table[2, 2] = new GameLetter("A");
-        // _tableService.ShiftBottom();
-
         bool success = true;
         for (int attempt = 0; attempt < 50; attempt++)
         {
@@ -73,7 +65,6 @@ public class WordFitter
                     success = false;
                     _col = -1;
                     _row = -1;
-
                     for (int i = 0; i < _gridSize; i++)
                         for (int j = 0; j < _gridSize; j++)
                             _table[i, j] = null;
@@ -89,7 +80,6 @@ public class WordFitter
             if (success)
                 break;
         }
-
         return success;
     }
 
@@ -139,24 +129,24 @@ public class WordFitter
         switch (direction)
         {
             case Direction.Left:
-                if (_row == 0 && _tableService.CanShiftRight())
+                if (_col == 0 && _tableService.CanShiftRight())
                 {
                     _tableService.ShiftRight();
-                    _row++;
-                }
-
-                if (_row > 0 && _table[_row - 1, _col] is null)
-                    _row -= 1;
-                break;
-            case Direction.Top:
-                if (_col == 0 && _tableService.CanShiftBottom())
-                {
-                    _tableService.ShiftBottom();
                     _col++;
                 }
 
                 if (_col > 0 && _table[_row, _col - 1] is null)
-                    _col -= 1;
+                    _col--;
+                break;
+            case Direction.Top:
+                if (_row == 0 && _tableService.CanShiftBottom())
+                {
+                    _tableService.ShiftBottom();
+                    _row++;
+                }
+
+                if (_row > 0 && _table[_row - 1, _col] is null)
+                    _row--;
                 break;
             case Direction.Right:
                 if (_col == _gridSize - 1 && _tableService.CanShiftLeft())
@@ -166,7 +156,7 @@ public class WordFitter
                 }
 
                 if (_col < _gridSize - 1 && _table[_row, _col + 1] is null)
-                    _col += 1;
+                    _col++;
                 break;
             case Direction.Bottom:
                 if (_row == _gridSize - 1 && _tableService.CanShiftTop())
@@ -176,7 +166,7 @@ public class WordFitter
                 }
 
                 if (_row < _gridSize - 1 && _table[_row + 1, _col] is null)
-                    _row += 1;
+                    _row++;
                 break;
         }
 
