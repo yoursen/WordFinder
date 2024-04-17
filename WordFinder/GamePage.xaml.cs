@@ -52,9 +52,9 @@ public partial class GamePage : ContentPage
         await Shell.Current.GoToAsync("..");
     }
 
-    private async void OnLetterTapped(object sender, EventArgs e)
+    private async void OnLetterClicked(object sender, EventArgs e)
     {
-        var frame = sender as ContentView;
+        var frame = sender as Button;
         if (frame is null)
             return;
 
