@@ -47,78 +47,93 @@
     </ContentPage.Resources>
 
     <Grid VerticalOptions="CenterAndExpand">
+
+        <Grid.GestureRecognizers>
+            <SwipeGestureRecognizer Direction="Right"
+                Swiped="OnSwipedRight"/>
+            <SwipeGestureRecognizer Direction="Left"
+                Swiped="OnSwipedLeft"/>
+        </Grid.GestureRecognizers>
+
+
         <Image Source="game_background_image2.png"
             Aspect="AspectFill"
             VerticalOptions="CenterAndExpand"
             HorizontalOptions="CenterAndExpand"
             Margin="-10"/>
 
-        <VerticalStackLayout
-            VerticalOptions="Start"
-            HorizontalOptions="Start"
-            Margin="50,20,0,0"
-            >
-            <Label Text="Answers"
-                    TextColor="{DynamicResource Accent}"                        
-                    FontSize="22"
-                    FontFamily="MainFontMedium"
-                    HorizontalOptions="Center"/>
-            <Label Text="{Binding Score}"
-                    TextColor="{DynamicResource Accent}"                        
-                    FontSize="28"
-                    FontFamily="MainFontMedium"
-                    HorizontalOptions="Center"/>
-        </VerticalStackLayout>
+        <FlexLayout Direction="Column"
+            JustifyContent="SpaceBetween">
 
+            <Grid ColumnDefinitions="*,*"
+                Margin="0,10,0,0">
+                <VerticalStackLayout>
+                    <Label Text="Answers"
+                        TextColor="{DynamicResource Primary}"
+                        FontSize="18"
+                        FontFamily="MainFontMedium"
+                        HorizontalOptions="Center"/>
+                    <Label Text="{Binding Score}"
+                        TextColor="{DynamicResource Primary}"
+                        FontSize="20"
+                        FontFamily="MainFontMedium"
+                        HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Text="Time left"
+                        TextColor="{DynamicResource Primary}"
+                        FontSize="18"
+                        FontFamily="MainFontMedium"
+                        HorizontalOptions="Center"/>
+                    <Label Text="{Binding Score}"
+                        TextColor="{DynamicResource Primary}"
+                        FontSize="20"
+                        FontFamily="MainFontMedium"
+                        HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Grid>
 
-        <VerticalStackLayout VerticalOptions="Center">
+            <Label Text="{Binding GuessWord.Description}"
+                HeightRequest="125"
+                Margin="10,0,10,0"
+                FontSize="18"
+                FontFamily="MainFont"
+                HorizontalOptions="Center"
+                VerticalOptions="Start"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"/>
 
-            <VerticalStackLayout VerticalOptions="Start">
-                <Label Text="{Binding GuessWord.Description}"
-                    Margin="10,0,10,0"
-                    HeightRequest="100"
-                    FontSize="18"
-                    FontFamily="MainFont"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Start"
-                    HorizontalTextAlignment="Center"
-                    VerticalTextAlignment="Start"/>
-            </VerticalStackLayout>
+            <!-- bottom group panel -->
+            <VerticalStackLayout>
+                <!-- user word and matrix -->
+                <VerticalStackLayout>
+                    <Label Text="{Binding UserWord}"
+                        CharacterSpacing="3"
+                        HeightRequest="75"
+                        FontSize="22"
+                        FontFamily="MainFont"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center">
+                    </Label>
 
-            <VerticalStackLayout VerticalOptions="End"
-                Padding="10,20,10,0">
-                <VerticalStackLayout.GestureRecognizers>
-                    <SwipeGestureRecognizer Direction="Right"
-                        Swiped="OnSwipedRight"/>
-                    <SwipeGestureRecognizer Direction="Left"
-                        Swiped="OnSwipedLeft"/>
-                </VerticalStackLayout.GestureRecognizers>
+                    <toolkit:UniformItemsLayout MaxRows="5"
+                        MaxColumns="5"
+                        HorizontalOptions="Center"
+                        BindableLayout.ItemsSource="{Binding Letters}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <local:CharButtonView ControlTemplate="{StaticResource CharButtonControlTemplate}"
+                                    Title="{Binding Letter}"
+                                    IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </toolkit:UniformItemsLayout>
+                </VerticalStackLayout>
 
-                <Label Text="{Binding UserWord}"
-                    CharacterSpacing="3"
-                    HeightRequest="75"
-                    FontSize="22"
-                    FontFamily="MainFont"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    VerticalTextAlignment="Center">
-                </Label>
-
-                <toolkit:UniformItemsLayout MaxRows="5"
-                    MaxColumns="5"
-                    HorizontalOptions="Center"
-                    BindableLayout.ItemsSource="{Binding Letters}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <local:CharButtonView ControlTemplate="{StaticResource CharButtonControlTemplate}"
-                                Title="{Binding Letter}"
-                                IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </toolkit:UniformItemsLayout>
-
-                <VerticalStackLayout Margin="0,30,0,0">
+                <!-- bottom nagivation buttons -->
+                <VerticalStackLayout Margin="0,20,0,0">
                     <HorizontalStackLayout Spacing="20"
                         HorizontalOptions="Center">
                         <Button Margin="0,10,0,0"
@@ -147,9 +162,7 @@
                             Text="Main Menu"/>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
-
             </VerticalStackLayout>
-
-        </VerticalStackLayout>
+        </FlexLayout>
     </Grid>
 </ContentPage>
