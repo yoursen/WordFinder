@@ -110,14 +110,15 @@
                 <VerticalStackLayout>
 
                     <!-- user word and buttons -->
-                    <Grid ColumnDefinitions="48,*,48" Margin="50,0,50,0">
+                    <Grid ColumnDefinitions="32,*,32" Margin="50,0,50,0">
                         <ImageButton Clicked="OnClearClicked"
                             Grid.Column="0">
                             <ImageButton.Source>
-                                <FontImageSource Glyph="&#xf644;"
+                            <!-- &#xf0c4; cut -->
+                                <FontImageSource Glyph="&#xf12d;"
                                     Color="{DynamicResource Primary}"
-                                    FontFamily="{OnPlatform iOS=Ionicons3, Android=ionicons3.ttf#}"
-                                    Size="48" />
+                                    FontFamily="FontAwesome"
+                                    />
                             </ImageButton.Source>
                         </ImageButton>
 
@@ -133,10 +134,10 @@
                         <ImageButton Clicked="OnClearLastLetter"
                             Grid.Column="2">
                             <ImageButton.Source>
-                                <FontImageSource Glyph="&#xf644;"
+                                <FontImageSource Glyph="&#xf104;"
                                     Color="{DynamicResource Primary}"
-                                    FontFamily="{OnPlatform iOS=Ionicons, Android=ionicons.ttf#}"
-                                    Size="44" />
+                                    FontFamily="FontAwesome"
+                                    />
                             </ImageButton.Source>
                         </ImageButton>
                     </Grid>

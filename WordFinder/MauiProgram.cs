@@ -16,6 +16,7 @@ public static class MauiProgram
 				fonts.AddFont("Roboto-Regular.ttf", "MainFont");
 				fonts.AddFont("Roboto-Medium.ttf", "MainFontMedium");
 				fonts.AddFont("Roboto-Light.ttf", "MainFontLight");
+				fonts.AddFont("FontAwesome.oft", "FontAwesome");
 			});
 		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddSingleton<GamePage>();
