@@ -152,7 +152,7 @@
                     <Button Margin="0,10,0,0"
                         WidthRequest="125"
                         BackgroundColor="{DynamicResource Primary}"
-                        Text="Hint"
+                        Text="{Binding HintsLeft, StringFormat='Hint ({0})'}"
                         Clicked="OnHintClicked"/>
                     <Button Margin="0,10,0,0"
                         WidthRequest="125"

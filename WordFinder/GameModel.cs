@@ -21,6 +21,7 @@ public partial class GameModel : ObservableObject
     [ObservableProperty] private string _userWord;
     [ObservableProperty] private GameLetter[] _Letters;
     [ObservableProperty] private int _score;
+    [ObservableProperty] private int _hintsLeft;
 
     public async Task Next()
     {
@@ -45,11 +46,15 @@ public partial class GameModel : ObservableObject
             success = CreateGameField();
         } while (!success);
 
-
+        HintsLeft = GuessWord.Word.Length - 2;
     }
 
     public async Task Hint()
     {
+        if (HintsLeft <= 0)
+            return;
+
+        HintsLeft--;
         await RemoveWrongLetters();
 
         var gameLetter = Letters.Where(el => el.IsMainLetter && !el.IsChecked)

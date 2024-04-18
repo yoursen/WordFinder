@@ -15,6 +15,7 @@ public class GamePageViewModel : BindableObject
     public GameWord GuessWord => _gameModel.GuessWord;
     public string UserWord => _gameModel.UserWord;
     public int Score => _gameModel.Score;
+    public int HintsLeft => _gameModel.HintsLeft;
 
     public async Task Reset() => await _gameModel.Reset();
     public async Task Next() => await _gameModel.Next();
