@@ -41,5 +41,14 @@ public class GameLetter : BindableObject
         set { SetValue(LetterIndexProperty, value); }
     }
 
+    public static readonly BindableProperty IsFixedProperty =
+            BindableProperty.Create(nameof(IsFixed), typeof(bool), typeof(GameLetter), default(bool));
+
+    public bool IsFixed
+    {
+        get { return (bool)GetValue(IsFixedProperty); }
+        set { SetValue(IsFixedProperty, value); }
+    }
+
     public override string ToString() => Letter ?? string.Empty;
 }

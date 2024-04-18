@@ -30,6 +30,12 @@
                         <Setter Property="BackgroundColor"
                             Value="{DynamicResource Accent}"/>
                     </DataTrigger>
+                    <DataTrigger TargetType="Button"
+                        Binding="{Binding IsFixed}"
+                        Value="True">
+                        <Setter Property="BackgroundColor"
+                            Value="{DynamicResource Accent2}"/>
+                    </DataTrigger>
                 </Button.Triggers>
             </Button>
         </ControlTemplate>
@@ -139,7 +145,8 @@
                             <DataTemplate>
                                 <local:CharButtonView ControlTemplate="{StaticResource CharButtonControlTemplate}"
                                     Title="{Binding Letter}"
-                                    IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+                                    IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                    IsFixed="{Binding IsFixed, Mode=OneWay}"/>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </toolkit:UniformItemsLayout>

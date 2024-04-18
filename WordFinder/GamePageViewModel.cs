@@ -32,13 +32,15 @@ public class GamePageViewModel : BindableObject
     }
 
     public void RemoveLastLetter() => _gameModel.RemoveLastLetter();
-    public void ClearUserWord() => _gameModel.ClearUserWord();
+    public async void ClearUserWord() => await _gameModel.ClearUserWord();
 
     private async Task CheckWordAndDoNext()
     {
         if (_gameModel.IsGuessWordCorrect())
         {
             _gameModel.Score++;
+            _gameModel.HighlightUserLetters();
+            await Task.Delay(100);
             await Next();
         }
     }

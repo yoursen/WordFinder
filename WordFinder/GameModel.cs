@@ -49,6 +49,12 @@ public partial class GameModel : ObservableObject
         HintsLeft = GuessWord.Word.Length - 2;
     }
 
+    public void HighlightUserLetters()
+    {
+        foreach (var letter in _userWordLetters.Where(l => l is not null && l.IsMainLetter))
+            letter.IsFixed = true;
+    }
+
     public async Task Hint()
     {
         if (HintsLeft <= 0)
@@ -57,13 +63,27 @@ public partial class GameModel : ObservableObject
         HintsLeft--;
         await RemoveWrongLetters();
 
-        var gameLetter = Letters.Where(el => el.IsMainLetter && !el.IsChecked)
+        var hintLetter = Letters.Where(el => el.IsMainLetter && !el.IsChecked)
                .OrderBy(el => el.LetterIndex)
                .FirstOrDefault();
 
-        if (gameLetter is not null)
-            await ToggleLetter(gameLetter);
-
+        if (hintLetter is not null)
+        {
+            await ToggleLetter(hintLetter);
+            hintLetter.IsFixed = true;
+            foreach (var letter in _userWordLetters)
+            {
+                if (letter == hintLetter)
+                {
+                    break;
+                }
+                else
+                {
+                    // mark previous letters to be fixed
+                    letter.IsFixed = true;
+                }
+            }
+        }
         await Task.CompletedTask;
     }
 
@@ -81,6 +101,9 @@ public partial class GameModel : ObservableObject
 
     public async Task ToggleLetter(GameLetter letter)
     {
+        if (letter.IsFixed)
+            return;
+
         if (letter.IsChecked)
         {
             var idx = _userWordLetters.IndexOf(letter);
@@ -113,19 +136,24 @@ public partial class GameModel : ObservableObject
     {
         if (_userWordLetters.Count > 0)
         {
-            _userWordLetters.Remove(_userWordLetters.Last());
-            UpdateUserWord();
+            var lastLetter = _userWordLetters.Last();
+            if (!lastLetter.IsFixed)
+            {
+                _userWordLetters.Remove(lastLetter);
+                UpdateUserWord();
+            }
         }
     }
 
-    public void ClearUserWord()
+    public async Task ClearUserWord()
     {
-        foreach (var letter in Letters)
+        foreach (var letter in _userWordLetters.ToArray())
         {
-            letter.IsChecked = false;
+            if (letter is null)
+                continue;
+
+            await ToggleLetter(letter);
         }
-        _userWordLetters.Clear();
-        UpdateUserWord();
     }
 
     private bool CreateGameField()

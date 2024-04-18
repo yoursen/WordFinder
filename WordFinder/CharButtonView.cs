@@ -17,4 +17,13 @@ public class CharButtonView : ContentView
         get { return (bool)GetValue(IsCheckedProperty); }
         set { SetValue(IsCheckedProperty, value); }
     }
+
+    public static readonly BindableProperty IsFixedProperty =
+        BindableProperty.Create(nameof(IsFixed), typeof(bool), typeof(CharButtonView), default(bool));
+
+    public bool IsFixed
+    {
+        get { return (bool)GetValue(IsFixedProperty); }
+        set { SetValue(IsFixedProperty, value); }
+    }
 }
