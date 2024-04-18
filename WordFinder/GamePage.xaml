@@ -51,7 +51,6 @@
                 Swiped="OnSwipedLeft"/>
         </Grid.GestureRecognizers>
 
-
         <Image Source="game_background_image2.png"
             Aspect="AspectFill"
             VerticalOptions="CenterAndExpand"
@@ -62,8 +61,8 @@
             JustifyContent="SpaceBetween">
 
             <Grid ColumnDefinitions="*,*"
-                Margin="0,10,0,0">
-                <VerticalStackLayout>
+                >
+                <VerticalStackLayout Margin="0,10,0,0">
                     <Label Text="Answers"
                         TextColor="{DynamicResource Primary}"
                         FontSize="18"
@@ -75,7 +74,21 @@
                         FontFamily="MainFontMedium"
                         HorizontalOptions="Center"/>
                 </VerticalStackLayout>
-                <VerticalStackLayout Grid.Column="1">
+
+                <!-- navigate back button -->
+                <ImageButton Clicked="OnBackClicked"
+                    Margin="5,0,0,0"
+                    WidthRequest="22"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Start">
+                    <ImageButton.Source>
+                        <FontImageSource Glyph="&#xf104;"
+                            Color="{DynamicResource Primary}"
+                            FontFamily="FontAwesome" />
+                    </ImageButton.Source>
+                </ImageButton>
+
+                <VerticalStackLayout Grid.Column="1" Margin="0,10,0,0">
                     <Label Text="Time left"
                         TextColor="{DynamicResource Primary}"
                         FontSize="18"
