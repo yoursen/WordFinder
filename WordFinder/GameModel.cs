@@ -1,3 +1,4 @@
+using System.Data.Common;
 using System.Text;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -12,14 +13,15 @@ public partial class GameModel : ObservableObject
     {
         _db = db;
         _wordFitter = wordFitter;
-        CreateGameField();
+        GuessWord = GameWord.Empty;
+        Letters = Enumerable.Range(0, GridSize * GridSize).Select(r=> new GameLetter("")).ToArray();
     }
 
     private List<GameLetter> _userWordLetters = new List<GameLetter>();
 
     [ObservableProperty] private GameWord _guessWord;
     [ObservableProperty] private string _userWord;
-    [ObservableProperty] private GameLetter[] _Letters;
+    [ObservableProperty] private GameLetter[] _letters;
     [ObservableProperty] private int _score;
     [ObservableProperty] private int _hintsLeft;
 
@@ -28,7 +30,7 @@ public partial class GameModel : ObservableObject
         bool success = false;
         do
         {
-            GuessWord = await _db.GetRandomWord();
+            GuessWord = await _db.GameRandomGameWord();
 
             if (GuessWord is null)
             {
@@ -43,7 +45,7 @@ public partial class GameModel : ObservableObject
 
             _userWordLetters.Clear();
             UpdateUserWord();
-            success = CreateGameField();
+            success = await CreateGameField();
         } while (!success);
 
         HintsLeft = GuessWord.Word.Length - 2;
@@ -156,7 +158,7 @@ public partial class GameModel : ObservableObject
         }
     }
 
-    private bool CreateGameField()
+    private async Task<bool> CreateGameField()
     {
         _wordFitter.Initialize(GridSize);
         if (GuessWord is not null)
@@ -164,6 +166,14 @@ public partial class GameModel : ObservableObject
             if (!_wordFitter.FitWord(GuessWord))
             {
                 return false;
+            }
+            var noiseWords = await _db.GameRandomWords(5);
+            foreach (var word in noiseWords)
+            {
+                if (word.Word == GuessWord.Word)
+                    continue;
+
+                _wordFitter.FitSecondaryWord(word);
             }
         }
         _wordFitter.FitBlank();

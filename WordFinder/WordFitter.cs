@@ -83,6 +83,40 @@ public class WordFitter
         return success;
     }
 
+    public void FitSecondaryWord(GameWord gameWord)
+    {
+        var blankCell = GetFirstBlankCell();
+        if (blankCell.row < 0 || blankCell.col < 0)
+            return;
+
+        _row = blankCell.row;
+        _col = blankCell.col;
+
+        int letterIndex = 0;
+        foreach (var ch in gameWord.Word)
+        {
+            _table[_row, _col] = new GameLetter(ch.ToString().ToUpper());
+            letterIndex++;
+
+            if (!UpdateCursorPosition(letterIndex, Direction.Right | Direction.Top | Direction.Bottom))
+                break;
+        }
+    }
+
+    private (int row, int col) GetFirstBlankCell()
+    {
+        for (int i = 0; i < _gridSize; i++)
+        {
+            for (var j = 0; j < _gridSize; j++)
+            {
+                if (_table[i, j] is null)
+                    return (i, j);
+            }
+        }
+
+        return (-1, -1);
+    }
+
     public void FitBlank()
     {
         for (int i = 0; i < _gridSize; i++)

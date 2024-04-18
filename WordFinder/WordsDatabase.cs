@@ -31,13 +31,22 @@ public class WordsDatabase
         }
     }
 
-    public async Task<GameWord> GetRandomWord()
+    public async Task<GameWord> GameRandomGameWord()
     {
         await Init();
 
         const string RandomWordQuery = "SELECT * FROM GameWord WHERE Id = (SELECT Id FROM GameWord WHERE IsPlayed = FALSE ORDER BY RANDOM() LIMIT 1)";
         var randomWord = await _database.QueryAsync<GameWord>(RandomWordQuery);
         return randomWord.FirstOrDefault();
+    }
+
+    public async Task<GameWord[]> GameRandomWords(int count)
+    {
+        await Init();
+
+        string RandomWordQuery = $"SELECT * FROM GameWord ORDER BY RANDOM() LIMIT {count}";
+        var randomWord = await _database.QueryAsync<GameWord>(RandomWordQuery);
+        return randomWord.ToArray();
     }
 
     public async Task SetIsPlayed(int id, bool isPlayed)
