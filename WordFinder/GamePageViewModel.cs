@@ -31,7 +31,7 @@ public class GamePageViewModel : BindableObject
         await CheckWordAndDoNext();
     }
 
-    public void RemoveLastLetter() => _gameModel.RemoveLastLetter();
+    public async void RemoveLastLetter() => await _gameModel.RemoveLastLetter();
     public async void ClearUserWord() => await _gameModel.ClearUserWord();
 
     private async Task CheckWordAndDoNext()

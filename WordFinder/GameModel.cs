@@ -1,6 +1,7 @@
 using System.Data.Common;
 using System.Text;
 using CommunityToolkit.Mvvm.ComponentModel;
+using LocalAuthentication;
 
 namespace WordFinder;
 
@@ -134,14 +135,14 @@ public partial class GameModel : ObservableObject
         await Task.CompletedTask;
     }
 
-    public void RemoveLastLetter()
+    public async Task RemoveLastLetter()
     {
         if (_userWordLetters.Count > 0)
         {
-            var lastLetter = _userWordLetters.Last();
-            if (!lastLetter.IsFixed)
+            var lastLetter = _userWordLetters.LastOrDefault(el=>el is not null);
+            if (lastLetter is not null && !lastLetter.IsFixed)
             {
-                _userWordLetters.Remove(lastLetter);
+                await ToggleLetter(lastLetter);
                 UpdateUserWord();
             }
         }
