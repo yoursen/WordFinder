@@ -1,7 +1,5 @@
-using System.Data.Common;
 using System.Text;
 using CommunityToolkit.Mvvm.ComponentModel;
-using LocalAuthentication;
 
 namespace WordFinder;
 
@@ -9,22 +7,32 @@ public partial class GameModel : ObservableObject
 {
     private const int GridSize = 5;
     private WordsDatabase _db;
+    private GameTimer _gameTimer;
     private WordFitter _wordFitter;
-    public GameModel(WordsDatabase db, WordFitter wordFitter)
+    public GameModel(WordsDatabase db, WordFitter wordFitter, GameTimer gameTimer)
     {
         _db = db;
         _wordFitter = wordFitter;
+        _gameTimer = gameTimer;
+        _gameTimer.PropertyChanged += (s, e) => OnPropertyChanged(e);
+        _gameTimer.TimeOver += OnTimeOver;
+
         GuessWord = GameWord.Empty;
-        Letters = Enumerable.Range(0, GridSize * GridSize).Select(r=> new GameLetter("")).ToArray();
+        Letters = Enumerable.Range(0, GridSize * GridSize).Select(r => new GameLetter("")).ToArray();
     }
 
     private List<GameLetter> _userWordLetters = new List<GameLetter>();
+
+    public event EventHandler GameOver;
 
     [ObservableProperty] private GameWord _guessWord;
     [ObservableProperty] private string _userWord;
     [ObservableProperty] private GameLetter[] _letters;
     [ObservableProperty] private int _score;
     [ObservableProperty] private int _hintsLeft;
+    [ObservableProperty] private int _gameDuration;
+
+    public TimeSpan TimeLeft => _gameTimer.TimeLeft;
 
     public async Task Next()
     {
@@ -92,6 +100,8 @@ public partial class GameModel : ObservableObject
 
     public async Task Reset()
     {
+        _gameTimer.Stop();
+
         foreach (var letter in Letters.Where(l => l.IsChecked))
             letter.IsChecked = false;
 
@@ -139,7 +149,7 @@ public partial class GameModel : ObservableObject
     {
         if (_userWordLetters.Count > 0)
         {
-            var lastLetter = _userWordLetters.LastOrDefault(el=>el is not null);
+            var lastLetter = _userWordLetters.LastOrDefault(el => el is not null);
             if (lastLetter is not null && !lastLetter.IsFixed)
             {
                 await ToggleLetter(lastLetter);
@@ -227,5 +237,19 @@ public partial class GameModel : ObservableObject
         }
 
         return isRemoved;
+    }
+
+    public async Task StartGame(int gameDuration)
+    {
+        GameDuration = gameDuration;
+        await Next();
+        _gameTimer.Start(TimeSpan.FromSeconds(5));
+    }
+
+    private void OnTimeOver(object sender, EventArgs e) => OnGameOver();
+
+    private void OnGameOver()
+    {
+        GameOver?.Invoke(this, EventArgs.Empty);
     }
 }

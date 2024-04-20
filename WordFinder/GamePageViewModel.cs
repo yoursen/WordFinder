@@ -6,12 +6,10 @@ namespace WordFinder;
 public class GamePageViewModel : BindableObject
 {
     private GameModel _gameModel;
-    private GameTimer _gameTimer;
 
-    public GamePageViewModel(GameModel gameModel, GameTimer gameTimer)
+    public GamePageViewModel(GameModel gameModel)
     {
         _gameModel = gameModel;
-        _gameTimer = gameTimer;
     }
 
     public GameLetter[] Letters => _gameModel.Letters;
@@ -20,11 +18,10 @@ public class GamePageViewModel : BindableObject
     public int Score => _gameModel.Score;
     public int HintsLeft => _gameModel.HintsLeft;
     public int GameDuration { get; set; }
-    public TimeSpan TimeLeft => _gameTimer.TimeLeft;
+    public TimeSpan TimeLeft => _gameModel.TimeLeft;
 
     public async Task Reset()
     {
-        _gameTimer.Stop();
         await _gameModel.Reset();
     }
     public async Task Next() => await _gameModel.Next();
@@ -60,22 +57,17 @@ public class GamePageViewModel : BindableObject
     public async Task OnNavigatedTo()
     {
         _gameModel.PropertyChanged += OnPropertyChanged;
-        _gameTimer.PropertyChanged += OnPropertyChanged;
-        _gameTimer.TimeOver += OnTimeOver;
-
-        await _gameModel.Next();
-        //_gameTimer.Start(TimeSpan.FromMinutes(GameDuration));
-        _gameTimer.Start(TimeSpan.FromSeconds(5));
+        _gameModel.GameOver += OnGameOver;
+        await _gameModel.StartGame(GameDuration);
     }
 
     public void OnNavigatedFrom()
     {
         _gameModel.PropertyChanged -= OnPropertyChanged;
-        _gameTimer.PropertyChanged -= OnPropertyChanged;
-        _gameTimer.TimeOver -= OnTimeOver;
+        _gameModel.GameOver -= OnGameOver;
     }
 
-    private async void OnTimeOver(object sender, EventArgs e)
+    private async void OnGameOver(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("GameOver");
     }
