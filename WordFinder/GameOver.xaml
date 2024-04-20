@@ -11,5 +11,20 @@
             VerticalOptions="CenterAndExpand"
             HorizontalOptions="CenterAndExpand"
             Margin="-10"/>
+
+        <VerticalStackLayout VerticalOptions="CenterAndExpand">
+            <VerticalStackLayout HorizontalOptions="Center">
+                <Label Text="Score:"/>
+                <Label Text="{Binding Score}"/>
+                <Label Text="Best score:"/>
+                <Label Text="{Binding BestScore}"/>
+            </VerticalStackLayout>
+
+            <Button Margin="0,10,0,0"
+                WidthRequest="125"
+                BackgroundColor="{DynamicResource Accent}"
+                Text="Main menu"
+                Clicked="OnMainMenuClicked"/>
+        </VerticalStackLayout>
     </Grid>
 </ContentPage>

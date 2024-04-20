@@ -243,7 +243,7 @@ public partial class GameModel : ObservableObject
     {
         GameDuration = gameDuration;
         await Next();
-        _gameTimer.Start(TimeSpan.FromSeconds(5));
+        _gameTimer.Start(TimeSpan.FromSeconds(15));
     }
 
     private void OnTimeOver(object sender, EventArgs e) => OnGameOver();

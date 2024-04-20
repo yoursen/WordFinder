@@ -10,6 +10,11 @@ public partial class GameOver : ContentPage
         BindingContext = _viewModel;
     }
 
+    private async void OnMainMenuClicked(object sender, EventArgs e){
+        await (sender as VisualElement)?.AnimateScale();
+        await Shell.Current.GoToAsync("///MainPage");
+    }
+
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
