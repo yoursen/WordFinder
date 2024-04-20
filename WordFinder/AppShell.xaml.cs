@@ -7,5 +7,6 @@ public partial class AppShell : Shell
 		InitializeComponent();
 
 		Routing.RegisterRoute("GamePage", typeof(GamePage));
+		Routing.RegisterRoute("GameOver", typeof(GameOver));
 	}
 }

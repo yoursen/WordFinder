@@ -5,7 +5,8 @@ namespace WordFinder;
 public partial class GameTimer : ObservableObject
 {
     private IDispatcherTimer _timer;
-    
+    public event EventHandler TimeOver;
+
     public GameTimer()
     {
         _timer = Dispatcher.GetForCurrentThread().CreateTimer();
@@ -28,10 +29,15 @@ public partial class GameTimer : ObservableObject
 
     private void Timer_Tick(object sender, EventArgs e)
     {
-        TimeLeft -= TimeSpan.FromSeconds(1);
+        var timeLeft = TimeLeft - TimeSpan.FromSeconds(1);
+        if (timeLeft.TotalMilliseconds < 0)
+            timeLeft = TimeSpan.FromSeconds(0);
+            
+        TimeLeft = timeLeft;
         if (TimeLeft.TotalMilliseconds <= 0)
         {
             Stop();
+            TimeOver?.Invoke(this, EventArgs.Empty);
         }
     }
 }

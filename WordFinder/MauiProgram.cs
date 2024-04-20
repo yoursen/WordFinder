@@ -18,15 +18,21 @@ public static class MauiProgram
 				fonts.AddFont("Roboto-Light.ttf", "MainFontLight");
 				fonts.AddFont("FontAwesome.oft", "FontAwesome");
 			});
-		builder.Services.AddSingleton<MainPage>();
-		builder.Services.AddSingleton<GamePage>();
-		builder.Services.AddSingleton<MainPageViewModel>();
-		builder.Services.AddSingleton<GamePageViewModel>();
+
 		builder.Services.AddSingleton<GameModel>();
 		builder.Services.AddSingleton<WordFitter>();
 		builder.Services.AddSingleton<TableService>();
 		builder.Services.AddSingleton<WordsDatabase>();
 		builder.Services.AddSingleton<GameTimer>();
+
+		builder.Services.AddSingleton<MainPage>();
+		builder.Services.AddSingleton<GamePage>();
+		builder.Services.AddSingleton<GameOver>();
+
+		builder.Services.AddSingleton<MainPageViewModel>();
+		builder.Services.AddSingleton<GamePageViewModel>();
+		builder.Services.AddSingleton<GameOverViewModel>();
+
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif

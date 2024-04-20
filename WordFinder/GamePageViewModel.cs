@@ -19,10 +19,8 @@ public class GamePageViewModel : BindableObject
     public string UserWord => _gameModel.UserWord;
     public int Score => _gameModel.Score;
     public int HintsLeft => _gameModel.HintsLeft;
-
     public int GameDuration { get; set; }
     public TimeSpan TimeLeft => _gameTimer.TimeLeft;
-
 
     public async Task Reset()
     {
@@ -63,14 +61,22 @@ public class GamePageViewModel : BindableObject
     {
         _gameModel.PropertyChanged += OnPropertyChanged;
         _gameTimer.PropertyChanged += OnPropertyChanged;
+        _gameTimer.TimeOver += OnTimeOver;
 
         await _gameModel.Next();
-        _gameTimer.Start(TimeSpan.FromMinutes(GameDuration));
+        //_gameTimer.Start(TimeSpan.FromMinutes(GameDuration));
+        _gameTimer.Start(TimeSpan.FromSeconds(5));
     }
 
     public void OnNavigatedFrom()
     {
         _gameModel.PropertyChanged -= OnPropertyChanged;
         _gameTimer.PropertyChanged -= OnPropertyChanged;
+        _gameTimer.TimeOver -= OnTimeOver;
+    }
+
+    private async void OnTimeOver(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("GameOver");
     }
 }
