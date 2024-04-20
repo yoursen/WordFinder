@@ -55,7 +55,7 @@
             Aspect="AspectFill"
             VerticalOptions="CenterAndExpand"
             HorizontalOptions="CenterAndExpand"
-            Margin="-10"/>
+            Margin="-10,-50,-10,-10"/>
 
         <FlexLayout Direction="Column"
             JustifyContent="SpaceBetween">
@@ -94,7 +94,7 @@
                         FontSize="18"
                         FontFamily="MainFontMedium"
                         HorizontalOptions="Center"/>
-                    <Label Text="{Binding Score}"
+                    <Label Text="{Binding TimeLeft, StringFormat=\{0:mm\\:ss\}}"
                         TextColor="{DynamicResource Primary}"
                         FontSize="20"
                         FontFamily="MainFontMedium"

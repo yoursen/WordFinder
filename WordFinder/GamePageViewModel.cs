@@ -2,13 +2,16 @@ using System.ComponentModel;
 
 namespace WordFinder;
 
+[QueryProperty(nameof(GameDuration), "GameDuration")]
 public class GamePageViewModel : BindableObject
 {
     private GameModel _gameModel;
+    private GameTimer _gameTimer;
 
-    public GamePageViewModel(GameModel gameModel)
+    public GamePageViewModel(GameModel gameModel, GameTimer gameTimer)
     {
         _gameModel = gameModel;
+        _gameTimer = gameTimer;
     }
 
     public GameLetter[] Letters => _gameModel.Letters;
@@ -17,7 +20,15 @@ public class GamePageViewModel : BindableObject
     public int Score => _gameModel.Score;
     public int HintsLeft => _gameModel.HintsLeft;
 
-    public async Task Reset() => await _gameModel.Reset();
+    public int GameDuration { get; set; }
+    public TimeSpan TimeLeft => _gameTimer.TimeLeft;
+
+
+    public async Task Reset()
+    {
+        _gameTimer.Stop();
+        await _gameModel.Reset();
+    }
     public async Task Next() => await _gameModel.Next();
     public async Task Hint()
     {
@@ -45,17 +56,21 @@ public class GamePageViewModel : BindableObject
         }
     }
 
-    private void GameModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         => OnPropertyChanged(e.PropertyName);
 
     public async Task OnNavigatedTo()
     {
-        _gameModel.PropertyChanged += GameModelPropertyChanged;
+        _gameModel.PropertyChanged += OnPropertyChanged;
+        _gameTimer.PropertyChanged += OnPropertyChanged;
+
         await _gameModel.Next();
+        _gameTimer.Start(TimeSpan.FromMinutes(GameDuration));
     }
 
     public void OnNavigatedFrom()
     {
-        _gameModel.PropertyChanged -= GameModelPropertyChanged;
+        _gameModel.PropertyChanged -= OnPropertyChanged;
+        _gameTimer.PropertyChanged -= OnPropertyChanged;
     }
 }

@@ -13,6 +13,6 @@ public class MainPageViewModel
 
     private async void PlayGameCommmandHandler()
     {
-        await Shell.Current.GoToAsync("./GamePage");
+        await Shell.Current.GoToAsync("./GamePage?GameDuration=2");
     }
 }
