@@ -1,6 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using WordFinder.Models;
 
-namespace WordFinder;
+namespace WordFinder.ViewModels;
 
 public partial class GameOverViewModel : ObservableObject
 {

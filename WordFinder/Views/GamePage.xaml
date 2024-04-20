@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    xmlns:local="clr-namespace:WordFinder"
-    x:Class="WordFinder.GamePage"
+    xmlns:local="clr-namespace:WordFinder.Views"
+    x:Class="WordFinder.Views.GamePage"
     Shell.NavBarIsVisible="False"
     BackgroundColor="{DynamicResource PrimaryBackground}">
     <ContentPage.Resources>

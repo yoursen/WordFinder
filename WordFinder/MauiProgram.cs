@@ -1,5 +1,8 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using WordFinder.Models;
+using WordFinder.ViewModels;
+using WordFinder.Views;
 
 namespace WordFinder;
 

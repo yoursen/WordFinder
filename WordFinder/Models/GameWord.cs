@@ -1,6 +1,6 @@
 using SQLite;
 
-namespace WordFinder;
+namespace WordFinder.Models;
 
 public class GameWord
 {

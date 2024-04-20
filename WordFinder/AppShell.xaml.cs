@@ -1,4 +1,6 @@
-﻿namespace WordFinder;
+﻿using WordFinder.Views;
+
+namespace WordFinder;
 
 public partial class AppShell : Shell
 {

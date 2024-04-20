@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace WordFinder;
+namespace WordFinder.ViewModels;
 
 public class MainPageViewModel
 {

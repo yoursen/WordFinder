@@ -1,6 +1,5 @@
-using System.Net.NetworkInformation;
 
-namespace WordFinder;
+namespace WordFinder.Models;
 
 public enum Direction
 {

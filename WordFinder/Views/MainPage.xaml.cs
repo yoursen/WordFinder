@@ -1,4 +1,7 @@
-﻿namespace WordFinder;
+﻿using WordFinder.Models;
+using WordFinder.ViewModels;
+
+namespace WordFinder.Views;
 
 public partial class MainPage : ContentPage
 {

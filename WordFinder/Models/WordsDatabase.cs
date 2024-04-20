@@ -1,5 +1,6 @@
 using SQLite;
-using WordFinder;
+
+namespace WordFinder.Models;
 
 public class WordsDatabase
 {

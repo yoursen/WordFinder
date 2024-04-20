@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace WordFinder;
+namespace WordFinder.Models;
 
 public partial class GameTimer : ObservableObject
 {

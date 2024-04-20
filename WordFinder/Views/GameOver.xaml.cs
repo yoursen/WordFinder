@@ -1,4 +1,6 @@
-namespace WordFinder;
+using WordFinder.ViewModels;
+
+namespace WordFinder.Views;
 
 public partial class GameOver : ContentPage
 {

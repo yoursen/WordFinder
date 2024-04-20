@@ -1,6 +1,7 @@
 using System.ComponentModel;
+using WordFinder.Models;
 
-namespace WordFinder;
+namespace WordFinder.ViewModels;
 
 [QueryProperty(nameof(GameDuration), "GameDuration")]
 public class GamePageViewModel : BindableObject

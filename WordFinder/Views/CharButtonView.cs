@@ -1,4 +1,4 @@
-namespace WordFinder;
+namespace WordFinder.Views;
 public class CharButtonView : ContentView
 {
     public static readonly BindableProperty TitleProperty =
