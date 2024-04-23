@@ -31,4 +31,11 @@ public partial class GameOverViewModel : ObservableObject
         await Task.CompletedTask;
         return;
     }
+
+    public void OnNavigatingFrom(){
+        GameDuration = 0;
+        BestScore = 0;
+        Score = 0;
+        IsRecord = false;
+    }
 }

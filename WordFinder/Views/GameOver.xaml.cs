@@ -31,5 +31,6 @@ public partial class GameOver : ContentPage
     protected override void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
         base.OnNavigatingFrom(args);
+        _viewModel.OnNavigatingFrom();
     }
 }

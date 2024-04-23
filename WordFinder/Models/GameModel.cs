@@ -108,6 +108,7 @@ public partial class GameModel : ObservableObject
         UserWord = string.Empty;
         GuessWord = GameWord.Empty;
         Score = 0;
+        UpdateUserWord();
 
         await Task.CompletedTask;
     }
@@ -243,7 +244,7 @@ public partial class GameModel : ObservableObject
     {
         GameDuration = gameDuration;
         await Next();
-        _gameTimer.Start(TimeSpan.FromSeconds(3));
+        _gameTimer.Start(TimeSpan.FromMinutes(gameDuration));
     }
 
     private void OnTimeOver(object sender, EventArgs e) => OnGameOver();

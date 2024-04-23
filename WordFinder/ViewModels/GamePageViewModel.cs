@@ -21,10 +21,6 @@ public class GamePageViewModel : BindableObject
     public int GameDuration { get; set; }
     public TimeSpan TimeLeft => _gameModel.TimeLeft;
 
-    public async Task Reset()
-    {
-        await _gameModel.Reset();
-    }
     public async Task Next() => await _gameModel.Next();
     public async Task Hint()
     {
@@ -64,13 +60,14 @@ public class GamePageViewModel : BindableObject
 
     public async Task OnNavigatingFrom()
     {
+        await _gameModel.Reset();
         _gameModel.PropertyChanged -= OnPropertyChanged;
         _gameModel.GameOver -= OnGameOver;
-        await _gameModel.Reset();
     }
 
     private async void OnGameOver(object sender, EventArgs e)
     {
+        await _gameModel.Reset();
         await Shell.Current.GoToAsync("GameOver");
     }
 }
