@@ -49,6 +49,7 @@
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\main_background_image2.png" />
 		<MauiImage Update="Resources\Images\game_background_image2.png" />
+		<MauiImage Update="Resources\Images\game_over.png" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />

@@ -6,11 +6,11 @@
     Shell.NavBarIsVisible="False">
 
     <Grid>
-        <Image Source="game_background_image2.png"
+        <Image Source="game_over.png"
             Aspect="AspectFill"
             VerticalOptions="CenterAndExpand"
             HorizontalOptions="CenterAndExpand"
-            Margin="-10"/>
+            Margin="-10,-50,-10,-10"/>
 
         <VerticalStackLayout VerticalOptions="CenterAndExpand">
             <VerticalStackLayout HorizontalOptions="Center">
