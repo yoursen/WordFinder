@@ -17,6 +17,11 @@ public partial class GameOver : ContentPage
         await Shell.Current.GoToAsync("///MainPage");
     }
 
+    private async void OnTryAgainClicked(object sender, EventArgs e){
+        await (sender as VisualElement)?.AnimateScale();
+        await Shell.Current.GoToAsync("..");
+    }
+
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);

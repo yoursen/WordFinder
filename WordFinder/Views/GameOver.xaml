@@ -5,26 +5,75 @@
     x:Class="WordFinder.Views.GameOver"
     Shell.NavBarIsVisible="False">
 
-    <Grid>
+    <Grid >
         <Image Source="game_over.png"
             Aspect="AspectFill"
             VerticalOptions="CenterAndExpand"
             HorizontalOptions="CenterAndExpand"
             Margin="-10,-50,-10,-10"/>
 
-        <VerticalStackLayout VerticalOptions="CenterAndExpand">
-            <VerticalStackLayout HorizontalOptions="Center">
-                <Label Text="Score:"/>
-                <Label Text="{Binding Score}"/>
-                <Label Text="Best score:"/>
-                <Label Text="{Binding BestScore}"/>
+        <VerticalStackLayout VerticalOptions="CenterAndExpand"
+            HorizontalOptions="Fill"
+            Padding="40,0"
+            Spacing="40">
+            <Label Text="Game Over"
+                Style="{StaticResource Headline}"
+                CharacterSpacing="6">
+                <Label.Shadow>
+                    <Shadow Brush="White"
+                        Offset="2,2"
+                        Radius="2"
+                        Opacity="0.5" />
+                </Label.Shadow>
+            </Label>
+
+            <VerticalStackLayout HorizontalOptions="CenterAndExpand">
+                <Grid ColumnDefinitions="*,40,*"
+                    RowDefinitions="*,10,*,10,*"
+                    HorizontalOptions="CenterAndExpand">
+                    <Label Text="Score"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource NormalLabel}"/>
+                    <Label Grid.Column="2"
+                        Text="{Binding Score}"
+                        HorizontalOptions="End"
+                        Style="{StaticResource NormalLabel}"/>
+
+                    <Label Grid.Row="2"
+                        Text="Best score"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource NormalLabel}"/>
+                    <Label Grid.Row = "2"
+                        Grid.Column="2"
+                        Text="{Binding BestScore}"
+                        HorizontalOptions="End"
+                        Style="{StaticResource NormalLabel}"/>
+
+                    <Label Grid.Row="4"
+                        Text="Game duration"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource NormalLabel}"/>
+                    <Label Grid.Row = "24"
+                        Grid.Column="2"
+                        Text="{Binding GameDuration, StringFormat='{0} mins'}"
+                        HorizontalOptions="End"
+                        Style="{StaticResource NormalLabel}"/>
+                </Grid>
             </VerticalStackLayout>
 
-            <Button Margin="0,10,0,0"
-                WidthRequest="125"
-                BackgroundColor="{DynamicResource Accent}"
-                Text="Main menu"
-                Clicked="OnMainMenuClicked"/>
+            <VerticalStackLayout Spacing="20"
+                HorizontalOptions="Fill">
+                <Button BackgroundColor="{DynamicResource Accent}"
+                    Margin="30,0,30,0"
+                    HorizontalOptions="Fill"
+                    Text="Try again"
+                    Clicked="OnTryAgainClicked"/>
+                <Button BackgroundColor="{DynamicResource Primary}"
+                    Margin="30,0,30,0"
+                    HorizontalOptions="Fill"
+                    Text="Main menu"
+                    Clicked="OnMainMenuClicked"/>
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </Grid>
 </ContentPage>

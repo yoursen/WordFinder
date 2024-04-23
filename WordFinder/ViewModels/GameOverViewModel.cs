@@ -16,12 +16,14 @@ public partial class GameOverViewModel : ObservableObject
     [ObservableProperty] private int _score;
     [ObservableProperty] private int _bestScore;
     [ObservableProperty] private bool _isRecord;
+    [ObservableProperty] private int _gameDuration;
 
     public async Task Refresh()
     {
         var gameScore = await _db.GetLastGameScore();
         var bestScore = await _db.GetBestGameScore(_gameModel.GameDuration);
 
+        GameDuration = gameScore.GameDuration;
         Score = gameScore.Score;
         BestScore = bestScore?.Score ?? Score;
         IsRecord = Score > BestScore;
