@@ -62,10 +62,11 @@ public class GamePageViewModel : BindableObject
         await _gameModel.StartGame(GameDuration);
     }
 
-    public void OnNavigatedFrom()
+    public async Task OnNavigatingFrom()
     {
         _gameModel.PropertyChanged -= OnPropertyChanged;
         _gameModel.GameOver -= OnGameOver;
+        await _gameModel.Reset();
     }
 
     private async void OnGameOver(object sender, EventArgs e)

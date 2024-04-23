@@ -25,7 +25,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<GameModel>();
 		builder.Services.AddSingleton<WordFitter>();
 		builder.Services.AddSingleton<TableService>();
-		builder.Services.AddSingleton<WordsDatabase>();
+		builder.Services.AddSingleton<GameDatabase>();
 		builder.Services.AddSingleton<GameTimer>();
 
 		builder.Services.AddSingleton<MainPage>();

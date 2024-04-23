@@ -9,7 +9,7 @@
     BackgroundColor="White">
 
     <ShellContent
-        ContentTemplate="{DataTemplate views:GameOver}"
-        Route="GameOver" />
+        ContentTemplate="{DataTemplate views:MainPage}"
+        Route="MainPage" />
 
 </Shell>

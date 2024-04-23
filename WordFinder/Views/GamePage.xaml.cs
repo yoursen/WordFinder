@@ -6,7 +6,7 @@ namespace WordFinder.Views;
 public partial class GamePage : ContentPage
 {
     private GamePageViewModel _viewModel;
-    public GamePage(GamePageViewModel viewModel, WordsDatabase db)
+    public GamePage(GamePageViewModel viewModel, GameDatabase db)
     {
         InitializeComponent();
         _viewModel = viewModel;
@@ -19,10 +19,10 @@ public partial class GamePage : ContentPage
         await _viewModel.OnNavigatedTo();
     }
 
-    protected override void OnNavigatingFrom(NavigatingFromEventArgs args)
+    protected override async void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
         base.OnNavigatingFrom(args);
-        _viewModel.OnNavigatedFrom();
+        await _viewModel.OnNavigatingFrom();
     }
 
     private async void OnNextClicked(object sender, EventArgs e)
@@ -51,7 +51,6 @@ public partial class GamePage : ContentPage
         if (sender is Button btn)
             await btn.AnimateScale();
 
-        await _viewModel.Reset();
         await Shell.Current.GoToAsync("..");
     }
 

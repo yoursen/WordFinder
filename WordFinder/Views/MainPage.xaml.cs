@@ -6,8 +6,8 @@ namespace WordFinder.Views;
 public partial class MainPage : ContentPage
 {
 	private MainPageViewModel _viewModel;
-	private WordsDatabase _db;
-	public MainPage(MainPageViewModel viewModel, WordsDatabase db)
+	private GameDatabase _db;
+	public MainPage(MainPageViewModel viewModel, GameDatabase db)
 	{
 		InitializeComponent();
 		_viewModel = viewModel;

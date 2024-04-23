@@ -6,10 +6,10 @@ namespace WordFinder.Models;
 public partial class GameModel : ObservableObject
 {
     private const int GridSize = 5;
-    private WordsDatabase _db;
+    private GameDatabase _db;
     private GameTimer _gameTimer;
     private WordFitter _wordFitter;
-    public GameModel(WordsDatabase db, WordFitter wordFitter, GameTimer gameTimer)
+    public GameModel(GameDatabase db, WordFitter wordFitter, GameTimer gameTimer)
     {
         _db = db;
         _wordFitter = wordFitter;
@@ -248,8 +248,15 @@ public partial class GameModel : ObservableObject
 
     private void OnTimeOver(object sender, EventArgs e) => OnGameOver();
 
-    private void OnGameOver()
+    private async void OnGameOver()
     {
+        var gameScore = new GameScore()
+        {
+            Score = Score,
+            GameDuration = GameDuration
+        };
+        await _db.AddGameScore(gameScore);
+
         GameOver?.Invoke(this, EventArgs.Empty);
     }
 }

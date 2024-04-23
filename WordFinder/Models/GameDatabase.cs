@@ -2,7 +2,7 @@ using SQLite;
 
 namespace WordFinder.Models;
 
-public class WordsDatabase
+public class GameDatabase
 {
     private SQLiteAsyncConnection _database;
 
@@ -30,6 +30,8 @@ public class WordsDatabase
                 }
             );
         }
+
+        await _database.CreateTableAsync<GameScore>();
     }
 
     public async Task<GameWord> GameRandomGameWord()
@@ -65,4 +67,28 @@ public class WordsDatabase
         const string sql = $"UPDATE GameWord SET IsPlayed = FALSE";
         var res = await _database.ExecuteAsync(sql);
     }
+
+    public async Task<GameScore> GetLastGameScore()
+    {
+        await Init();
+
+        const string query = "SELECT * FROM GameScore WHERE ID = (SELECT MAX(ID) FROM GameScore);";
+        var result = await _database.QueryAsync<GameScore>(query);
+        return result.FirstOrDefault();
+    }
+
+    public async Task AddGameScore(GameScore gameScore)
+    {
+        await Init();
+        await _database.InsertAsync(gameScore);
+    }
+
+    public async Task<GameScore> GetBestGameScore(int gameDuration)
+    {
+        await Init();
+        var query = "SELECT * FROM GameScore WHERE Score = (SELECT MAX(Score) FROM GameScore WHERE GameDuration = ?) LIMIT 1;";
+        var result = await _database.QueryAsync<GameScore>(query, gameDuration);
+        return result.FirstOrDefault();
+    }
+
 }
