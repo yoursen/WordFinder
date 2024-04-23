@@ -64,13 +64,10 @@
             <VerticalStackLayout Spacing="20"
                 HorizontalOptions="Fill">
                 <Button BackgroundColor="{DynamicResource Accent}"
-                    Margin="30,0,30,0"
-                    HorizontalOptions="Fill"
+                    Style="{StaticResource MenuButtonStyle}"
                     Text="Try again"
                     Clicked="OnTryAgainClicked"/>
-                <Button BackgroundColor="{DynamicResource Primary}"
-                    Margin="30,0,30,0"
-                    HorizontalOptions="Fill"
+                <Button Style="{StaticResource MenuButtonStyle}"
                     Text="Main menu"
                     Clicked="OnMainMenuClicked"/>
             </VerticalStackLayout>
