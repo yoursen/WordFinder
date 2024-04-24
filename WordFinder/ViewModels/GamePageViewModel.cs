@@ -1,11 +1,13 @@
 using System.ComponentModel;
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.Messaging;
+using WordFinder.Messages;
 using WordFinder.Models;
 
 namespace WordFinder.ViewModels;
 
 [QueryProperty(nameof(GameDuration), "GameDuration")]
-public class GamePageViewModel : BindableObject
+public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>, IRecipient<AppResumedMessage>
 {
     private GameModel _gameModel;
     private IPopupService _popupService;
@@ -74,6 +76,7 @@ public class GamePageViewModel : BindableObject
         _gameModel.PropertyChanged += OnPropertyChanged;
         _gameModel.GameOver += OnGameOver;
         await _gameModel.StartGame(GameDuration);
+        WeakReferenceMessenger.Default.RegisterAll(this);
     }
 
     public async Task OnNavigatingFrom()
@@ -81,6 +84,7 @@ public class GamePageViewModel : BindableObject
         await _gameModel.Reset();
         _gameModel.PropertyChanged -= OnPropertyChanged;
         _gameModel.GameOver -= OnGameOver;
+        WeakReferenceMessenger.Default.UnregisterAll(this);
     }
 
     private async void OnGameOver(object sender, EventArgs e)
@@ -88,4 +92,8 @@ public class GamePageViewModel : BindableObject
         await _gameModel.Reset();
         await Shell.Current.GoToAsync("GameOver");
     }
+
+    public void Receive(AppSuspendedMessage message) => _gameModel.SuspendGame();
+
+    public void Receive(AppResumedMessage message) => _gameModel.ResumeGame();
 }
