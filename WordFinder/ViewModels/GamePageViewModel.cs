@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using CommunityToolkit.Maui.Core;
 using WordFinder.Models;
 
 namespace WordFinder.ViewModels;
@@ -7,10 +8,12 @@ namespace WordFinder.ViewModels;
 public class GamePageViewModel : BindableObject
 {
     private GameModel _gameModel;
+    private IPopupService _popupService;
 
-    public GamePageViewModel(GameModel gameModel)
+    public GamePageViewModel(GameModel gameModel, IPopupService popupService)
     {
         _gameModel = gameModel;
+        _popupService = popupService;
     }
 
     public GameLetter[] Letters => _gameModel.Letters;
@@ -20,6 +23,21 @@ public class GamePageViewModel : BindableObject
     public int HintsLeft => _gameModel.HintsLeft;
     public int GameDuration { get; set; }
     public TimeSpan TimeLeft => _gameModel.TimeLeft;
+
+    public async Task<bool> AskExitGame()
+    {
+        _gameModel.SuspendGame();
+        var result = await _popupService.ShowPopupAsync<ExitGamePopupViewModel>();
+        if (result is bool b && b)
+        {
+            return b;
+        }
+        else
+        {
+            _gameModel.ResumeGame();
+            return false;
+        }
+    }
 
     public async Task Next() => await _gameModel.Next();
     public async Task Hint()

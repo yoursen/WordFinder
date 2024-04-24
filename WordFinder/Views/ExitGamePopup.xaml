@@ -1,0 +1,29 @@
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="WordFinder.Views.ExitGamePopup"
+    Color="White">
+
+    <VerticalStackLayout Spacing="20"
+        Padding="20">
+
+        <Label Text="Exit game"
+            Style="{StaticResource Headline}"/>
+
+        <Grid ColumnDefinitions="*,20,*">
+            <Button Style="{StaticResource MenuButtonStyle}"
+                BackgroundColor="{StaticResource Accent}"
+                WidthRequest="100"
+                Margin="0"
+                Text="Yes"
+                Clicked="YesClicked"/>
+            <Button Grid.Column = "2"
+                WidthRequest="100"
+                Style="{StaticResource MenuButtonStyle}"
+                Margin="0"
+                Clicked="NoClicked"
+                Text="No" />
+        </Grid>
+    </VerticalStackLayout>
+
+</toolkit:Popup>

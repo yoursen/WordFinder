@@ -37,7 +37,13 @@ public partial class GamePage : ContentPage
         await _viewModel.Hint();
     }
 
-    private async void OnBackClicked(object sender, EventArgs e) => await GoBack(sender);
+    private async void OnBackClicked(object sender, EventArgs e)
+    {
+        await (sender as VisualElement).AnimateScale();
+        var exit = await _viewModel.AskExitGame();
+        if (exit)
+            await Shell.Current.GoToAsync("///MainPage");
+    }
 
     private async void OnSwipedRight(object sender, SwipedEventArgs e)
     {
@@ -45,14 +51,6 @@ public partial class GamePage : ContentPage
     }
 
     private void OnSwipedLeft(object sender, SwipedEventArgs e) => _viewModel.RemoveLastLetter();
-
-    private async Task GoBack(object sender)
-    {
-        if (sender is Button btn)
-            await btn.AnimateScale();
-
-        await Shell.Current.GoToAsync("..");
-    }
 
     private async void OnLetterClicked(object sender, EventArgs e)
     {

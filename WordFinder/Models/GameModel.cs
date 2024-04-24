@@ -34,6 +34,9 @@ public partial class GameModel : ObservableObject
 
     public TimeSpan TimeLeft => _gameTimer.TimeLeft;
 
+    public void SuspendGame() => _gameTimer.Stop();
+    public void ResumeGame() => _gameTimer.Start();
+
     public async Task Next()
     {
         bool success = false;
@@ -100,7 +103,7 @@ public partial class GameModel : ObservableObject
 
     public async Task Reset()
     {
-        _gameTimer.Stop();
+        _gameTimer.Reset();
 
         foreach (var letter in Letters.Where(l => l.IsChecked))
             letter.IsChecked = false;

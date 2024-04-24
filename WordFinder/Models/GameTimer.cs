@@ -19,12 +19,17 @@ public partial class GameTimer : ObservableObject
     public void Start(TimeSpan timeLeft)
     {
         TimeLeft = timeLeft;
-        _timer.Start();
+        Start();
     }
 
-    public void Stop()
+    public void Start() => _timer.Start();
+
+    public void Stop() => _timer.Stop();
+
+    public void Reset()
     {
-        _timer.Stop();
+        Stop();
+        TimeLeft = new TimeSpan();
     }
 
     private void Timer_Tick(object sender, EventArgs e)
@@ -32,7 +37,7 @@ public partial class GameTimer : ObservableObject
         var timeLeft = TimeLeft - TimeSpan.FromSeconds(1);
         if (timeLeft.TotalMilliseconds < 0)
             timeLeft = TimeSpan.FromSeconds(0);
-            
+
         TimeLeft = timeLeft;
         if (TimeLeft.TotalMilliseconds <= 0)
         {

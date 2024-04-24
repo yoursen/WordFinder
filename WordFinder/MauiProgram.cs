@@ -37,6 +37,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<GameOverViewModel>();
 
 		builder.Services.AddTransientPopup<GameModePopup, GameModePopupViewModel>();
+		builder.Services.AddTransientPopup<ExitGamePopup, ExitGamePopupViewModel>();
 
 #if DEBUG
 		builder.Logging.AddDebug();
