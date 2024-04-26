@@ -9,6 +9,7 @@ public partial class GameModel : ObservableObject
     private GameDatabase _db;
     private GameTimer _gameTimer;
     private WordFitter _wordFitter;
+    private TimeSpan HintPenaltyTimeSpan { get; init; } = TimeSpan.FromSeconds(5);
     public GameModel(GameDatabase db, WordFitter wordFitter, GameTimer gameTimer)
     {
         _db = db;
@@ -98,6 +99,8 @@ public partial class GameModel : ObservableObject
                 }
             }
         }
+
+        _gameTimer.AddPenalty(HintPenaltyTimeSpan);
         await Task.CompletedTask;
     }
 
