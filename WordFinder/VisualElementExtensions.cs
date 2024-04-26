@@ -1,15 +1,17 @@
 namespace WordFinder;
 public static class VisualElementExtensions
 {
-    public static async Task AnimateScale(this VisualElement visualElement)
+    public static async Task AnimateScale(this VisualElement visualElement, double scaleFactor = 1.05)
     {
-        await visualElement.ScaleTo(1.05, 250, Easing.SinOut);
+        await visualElement.ScaleTo(scaleFactor, 250, Easing.SinOut);
         await visualElement.ScaleTo(1, 250, Easing.SinIn);
         visualElement.Scale = 1;
     }
 
     public static void AnimateShake(this VisualElement element)
     {
+        // todo: make awaitable animation
+
         double shakeTranslation = 10;
         var shakeXAnimation = new Animation
             {

@@ -18,6 +18,7 @@ public partial class GamePage : ContentPage
         base.OnNavigatedTo(args);
         await _viewModel.OnNavigatedTo();
         _viewModel.WrongTextEntered += OnWrongTextEntered;
+        _viewModel.CorrectTextEntered += OnCorrectTextEntered;
     }
 
     protected override async void OnNavigatingFrom(NavigatingFromEventArgs args)
@@ -25,6 +26,12 @@ public partial class GamePage : ContentPage
         base.OnNavigatingFrom(args);
         await _viewModel.OnNavigatingFrom();
         _viewModel.WrongTextEntered -= OnWrongTextEntered;
+        _viewModel.CorrectTextEntered -= OnCorrectTextEntered;
+    }
+
+    private async void OnCorrectTextEntered(object sender, EventArgs e)
+    {
+        await UserTextLabel.AnimateScale(1.15);
     }
 
     private void OnWrongTextEntered(object sender, EventArgs e)
