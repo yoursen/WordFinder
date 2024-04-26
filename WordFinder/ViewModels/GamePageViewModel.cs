@@ -3,6 +3,7 @@ using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.Messaging;
 using WordFinder.Messages;
 using WordFinder.Models;
+using WordFinder.Services;
 
 namespace WordFinder.ViewModels;
 
@@ -11,11 +12,13 @@ public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>
 {
     private GameModel _gameModel;
     private IPopupService _popupService;
+    private AwaitableMessageService _ams;
 
-    public GamePageViewModel(GameModel gameModel, IPopupService popupService)
+    public GamePageViewModel(GameModel gameModel, IPopupService popupService, AwaitableMessageService ams)
     {
         _gameModel = gameModel;
         _popupService = popupService;
+        _ams = ams;
     }
 
     public GameLetter[] Letters => _gameModel.Letters;
@@ -25,9 +28,6 @@ public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>
     public int HintsLeft => _gameModel.HintsLeft;
     public int GameDuration { get; set; }
     public TimeSpan TimeLeft => _gameModel.TimeLeft;
-
-    public event EventHandler WrongTextEntered;
-    public event EventHandler CorrectTextEntered;
 
     public async Task<bool> AskExitGame()
     {
@@ -66,13 +66,12 @@ public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>
         {
             _gameModel.Score++;
             _gameModel.HighlightUserLetters();
-            CorrectTextEntered?.Invoke(this, EventArgs.Empty);
-            await Task.Delay(500); // todo: refactor awaiting for event.
+            await _ams.Send("CorrectTextEntered");
             await Next();
         }
         else if (!UserWord.Contains("_"))
         {
-            WrongTextEntered?.Invoke(this, EventArgs.Empty);
+            await _ams.Send("WrongTextEntered");
         }
     }
 

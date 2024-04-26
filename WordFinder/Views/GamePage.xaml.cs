@@ -1,4 +1,5 @@
 using WordFinder.Models;
+using WordFinder.Services;
 using WordFinder.ViewModels;
 
 namespace WordFinder.Views;
@@ -6,37 +7,41 @@ namespace WordFinder.Views;
 public partial class GamePage : ContentPage
 {
     private GamePageViewModel _viewModel;
-    public GamePage(GamePageViewModel viewModel, GameDatabase db)
+    private AwaitableMessageService _ams;
+    public GamePage(GamePageViewModel viewModel, GameDatabase db, AwaitableMessageService ams)
     {
         InitializeComponent();
         _viewModel = viewModel;
         BindingContext = _viewModel;
+        _ams = ams;
     }
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
         await _viewModel.OnNavigatedTo();
-        _viewModel.WrongTextEntered += OnWrongTextEntered;
-        _viewModel.CorrectTextEntered += OnCorrectTextEntered;
+
+        _ams.Register("WrongTextEntered", OnWrongTextEntered);
+        _ams.Register("CorrectTextEntered", OnCorrectTextEntered);
     }
 
     protected override async void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
         base.OnNavigatingFrom(args);
         await _viewModel.OnNavigatingFrom();
-        _viewModel.WrongTextEntered -= OnWrongTextEntered;
-        _viewModel.CorrectTextEntered -= OnCorrectTextEntered;
+        _ams.Unregister("WrongTextEntered", OnWrongTextEntered);
+        _ams.Unregister("CorrectTextEntered", OnCorrectTextEntered);
     }
 
-    private async void OnCorrectTextEntered(object sender, EventArgs e)
+    private async Task OnCorrectTextEntered(object args)
     {
         await UserTextLabel.AnimateScale(1.15);
     }
 
-    private void OnWrongTextEntered(object sender, EventArgs e)
+    private async Task OnWrongTextEntered(object args)
     {
         UserTextLabel.AnimateShake();
+        await Task.CompletedTask;
     }
 
     private async void OnNextClicked(object sender, EventArgs e)

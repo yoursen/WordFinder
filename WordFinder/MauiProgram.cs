@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using WordFinder.Models;
+using WordFinder.Services;
 using WordFinder.ViewModels;
 using WordFinder.Views;
 
@@ -31,6 +32,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddSingleton<GamePage>();
 		builder.Services.AddSingleton<GameOver>();
+		builder.Services.AddSingleton<AwaitableMessageService>();
 
 		builder.Services.AddSingleton<MainPageViewModel>();
 		builder.Services.AddSingleton<GamePageViewModel>();
