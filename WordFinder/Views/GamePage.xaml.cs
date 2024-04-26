@@ -17,12 +17,19 @@ public partial class GamePage : ContentPage
     {
         base.OnNavigatedTo(args);
         await _viewModel.OnNavigatedTo();
+        _viewModel.WrongTextEntered += OnWrongTextEntered;
     }
 
     protected override async void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
         base.OnNavigatingFrom(args);
         await _viewModel.OnNavigatingFrom();
+        _viewModel.WrongTextEntered -= OnWrongTextEntered;
+    }
+
+    private void OnWrongTextEntered(object sender, EventArgs e)
+    {
+        UserTextLabel.AnimateShake();
     }
 
     private async void OnNextClicked(object sender, EventArgs e)

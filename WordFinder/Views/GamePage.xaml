@@ -130,7 +130,8 @@
                             </ImageButton.Source>
                         </ImageButton>
 
-                        <Label Text="{Binding UserWord}"
+                        <Label x:Name="UserTextLabel" 
+                            Text="{Binding UserWord}"
                             Grid.Column="1"
                             CharacterSpacing="3"
                             FontSize="22"

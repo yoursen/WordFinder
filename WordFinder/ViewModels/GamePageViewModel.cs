@@ -26,6 +26,8 @@ public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>
     public int GameDuration { get; set; }
     public TimeSpan TimeLeft => _gameModel.TimeLeft;
 
+    public event EventHandler WrongTextEntered;
+
     public async Task<bool> AskExitGame()
     {
         _gameModel.SuspendGame();
@@ -65,6 +67,10 @@ public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>
             _gameModel.HighlightUserLetters();
             await Task.Delay(100);
             await Next();
+        }
+        else if (!UserWord.Contains("_"))
+        {
+            WrongTextEntered?.Invoke(this, EventArgs.Empty);
         }
     }
 
