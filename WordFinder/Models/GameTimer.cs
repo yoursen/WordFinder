@@ -8,6 +8,7 @@ public partial class GameTimer : ObservableObject
     public event EventHandler TimeOver;
     private TimeSpan OneSecondTimeSpan = TimeSpan.FromSeconds(1);
     private TimeSpan PenalyTimeSpan = TimeSpan.Zero;
+    private bool _isFreePlayMode;
 
     public GameTimer()
     {
@@ -20,6 +21,7 @@ public partial class GameTimer : ObservableObject
 
     public void Start(TimeSpan timeLeft)
     {
+        _isFreePlayMode = timeLeft.TotalSeconds <= 0;
         TimeLeft = timeLeft;
         Start();
     }
@@ -44,6 +46,9 @@ public partial class GameTimer : ObservableObject
 
     private void Timer_Tick(object sender, EventArgs e)
     {
+        if (_isFreePlayMode)
+            return;
+
         TimeSpan fee = TimeSpan.Zero;
         lock (this)
         {

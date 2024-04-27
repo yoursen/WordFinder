@@ -29,6 +29,7 @@ public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>
     public int GameDuration { get; set; }
     public TimeSpan TimeLeft => _gameModel.TimeLeft;
     public TimeSpan HintPenaltyTimeSpan => _gameModel.HintPenaltyTimeSpan;
+    public bool IsFreeplayMode => _gameModel.IsFreeplayMode;
 
     public async Task<bool> AskExitGame()
     {

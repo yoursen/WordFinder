@@ -36,6 +36,7 @@ public partial class GameModel : ObservableObject
     [ObservableProperty] private int _score;
     [ObservableProperty] private int _hintsLeft;
     [ObservableProperty] private int _gameDuration;
+    [ObservableProperty] private bool _isFreeplayMode;
 
     public TimeSpan TimeLeft => _gameTimer.TimeLeft;
 
@@ -98,15 +99,16 @@ public partial class GameModel : ObservableObject
                 }
                 else
                 {
-                    // mark previous letters to be fixed
                     letter.IsFixed = true;
                 }
             }
         }
 
-        _gameTimer.AddPenalty(HintPenaltyTimeSpan);
-        await _ams.Send("PenaltyApplied", HintPenaltyTimeSpan);
-        await Task.CompletedTask;
+        if (!IsFreeplayMode)
+        {
+            _gameTimer.AddPenalty(HintPenaltyTimeSpan);
+            await _ams.Send("PenaltyApplied", HintPenaltyTimeSpan);
+        }
     }
 
     public async Task Reset()
@@ -251,11 +253,12 @@ public partial class GameModel : ObservableObject
         return isRemoved;
     }
 
-    public async Task StartGame(int gameDuration)
+    public async Task StartGame(int gameDurationSec)
     {
-        GameDuration = gameDuration;
+        IsFreeplayMode = gameDurationSec <= 0;
+        GameDuration = gameDurationSec;
         await Next();
-        _gameTimer.Start(TimeSpan.FromMinutes(gameDuration));
+        _gameTimer.Start(TimeSpan.FromMinutes(gameDurationSec));
     }
 
     private void OnTimeOver(object sender, EventArgs e) => OnGameOver();

@@ -88,7 +88,9 @@
                     </ImageButton.Source>
                 </ImageButton>
 
-                <VerticalStackLayout Grid.Column="1" Margin="0,10,0,0">
+                <!-- Time Left group -->
+                <VerticalStackLayout Grid.Column="1" Margin="0,10,0,0"
+                    IsVisible="{Binding IsFreeplayMode, Converter={StaticResource InvertedBoolConverter}}">
                     <Label Text="Time left"
                         TextColor="{DynamicResource Primary}"
                         FontSize="18"

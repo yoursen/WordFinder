@@ -33,4 +33,11 @@ public partial class GameModePopup : Popup
         await CloseAsync();
         _viewModel.StartGame(10);
     }
+
+    private async void OnFreeplayClicked(object sender, EventArgs e)
+    {
+        await (sender as VisualElement).AnimateScale();
+        await CloseAsync();
+        _viewModel.StartGame(-1);
+    }
 }
