@@ -107,7 +107,7 @@
                     Grid.Column="1"
                     FontSize="20"
                     FontFamily="MainFontMedium"
-                    Text="-00:05"
+                    Text="{Binding HintPenaltyTimeSpan, StringFormat=-\{0:mm\\:ss\}}"
                     IsVisible="false"
                     TranslationY="20"
                     TextColor="{DynamicResource Accent}"/>

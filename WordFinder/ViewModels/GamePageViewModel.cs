@@ -28,6 +28,7 @@ public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>
     public int HintsLeft => _gameModel.HintsLeft;
     public int GameDuration { get; set; }
     public TimeSpan TimeLeft => _gameModel.TimeLeft;
+    public TimeSpan HintPenaltyTimeSpan => _gameModel.HintPenaltyTimeSpan;
 
     public async Task<bool> AskExitGame()
     {

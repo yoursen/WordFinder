@@ -11,7 +11,7 @@ public partial class GameModel : ObservableObject
     private GameDatabase _db;
     private GameTimer _gameTimer;
     private WordFitter _wordFitter;
-    private TimeSpan HintPenaltyTimeSpan { get; init; } = TimeSpan.FromSeconds(5);
+    public TimeSpan HintPenaltyTimeSpan { get; init; } = TimeSpan.FromSeconds(5);
     private AwaitableMessageService _ams;
     public GameModel(GameDatabase db, WordFitter wordFitter, GameTimer gameTimer, AwaitableMessageService ams)
     {
