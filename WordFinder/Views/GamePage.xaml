@@ -89,8 +89,7 @@
                 </ImageButton>
 
                 <!-- Time Left group -->
-                <VerticalStackLayout Grid.Column="1" Margin="0,10,0,0"
-                    IsVisible="{Binding IsFreeplayMode, Converter={StaticResource InvertedBoolConverter}}">
+                <VerticalStackLayout Grid.Column="1" Margin="0,10,0,0">
                     <Label Text="Time left"
                         TextColor="{DynamicResource Primary}"
                         FontSize="18"
@@ -100,7 +99,13 @@
                         TextColor="{DynamicResource Primary}"
                         FontSize="20"
                         FontFamily="MainFontMedium"
-                        HorizontalOptions="Center"/>
+                        HorizontalOptions="Center">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsFreeplayMode}" Value="True">
+                                <Setter Property="Text" Value="--:--"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
                 </VerticalStackLayout>
 
                 <Label x:Name="PenaltyLabel"
