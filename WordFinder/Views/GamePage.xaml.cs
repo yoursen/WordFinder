@@ -23,6 +23,7 @@ public partial class GamePage : ContentPage
 
         _ams.Register("WrongTextEntered", OnWrongTextEntered);
         _ams.Register("CorrectTextEntered", OnCorrectTextEntered);
+        _ams.Register("PenaltyApplied", OnPenaltyApplied);
     }
 
     protected override async void OnNavigatingFrom(NavigatingFromEventArgs args)
@@ -31,18 +32,18 @@ public partial class GamePage : ContentPage
         await _viewModel.OnNavigatingFrom();
         _ams.Unregister("WrongTextEntered", OnWrongTextEntered);
         _ams.Unregister("CorrectTextEntered", OnCorrectTextEntered);
+        _ams.Unregister("PenaltyApplied", OnPenaltyApplied);
     }
 
-    private async Task OnCorrectTextEntered(object args)
-    {
-        await UserTextLabel.AnimateScale(1.15);
-    }
+    private async Task OnCorrectTextEntered(object args) => await UserTextLabel.AnimateScale(1.15);
 
     private async Task OnWrongTextEntered(object args)
     {
         UserTextLabel.AnimateShake();
         await Task.CompletedTask;
     }
+
+    private async Task OnPenaltyApplied(object args) => await PenaltyLabel.AnimateDrop();
 
     private async void OnNextClicked(object sender, EventArgs e)
     {
@@ -73,19 +74,20 @@ public partial class GamePage : ContentPage
 
     private async void OnLetterClicked(object sender, EventArgs e)
     {
-        var frame = sender as Button;
-        if (frame is null)
+        var button = sender as Button;
+        if (button is null)
             return;
 
-        if (frame.Parent?.BindingContext is GameLetter letter)
+        if (button.Parent?.BindingContext is GameLetter letter)
         {
             HapticFeedback.Default.Perform(HapticFeedbackType.Click);
             await _viewModel.ToggleLetter(letter);
         }
 
-        await frame.AnimateScale();
+        await button.AnimateScale();
     }
 
     private void OnClearClicked(object sender, EventArgs e) => _viewModel.ClearUserWord();
     private void OnClearLastLetter(object sender, EventArgs e) => _viewModel.RemoveLastLetter();
+
 }

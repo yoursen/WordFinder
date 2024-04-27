@@ -26,4 +26,18 @@ public static class VisualElementExtensions
         shakeAnimation.Add(0, 1, shakeXAnimation);
         shakeAnimation.Commit(element, "ShakeAnimation");
     }
+
+    public static async Task AnimateDrop(this VisualElement element, double yTranslate = 10, uint speed = 750)
+    {
+        element.Opacity = 1;
+        element.IsVisible = true;
+        var originalY = element.TranslationY;
+        var targetY = originalY + yTranslate;
+
+        await element.TranslateTo(element.TranslationX, targetY, speed, Easing.SinIn);
+        await element.FadeTo(0, 250, Easing.Linear);
+
+        element.IsVisible = false;
+        element.TranslationY = originalY;
+    }
 }

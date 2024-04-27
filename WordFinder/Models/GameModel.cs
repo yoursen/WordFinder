@@ -1,5 +1,7 @@
 using System.Text;
+using AVFoundation;
 using CommunityToolkit.Mvvm.ComponentModel;
+using WordFinder.Services;
 
 namespace WordFinder.Models;
 
@@ -10,13 +12,15 @@ public partial class GameModel : ObservableObject
     private GameTimer _gameTimer;
     private WordFitter _wordFitter;
     private TimeSpan HintPenaltyTimeSpan { get; init; } = TimeSpan.FromSeconds(5);
-    public GameModel(GameDatabase db, WordFitter wordFitter, GameTimer gameTimer)
+    private AwaitableMessageService _ams;
+    public GameModel(GameDatabase db, WordFitter wordFitter, GameTimer gameTimer, AwaitableMessageService ams)
     {
         _db = db;
         _wordFitter = wordFitter;
         _gameTimer = gameTimer;
         _gameTimer.PropertyChanged += (s, e) => OnPropertyChanged(e);
         _gameTimer.TimeOver += OnTimeOver;
+        _ams = ams;
 
         GuessWord = GameWord.Empty;
         Letters = Enumerable.Range(0, GridSize * GridSize).Select(r => new GameLetter("")).ToArray();
@@ -101,6 +105,7 @@ public partial class GameModel : ObservableObject
         }
 
         _gameTimer.AddPenalty(HintPenaltyTimeSpan);
+        await _ams.Send("PenaltyApplied", HintPenaltyTimeSpan);
         await Task.CompletedTask;
     }
 
