@@ -150,8 +150,8 @@
     </Style>
 
     <Style TargetType="Frame" x:Key="GlassFrameStyle">
-        <Setter Property="BackgroundColor" Value="#44FFFFFF"/>
-        <Setter Property="BorderColor" Value="#66FFFFFF"/>
+        <Setter Property="BackgroundColor" Value="#33FFFFFF"/>
+        <Setter Property="BorderColor" Value="#44FFFFFF"/>
         <Setter Property="CornerRadius" Value="8"/>
     </Style>
 
