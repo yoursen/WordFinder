@@ -31,12 +31,16 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddSingleton<GamePage>();
-		builder.Services.AddSingleton<GameOver>();
+		builder.Services.AddSingleton<GameOverPage>();
+		builder.Services.AddSingleton<GameBestScorePage>();
+		builder.Services.AddSingleton<GameSettingsPage>();
 		builder.Services.AddSingleton<AwaitableMessageService>();
 
 		builder.Services.AddSingleton<MainPageViewModel>();
 		builder.Services.AddSingleton<GamePageViewModel>();
 		builder.Services.AddSingleton<GameOverViewModel>();
+		builder.Services.AddSingleton<GameSettingsViewModel>();
+		builder.Services.AddSingleton<GameBestScoreViewModel>();
 
 		builder.Services.AddTransientPopup<GameModePopup, GameModePopupViewModel>();
 		builder.Services.AddTransientPopup<ExitGamePopup, ExitGamePopupViewModel>();

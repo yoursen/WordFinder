@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:WordFinder.Views"
+    x:Class="WordFinder.Views.GameSettingsPage"
+    Shell.NavBarIsVisible="False">
+
+    <Grid >
+        <Image Source="game_over.png"
+            Aspect="AspectFill"
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand"
+            Margin="-10,-50,-10,-10"/>
+
+        <VerticalStackLayout VerticalOptions="CenterAndExpand"
+            HorizontalOptions="Fill"
+            Padding="40,0"
+            Spacing="40">
+            <Label Text="Settings"
+                Style="{StaticResource Headline}"
+                CharacterSpacing="6">
+                <Label.Shadow>
+                    <Shadow Brush="White"
+                        Offset="2,2"
+                        Radius="2"
+                        Opacity="0.5" />
+                </Label.Shadow>
+            </Label>
+
+            <VerticalStackLayout Spacing="20"
+                HorizontalOptions="Fill">
+                <Button Style="{StaticResource MenuButtonStyle}"
+                    Text="Main menu"
+                    Clicked="OnMainMenuClicked"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

@@ -27,18 +27,18 @@
             </Label>
 
             <Button Text="Play Game"
-                Clicked="OnButtonClicked"
+                Clicked="OnPlayGameClicked"
                 Opacity="0.9"
                 Style="{StaticResource MenuButtonStyle}"
                 BackgroundColor="{DynamicResource Accent}" />
 
-            <Button Text="Leaderboard"
-                Clicked="OnButtonClicked"
+            <Button Text="Best score"
+                Clicked="OnBestScoreClicked"
                 Opacity="0.9"
                 Style="{StaticResource MenuButtonStyle}"/>
 
             <Button Text="Settings"
-                Clicked="OnButtonClicked"
+                Clicked="OnSettingsClicked"
                 Opacity="0.9"
                 Style="{StaticResource MenuButtonStyle}"/>
         </VerticalStackLayout>

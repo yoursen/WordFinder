@@ -2,10 +2,10 @@ using WordFinder.ViewModels;
 
 namespace WordFinder.Views;
 
-public partial class GameOver : ContentPage
+public partial class GameBestScorePage : ContentPage
 {
-    private GameOverViewModel _viewModel;
-    public GameOver(GameOverViewModel viewModel)
+    private GameBestScoreViewModel _viewModel;
+    public GameBestScorePage(GameBestScoreViewModel viewModel)
     {
         InitializeComponent();
         _viewModel = viewModel;
@@ -17,20 +17,13 @@ public partial class GameOver : ContentPage
         await Shell.Current.GoToAsync("///MainPage");
     }
 
-    private async void OnTryAgainClicked(object sender, EventArgs e){
-        await (sender as VisualElement)?.AnimateScale();
-        await Shell.Current.GoToAsync("..");
-    }
-
-    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
-        await _viewModel.Refresh();
     }
 
     protected override void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
         base.OnNavigatingFrom(args);
-        _viewModel.OnNavigatingFrom();
     }
 }
