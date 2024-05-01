@@ -261,9 +261,9 @@ public partial class GameModel : ObservableObject
         _gameTimer.Start(TimeSpan.FromMinutes(gameDurationSec));
     }
 
-    private void OnTimeOver(object sender, EventArgs e) => OnGameOver();
+    private async void OnTimeOver(object sender, EventArgs e) => await DoGameOver();
 
-    private async void OnGameOver()
+    public async Task DoGameOver()
     {
         var gameScore = new GameScore()
         {

@@ -68,7 +68,7 @@ public partial class GamePage : ContentPage
         await (sender as VisualElement).AnimateScale();
         var exit = await _viewModel.AskExitGame();
         if (exit)
-            await Shell.Current.GoToAsync("///MainPage");
+            await _viewModel.DoGameOver();
     }
 
     private async void OnSwipedRight(object sender, SwipedEventArgs e)

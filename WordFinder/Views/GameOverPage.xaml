@@ -57,7 +57,16 @@
                         Grid.Column="2"
                         Text="{Binding GameDuration, StringFormat='{0} mins'}"
                         HorizontalOptions="End"
-                        Style="{StaticResource NormalLabel}"/>
+                        Style="{StaticResource NormalLabel}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                Binding="{Binding GameDuration}"
+                                Value="-1">
+                                <Setter Property="Text"
+                                    Value="Freeplay"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
                 </Grid>
             </VerticalStackLayout>
 

@@ -102,6 +102,8 @@ public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>
         await Shell.Current.GoToAsync("GameOver");
     }
 
+    public async Task DoGameOver() => await _gameModel.DoGameOver();
+
     public void Receive(AppSuspendedMessage message) => _gameModel.SuspendGame();
 
     public void Receive(AppResumedMessage message) => _gameModel.ResumeGame();
