@@ -26,7 +26,7 @@
                 </Label.Shadow>
             </Label>
 
-            <Button Text="Play Game"
+            <Button Text="Play game"
                 Clicked="OnPlayGameClicked"
                 Opacity="0.9"
                 Style="{StaticResource MenuButtonStyle}"

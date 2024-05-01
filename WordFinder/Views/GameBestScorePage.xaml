@@ -27,6 +27,50 @@
                 </Label.Shadow>
             </Label>
 
+            <Grid Margin="30,0"
+                ColumnDefinitions="*,20"
+                RowDefinitions="*,10,*,10,*,10,*"
+                HorizontalOptions="Fill">
+                <Label Text="2 minutes game"
+                    HorizontalOptions="Start"
+                    Style="{StaticResource NormalLabel}"/>
+                <Label Grid.Column="1"
+                    Text="{Binding Score2min}"
+                    HorizontalOptions="End"
+                    Style="{StaticResource NormalLabel}"/>
+
+                <Label Grid.Row="2"
+                    Text="5 minutes game"
+                    HorizontalOptions="Start"
+                    Style="{StaticResource NormalLabel}"/>
+                <Label Grid.Row = "2"
+                    Grid.Column="1"
+                    Text="{Binding Score5min}"
+                    HorizontalOptions="End"
+                    Style="{StaticResource NormalLabel}"/>
+
+
+                <Label Grid.Row="4"
+                    Text="10 minutes game"
+                    HorizontalOptions="Start"
+                    Style="{StaticResource NormalLabel}"/>
+                <Label Grid.Row = "4"
+                    Grid.Column="1"
+                    Text="{Binding Score10min}"
+                    HorizontalOptions="End"
+                    Style="{StaticResource NormalLabel}"/>
+
+                <Label Grid.Row="6"
+                    Text="Freeplay"
+                    HorizontalOptions="Start"
+                    Style="{StaticResource NormalLabel}"/>
+                <Label Grid.Row = "6"
+                    Grid.Column="1"
+                    Text="{Binding ScoreFreeplay}"
+                    HorizontalOptions="End"
+                    Style="{StaticResource NormalLabel}"/>
+            </Grid>
+
             <VerticalStackLayout Spacing="20"
                 HorizontalOptions="Fill">
                 <Button Style="{StaticResource MenuButtonStyle}"
