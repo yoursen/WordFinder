@@ -27,6 +27,28 @@
                 </Label.Shadow>
             </Label>
 
+            <Grid ColumnDefinitions="*,40,*"
+                RowDefinitions="*,20,*,20"
+                Margin="40,0">
+                <Label Text="Vibrate"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    Style="{StaticResource NormalLabel}"/>
+                <Switch Grid.Column="2"
+                    HorizontalOptions="End"
+                    IsToggled="{Binding Vibrate}"/>
+
+                <Label Text="Click"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    Grid.Row="2"
+                    Style="{StaticResource NormalLabel}"/>
+                <Switch Grid.Column="2"
+                    HorizontalOptions="End"
+                    Grid.Row="2"
+                    IsToggled="{Binding Click}"/>
+            </Grid>
+
             <VerticalStackLayout Spacing="20"
                 HorizontalOptions="Fill">
                 <Button Style="{StaticResource MenuButtonStyle}"
