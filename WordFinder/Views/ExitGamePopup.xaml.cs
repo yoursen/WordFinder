@@ -1,4 +1,5 @@
 using CommunityToolkit.Maui.Views;
+using WordFinder.Services;
 using WordFinder.ViewModels;
 
 namespace WordFinder.Views;
@@ -6,21 +7,25 @@ namespace WordFinder.Views;
 public partial class ExitGamePopup : Popup
 {
     private ExitGamePopupViewModel _viewModel;
-    public ExitGamePopup(ExitGamePopupViewModel viewModel)
+    private TouchFeedbackService _feedback;
+    public ExitGamePopup(ExitGamePopupViewModel viewModel, TouchFeedbackService feedback)
     {
         InitializeComponent();
         BindingContext = viewModel;
         _viewModel = viewModel;
+        _feedback = feedback;
     }
 
     private async void YesClicked(object sender, EventArgs e)
     {
+        _feedback.DoFeedback();
         await (sender as VisualElement).AnimateScale();
         await CloseAsync(true);
     }
 
     private async void NoClicked(object sender, EventArgs e)
     {
+        _feedback.DoFeedback();
         await (sender as VisualElement).AnimateScale();
         await CloseAsync(false);
     }

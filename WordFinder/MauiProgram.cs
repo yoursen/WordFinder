@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using WordFinder.Interfaces;
 using WordFinder.Models;
 using WordFinder.Services;
 using WordFinder.ViewModels;
@@ -13,7 +14,7 @@ public static class MauiProgram
 	{
 		var builder = MauiApp.CreateBuilder();
 
-		// services
+		// app
 		builder.UseMauiApp<App>();
 		builder.UseMauiCommunityToolkit();
 		builder.ConfigureFonts(fonts =>
@@ -37,7 +38,11 @@ public static class MauiProgram
 		builder.Services.AddSingleton<GameOverPage>();
 		builder.Services.AddSingleton<GameBestScorePage>();
 		builder.Services.AddSingleton<GameSettingsPage>();
+
+		// services
 		builder.Services.AddSingleton<AwaitableMessageService>();
+		builder.Services.AddSingleton<TouchFeedbackService>();
+		builder.Services.AddSingleton<ISound, Sound>();
 
 		// view models
 		builder.Services.AddSingleton<MainPageViewModel>();
@@ -46,7 +51,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<GameSettingsViewModel>();
 		builder.Services.AddSingleton<GameBestScoreViewModel>();
 
-        // popups
+		// popups
 		builder.Services.AddTransientPopup<GameModePopup, GameModePopupViewModel>();
 		builder.Services.AddTransientPopup<ExitGamePopup, ExitGamePopupViewModel>();
 
@@ -54,6 +59,6 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
-		return builder.Build();
+		return  builder.Build();
 	}
 }

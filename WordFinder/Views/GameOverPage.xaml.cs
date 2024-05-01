@@ -1,3 +1,4 @@
+using WordFinder.Services;
 using WordFinder.ViewModels;
 
 namespace WordFinder.Views;
@@ -5,19 +6,25 @@ namespace WordFinder.Views;
 public partial class GameOverPage : ContentPage
 {
     private GameOverViewModel _viewModel;
-    public GameOverPage(GameOverViewModel viewModel)
+    private TouchFeedbackService _feedback;
+    public GameOverPage(GameOverViewModel viewModel, TouchFeedbackService feedback)
     {
         InitializeComponent();
         _viewModel = viewModel;
         BindingContext = _viewModel;
+        _feedback = feedback;
     }
 
-    private async void OnMainMenuClicked(object sender, EventArgs e){
+    private async void OnMainMenuClicked(object sender, EventArgs e)
+    {
+        _feedback.DoFeedback();
         await (sender as VisualElement)?.AnimateScale();
         await Shell.Current.GoToAsync("///MainPage");
     }
 
-    private async void OnTryAgainClicked(object sender, EventArgs e){
+    private async void OnTryAgainClicked(object sender, EventArgs e)
+    {
+        _feedback.DoFeedback();
         await (sender as VisualElement)?.AnimateScale();
         await Shell.Current.GoToAsync("..");
     }

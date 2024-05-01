@@ -8,12 +8,15 @@ public partial class GamePage : ContentPage
 {
     private GamePageViewModel _viewModel;
     private AwaitableMessageService _ams;
-    public GamePage(GamePageViewModel viewModel, GameDatabase db, AwaitableMessageService ams)
+    private TouchFeedbackService _feedback;
+    public GamePage(GamePageViewModel viewModel, GameDatabase db, AwaitableMessageService ams,
+        TouchFeedbackService touchFeedbackService)
     {
         InitializeComponent();
         _viewModel = viewModel;
         BindingContext = _viewModel;
         _ams = ams;
+        _feedback = touchFeedbackService;
     }
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
@@ -48,17 +51,20 @@ public partial class GamePage : ContentPage
     private async void OnNextClicked(object sender, EventArgs e)
     {
         //await (sender as VisualElement).AnimateScale();
+        _feedback.DoFeedback();
         await _viewModel.Next();
     }
 
     private async void OnHintClicked(object sender, EventArgs e)
     {
         //await (sender as VisualElement).AnimateScale();
+        _feedback.DoFeedback();
         await _viewModel.Hint();
     }
 
     private async void OnBackClicked(object sender, EventArgs e)
     {
+        _feedback.DoFeedback();
         await (sender as VisualElement).AnimateScale();
         var exit = await _viewModel.AskExitGame();
         if (exit)
@@ -84,10 +90,20 @@ public partial class GamePage : ContentPage
             await _viewModel.ToggleLetter(letter);
         }
 
+        _feedback.DoFeedback();
         await button.AnimateScale();
     }
 
-    private void OnClearClicked(object sender, EventArgs e) => _viewModel.ClearUserWord();
-    private void OnClearLastLetter(object sender, EventArgs e) => _viewModel.RemoveLastLetter();
+    private void OnClearClicked(object sender, EventArgs e)
+    {
+        _feedback.DoFeedback();
+        _viewModel.ClearUserWord();
+
+    }
+    private void OnClearLastLetter(object sender, EventArgs e)
+    {
+        _feedback.DoFeedback();
+        _viewModel.RemoveLastLetter();
+    }
 
 }
