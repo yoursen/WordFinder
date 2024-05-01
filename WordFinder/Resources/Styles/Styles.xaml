@@ -149,6 +149,12 @@
         <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource PrimaryBackground}, Dark={StaticResource PrimaryBackground}}" />
     </Style>
 
+    <Style TargetType="Frame" x:Key="GlassFrameStyle">
+        <Setter Property="BackgroundColor" Value="#44FFFFFF"/>
+        <Setter Property="BorderColor" Value="#66FFFFFF"/>
+        <Setter Property="CornerRadius" Value="8"/>
+    </Style>
+
     <Style TargetType="ImageButton">
         <Setter Property="Opacity" Value="1" />
         <Setter Property="BorderColor" Value="Transparent"/>
