@@ -6,7 +6,7 @@
     Shell.NavBarIsVisible="False">
 
     <Grid >
-        <Image Source="background_1A.png"
+        <Image Source="game_background_image2.png"
             Aspect="AspectFill"
             VerticalOptions="CenterAndExpand"
             HorizontalOptions="CenterAndExpand"
