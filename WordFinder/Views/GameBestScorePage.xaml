@@ -78,5 +78,17 @@
                     Clicked="OnMainMenuClicked"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
+
+        <ImageButton Clicked="OnMainMenuClicked"
+            Margin="5,10,0,0"
+            WidthRequest="22"
+            VerticalOptions="Start"
+            HorizontalOptions="Start">
+            <ImageButton.Source>
+                <FontImageSource Glyph="&#xf104;"
+                    Color="{DynamicResource Primary}"
+                    FontFamily="FontAwesome" />
+            </ImageButton.Source>
+        </ImageButton>
     </Grid>
 </ContentPage>
