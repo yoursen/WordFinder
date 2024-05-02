@@ -2,6 +2,7 @@ using SQLite;
 
 namespace WordFinder.Models;
 
+[Table("GameWords")]
 public class GameWord
 {
     public static GameWord Empty = new GameWord(string.Empty, string.Empty);
