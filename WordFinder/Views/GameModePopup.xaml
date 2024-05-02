@@ -12,20 +12,21 @@
 
         <Button Style="{StaticResource MenuButtonStyle}"
             Margin="0"
-            Text="2 minutes"
-            Clicked="On2minClicked"/>
-        <Button Style="{StaticResource MenuButtonStyle}"
-            Margin="0"
-            Clicked="On5minClicked"
-            Text="5 minutes" />
+            Clicked="OnFreeplayClicked"
+            Text="Freeplay mode" />
         <Button Style="{StaticResource MenuButtonStyle}"
             Margin="0"
             Clicked="On10minClicked"
             Text="10 minutes" />
         <Button Style="{StaticResource MenuButtonStyle}"
             Margin="0"
-            Clicked="OnFreeplayClicked"
-            Text="Freeplay mode" />
+            Clicked="On5minClicked"
+            Text="5 minutes" />
+        <Button Style="{StaticResource MenuButtonStyle}"
+            Margin="0"
+            Text="2 minutes"
+            Clicked="On2minClicked"/>
+
     </VerticalStackLayout>
 
 </toolkit:Popup>
