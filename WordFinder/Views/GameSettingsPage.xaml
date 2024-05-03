@@ -29,7 +29,7 @@
 
             <Grid ColumnDefinitions="*,40,*"
                 RowDefinitions="*,20,*"
-                WidthRequest="250"
+                WidthRequest="210"
                 HorizontalOptions="Center">
                 <Label Text="Vibrate"
                     HorizontalOptions="Start"
