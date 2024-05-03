@@ -10,8 +10,6 @@ public static class VisualElementExtensions
 
     public static void AnimateShake(this VisualElement element)
     {
-        // todo: make awaitable animation
-
         double shakeTranslation = 10;
         var shakeXAnimation = new Animation
             {
