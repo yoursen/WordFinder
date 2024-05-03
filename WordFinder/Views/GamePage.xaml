@@ -42,7 +42,7 @@
 
     </ContentPage.Resources>
 
-    <Grid VerticalOptions="Center">
+    <Grid>
 
         <Grid.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Right"
@@ -122,7 +122,7 @@
 
             <Label Text="{Binding GuessWord.Description}"
                 HeightRequest="75"
-                Margin="10,0,10,0"
+                Margin="15,0,15,0"
                 FontSize="18"
                 FontFamily="MainFont"
                 HorizontalOptions="Center"
@@ -131,7 +131,7 @@
                 VerticalTextAlignment="Center"/>
 
             <!-- bottom group panel -->
-            <VerticalStackLayout>
+            <VerticalStackLayout Margin="0,0,0,25">
                 <!-- user word and matrix -->
                 <VerticalStackLayout>
 
@@ -200,8 +200,6 @@
                         Clicked="OnNextClicked"/>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
-
-            <Frame HeightRequest="25"/>
         </FlexLayout>
     </Grid>
 </ContentPage>
