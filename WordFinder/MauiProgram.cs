@@ -15,7 +15,12 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 
 		// app
-		builder.UseMauiApp<App>();
+		builder.UseMauiApp<App>().ConfigureMauiHandlers((handlers)=>{  
+#if IOS  
+               handlers.AddHandler(typeof(Shell), typeof(CustomShellRenderer));  
+#endif  
+        }); 
+
 		builder.UseMauiCommunityToolkit();
 		builder.ConfigureFonts(fonts =>
 		{

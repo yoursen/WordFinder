@@ -106,5 +106,4 @@ public partial class GamePage : ContentPage
         _feedback.DoFeedback();
         _viewModel.RemoveLastLetter();
     }
-
 }
