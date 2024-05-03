@@ -15,10 +15,11 @@ public partial class GameBestScorePage : ContentPage
         _feedback = feedback;
     }
 
-    private async void OnMainMenuClicked(object sender, EventArgs e){
+    private async void OnMainMenuClicked(object sender, EventArgs e)
+    {
         _feedback.DoFeedback();
         await (sender as VisualElement)?.AnimateScale();
-        await Shell.Current.GoToAsync("///MainPage");
+        await GoHome();
     }
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
@@ -31,4 +32,7 @@ public partial class GameBestScorePage : ContentPage
     {
         base.OnNavigatingFrom(args);
     }
+    private async Task GoHome() => await Shell.Current.GoToAsync("///MainPage");
+
+    protected async void OnSwipedRight(object sender, SwipedEventArgs e) => await GoHome();
 }

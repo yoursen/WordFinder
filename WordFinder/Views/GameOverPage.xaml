@@ -5,7 +5,12 @@
     x:Class="WordFinder.Views.GameOverPage"
     Shell.NavBarIsVisible="False">
 
-    <Grid >
+    <Grid>
+        <Grid.GestureRecognizers>
+            <SwipeGestureRecognizer Direction="Right"
+                Swiped="OnSwipedRight"/>
+        </Grid.GestureRecognizers>
+
         <Image Source="game_background_image2.png"
             Aspect="AspectFill"
             VerticalOptions="CenterAndExpand"

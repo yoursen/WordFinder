@@ -19,7 +19,7 @@ public partial class GameOverPage : ContentPage
     {
         _feedback.DoFeedback();
         await (sender as VisualElement)?.AnimateScale();
-        await Shell.Current.GoToAsync("///MainPage");
+        await GoHome();
     }
 
     private async void OnTryAgainClicked(object sender, EventArgs e)
@@ -40,4 +40,7 @@ public partial class GameOverPage : ContentPage
         base.OnNavigatingFrom(args);
         _viewModel.OnNavigatingFrom();
     }
+    private async Task GoHome() => await Shell.Current.GoToAsync("///MainPage"); 
+
+    protected async void OnSwipedRight(object sender, SwipedEventArgs e) => await GoHome();
 }
