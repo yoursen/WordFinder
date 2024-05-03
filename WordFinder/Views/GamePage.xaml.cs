@@ -50,14 +50,15 @@ public partial class GamePage : ContentPage
 
     private async void OnNextClicked(object sender, EventArgs e)
     {
-        //await (sender as VisualElement).AnimateScale();
         _feedback.DoFeedback();
+        await _viewModel.RevealAnswer();
+        await UserTextLabel.AnimateScale(1.15);
+        await Task.Delay(750);
         await _viewModel.Next();
     }
 
     private async void OnHintClicked(object sender, EventArgs e)
     {
-        //await (sender as VisualElement).AnimateScale();
         _feedback.DoFeedback();
         await _viewModel.Hint();
     }

@@ -220,6 +220,20 @@ public partial class GameModel : ObservableObject
         UserWord = sb.ToString();
     }
 
+    public async Task RevealAnswer()
+    {
+        _userWordLetters.Clear();
+        foreach (var letter in Letters.OrderBy(l=>l.LetterIndex))
+        {
+            letter.IsFixed = false;
+            letter.IsChecked = false;
+            if (!letter.IsChecked && letter.IsMainLetter)
+                await ToggleLetter(letter);
+        }
+
+        UpdateUserWord();
+    }
+
     public bool IsGuessWordCorrect() => string.Compare(GuessWord.Word, UserWord, StringComparison.OrdinalIgnoreCase) == 0;
 
     private async Task<bool> RemoveWrongLetters()

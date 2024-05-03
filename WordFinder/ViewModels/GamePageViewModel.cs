@@ -46,7 +46,16 @@ public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>
         }
     }
 
-    public async Task Next() => await _gameModel.Next();
+    public async Task Next()
+    {
+        await _gameModel.Next();
+    }
+
+    public async Task RevealAnswer()
+    {
+        await _gameModel.RevealAnswer();
+    }
+
     public async Task Hint()
     {
         await _gameModel.Hint();
