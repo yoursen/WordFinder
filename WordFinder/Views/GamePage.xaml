@@ -58,7 +58,7 @@
             Margin="-10,-50"/>
 
         <FlexLayout Direction="Column"
-            JustifyContent="SpaceBetween">
+            JustifyContent="SpaceAround">
 
             <Grid ColumnDefinitions="*,*"
                 >
