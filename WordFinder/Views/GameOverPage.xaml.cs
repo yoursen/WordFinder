@@ -40,7 +40,7 @@ public partial class GameOverPage : ContentPage
         base.OnNavigatingFrom(args);
         _viewModel.OnNavigatingFrom();
     }
-    private async Task GoHome() => await Shell.Current.GoToAsync("///MainPage"); 
+    private async Task GoHome() => await Navigation.PopToRootAsync();
 
     protected async void OnSwipedRight(object sender, SwipedEventArgs e) => await GoHome();
 }
