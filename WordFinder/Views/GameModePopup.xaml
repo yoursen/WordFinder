@@ -11,19 +11,19 @@
             Style="{StaticResource Headline}"/>
 
         <Button Style="{StaticResource MenuButtonStyle}"
-            Margin="0"
+            Margin="5,0"
             Clicked="OnFreeplayClicked"
             Text="Freeplay mode" />
         <Button Style="{StaticResource MenuButtonStyle}"
-            Margin="0"
+            Margin="5,0"
             Clicked="On10minClicked"
             Text="10 minutes" />
         <Button Style="{StaticResource MenuButtonStyle}"
-            Margin="0"
+           Margin="5,0"
             Clicked="On5minClicked"
             Text="5 minutes" />
         <Button Style="{StaticResource MenuButtonStyle}"
-            Margin="0"
+            Margin="5,0"
             Text="2 minutes"
             Clicked="On2minClicked"/>
 

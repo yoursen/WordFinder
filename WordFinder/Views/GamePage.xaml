@@ -42,7 +42,7 @@
 
     </ContentPage.Resources>
 
-    <Grid VerticalOptions="CenterAndExpand">
+    <Grid VerticalOptions="Center">
 
         <Grid.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Right"
@@ -53,9 +53,9 @@
 
         <Image Source="game_background_image2.png"
             Aspect="AspectFill"
-            VerticalOptions="CenterAndExpand"
-            HorizontalOptions="CenterAndExpand"
-            Margin="-10,-50,-10,-10"/>
+            VerticalOptions="Fill"
+            HorizontalOptions="Fill"
+            Margin="-10,-50"/>
 
         <FlexLayout Direction="Column"
             JustifyContent="SpaceBetween">
@@ -136,8 +136,8 @@
                 <VerticalStackLayout>
 
                     <!-- user word and buttons -->
-                    <Grid ColumnDefinitions="32,*,32"
-                        Margin="50,0,50,0">
+                    <Grid ColumnDefinitions="32,280,32"
+                        HorizontalOptions="Center">
                         <ImageButton Clicked="OnClearClicked"
                             Grid.Column="0">
                             <ImageButton.Source>

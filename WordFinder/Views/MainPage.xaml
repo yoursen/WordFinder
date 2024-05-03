@@ -12,7 +12,8 @@
             HorizontalOptions="CenterAndExpand"
             Margin="-10"/>
         <VerticalStackLayout Padding="40,0"
-            VerticalOptions="CenterAndExpand"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
             Spacing="20">
 
             <Label Text="Word Finder"
@@ -28,18 +29,15 @@
 
             <Button Text="Play game"
                 Clicked="OnPlayGameClicked"
-                Opacity="0.9"
                 Style="{StaticResource MenuButtonStyle}"
                 BackgroundColor="{DynamicResource Accent}" />
 
             <Button Text="Best score"
                 Clicked="OnBestScoreClicked"
-                Opacity="0.9"
                 Style="{StaticResource MenuButtonStyle}"/>
 
             <Button Text="Settings"
                 Clicked="OnSettingsClicked"
-                Opacity="0.9"
                 Style="{StaticResource MenuButtonStyle}"/>
         </VerticalStackLayout>
     </Grid>

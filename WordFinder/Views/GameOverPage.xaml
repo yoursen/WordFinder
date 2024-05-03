@@ -70,8 +70,8 @@
                 </Grid>
             </VerticalStackLayout>
 
-            <VerticalStackLayout Spacing="20"
-                HorizontalOptions="Fill">
+            <VerticalStackLayout Spacing="20" WidthRequest="250"
+                HorizontalOptions="Center">
                 <Button BackgroundColor="{DynamicResource Accent}"
                     Style="{StaticResource MenuButtonStyle}"
                     Text="Try again"

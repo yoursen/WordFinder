@@ -13,7 +13,7 @@
             Margin="-10,-50,-10,-10"/>
 
         <VerticalStackLayout VerticalOptions="CenterAndExpand"
-            HorizontalOptions="Fill"
+            HorizontalOptions="CenterAndExpand"
             Padding="40,0"
             Spacing="40">
             <Label Text="Best score"
@@ -28,9 +28,9 @@
             </Label>
 
             <Grid Margin="30,0"
-                ColumnDefinitions="*,20"
+                ColumnDefinitions="*,60"
                 RowDefinitions="*,10,*,10,*,10,*"
-                HorizontalOptions="Fill">
+                HorizontalOptions="Center">
                 <Label Text="2 minutes game"
                     HorizontalOptions="Start"
                     Style="{StaticResource NormalLabel}"/>
