@@ -1,5 +1,4 @@
 using System.Text;
-using AVFoundation;
 using CommunityToolkit.Mvvm.ComponentModel;
 using WordFinder.Services;
 
