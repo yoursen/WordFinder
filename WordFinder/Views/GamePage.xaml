@@ -4,12 +4,16 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:local="clr-namespace:WordFinder.Views"
     x:Class="WordFinder.Views.GamePage"
+    xmlns:vm="clr-namespace:WordFinder.ViewModels"
+    xmlns:model="clr-namespace:WordFinder.Models"
+    x:DataType="vm:GamePageViewModel"    
     Shell.NavBarIsVisible="False"
     BackgroundColor="{DynamicResource PrimaryBackground}">
     <ContentPage.Resources>
         <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
 
-        <ControlTemplate x:Key="CharButtonControlTemplate">
+        <ControlTemplate x:Key="CharButtonControlTemplate"
+            x:DataType="local:CharButtonView">
             <Button BindingContext="{Binding Source={RelativeSource TemplatedParent}}"
                 BorderColor="Transparent"
                 CornerRadius="4"
@@ -174,7 +178,7 @@
                         HorizontalOptions="Center"
                         BindableLayout.ItemsSource="{Binding Letters}">
                         <BindableLayout.ItemTemplate>
-                            <DataTemplate>
+                            <DataTemplate x:DataType="model:GameLetter">
                                 <local:CharButtonView ControlTemplate="{StaticResource CharButtonControlTemplate}"
                                     Title="{Binding Letter}"
                                     IsChecked="{Binding IsChecked, Mode=TwoWay}"
