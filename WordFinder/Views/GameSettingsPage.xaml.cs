@@ -31,7 +31,7 @@ public partial class GameSettingsPage : ContentPage
     {
         base.OnNavigatingFrom(args);
     }
-    private async Task GoHome() => await Shell.Current.GoToAsync("///MainPage");
+    private async Task GoHome() => await Navigation.PopToRootAsync();
 
     protected async void OnSwipedRight(object sender, SwipedEventArgs e) => await GoHome();
 }

@@ -77,7 +77,7 @@
                 </Grid>
             </VerticalStackLayout>
 
-            <VerticalStackLayout Spacing="20" WidthRequest="250"
+            <VerticalStackLayout Spacing="20"
                 HorizontalOptions="Center">
                 <Button BackgroundColor="{DynamicResource Accent}"
                     Style="{StaticResource MenuButtonStyle}"

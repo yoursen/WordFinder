@@ -35,7 +35,7 @@
             </Label>
 
             <Grid Margin="30,0"
-                ColumnDefinitions="*,60"
+                ColumnDefinitions="*,90"
                 RowDefinitions="*,10,*,10,*,10,*"
                 HorizontalOptions="Center">
                 <Label Text="2 minutes game"
@@ -79,7 +79,7 @@
             </Grid>
 
             <VerticalStackLayout Spacing="20"
-                HorizontalOptions="Fill">
+                HorizontalOptions="CenterAndExpand">
                 <Button Style="{StaticResource MenuButtonStyle}"
                     Text="Main menu"
                     Clicked="OnMainMenuClicked"/>

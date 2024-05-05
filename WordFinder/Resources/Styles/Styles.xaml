@@ -57,8 +57,8 @@
 
     <Style TargetType="Button" x:Key="MenuButtonStyle">
         <Setter Property="BackgroundColor" Value="{DynamicResource Primary}"/>
-        <Setter Property="Margin" Value="30,0,30,0"/>
         <Setter Property="HorizontalOptions" Value="Fill"/>
+        <Setter Property="WidthRequest" Value="220"/>
     </Style>
 
     <Style TargetType="CheckBox">

@@ -57,7 +57,7 @@
                     IsToggled="{Binding Click}"/>
             </Grid>
 
-            <VerticalStackLayout Spacing="20" WidthRequest="250"
+            <VerticalStackLayout Spacing="20"
                 HorizontalOptions="Center">
                 <Button Style="{StaticResource MenuButtonStyle}"
                     Text="Main menu"
