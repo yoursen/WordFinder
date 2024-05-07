@@ -173,12 +173,13 @@ public partial class GameModel : ObservableObject
 
     public async Task ClearUserWord()
     {
-        foreach (var letter in _userWordLetters.ToArray())
+        foreach (var letter in _userWordLetters.ToArray().Reverse())
         {
             if (letter is null)
                 continue;
 
             await ToggleLetter(letter);
+            await Task.Delay(40);
         }
     }
 
