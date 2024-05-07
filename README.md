@@ -15,6 +15,3 @@ In this game, players are presented with a short word description and must decip
 - **Word Categories:** Players can select from a variety of categories such as animals, cities, food, etc., or even input their own words. The complexity of the words varies based on the chosen category.
 - **Time Challenge:** A global time counter adds an extra layer of challenge, encouraging players to solve each word within a specified time limit.
 
-### Attribution
-Tapping Wood 2.wav by F.M.Audio -- https://freesound.org/s/617055/ -- License: Attribution 4.0
-
