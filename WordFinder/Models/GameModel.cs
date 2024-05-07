@@ -227,18 +227,22 @@ public partial class GameModel : ObservableObject
     public async Task RevealAnswer()
     {
         await RemoveWrongLetters();
-
-        _userWordLetters.Clear();
+        UpdateUserWord();
+        
         foreach (var letter in Letters.OrderBy(l => l.LetterIndex))
         {
             letter.IsFixed = false;
-            letter.IsChecked = false;
-            if (!letter.IsChecked && letter.IsMainLetter)
+            if (letter.IsMainLetter)
             {
                 letter.IsFixed = true;
+
+                if (!letter.IsChecked)
+                {
+                    _touchFeedback.Perform();
+                    await Task.Delay(40);
+                }
+
                 await ToggleLetter(letter);
-                _touchFeedback.Perform();
-                await Task.Delay(40);
             }
         }
 

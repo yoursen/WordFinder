@@ -38,7 +38,7 @@ public class Sound : ISound
             return;
 
         if (_player.Playing)
-            _player.Stop();
+            return;
 
         try
         {
