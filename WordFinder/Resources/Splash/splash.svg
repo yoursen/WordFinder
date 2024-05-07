@@ -14,7 +14,7 @@
         stroke-width="6"/>
         <text fill="#eeeeee"
             fill-opacity="null"
-            font-family="Arial"
+            font-family="Roboto"
             font-size="45"
             font-weight="bold"
             id="svg_5"
@@ -29,7 +29,7 @@
             xml:space="preserve"
             y="40">Word Finder</text>
         <text fill="#eeeeee"
-            font-family="Arial"
+            font-family="Roboto"
             font-size="27"
             id="svg_6"
             stroke="null"
