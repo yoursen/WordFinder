@@ -222,7 +222,7 @@ public partial class GameModel : ObservableObject
     public async Task RevealAnswer()
     {
         _userWordLetters.Clear();
-        foreach (var letter in Letters.OrderBy(l=>l.LetterIndex))
+        foreach (var letter in Letters.OrderBy(l => l.LetterIndex))
         {
             letter.IsFixed = false;
             letter.IsChecked = false;
@@ -248,12 +248,16 @@ public partial class GameModel : ObservableObject
 
         // check for position of letters
         List<GameLetter> toRemove = new();
+        bool isGap = false;
         for (int i = 0; i < _userWordLetters.Count; i++)
         {
             if (_userWordLetters[i] is null)
+            {
+                isGap = true;
                 continue;
+            }
 
-            if (string.Compare(GuessWord.Word[i].ToString(), _userWordLetters[i].Letter, StringComparison.OrdinalIgnoreCase) != 0)
+            if (isGap || string.Compare(GuessWord.Word[i].ToString(), _userWordLetters[i].Letter, StringComparison.OrdinalIgnoreCase) != 0)
                 toRemove.Add(_userWordLetters[i]);
         }
 
