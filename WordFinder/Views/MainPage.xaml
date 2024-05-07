@@ -18,7 +18,7 @@
 
             <Label Text="Word Finder"
                 Style="{StaticResource Headline}"
-                CharacterSpacing="6">
+                CharacterSpacing="1">
                 <Label.Shadow>
                     <Shadow Brush="White"
                         Offset="2,2"

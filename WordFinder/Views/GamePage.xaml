@@ -155,7 +155,7 @@
                         <Label x:Name="UserTextLabel" 
                             Text="{Binding UserWord}"
                             Grid.Column="1"
-                            CharacterSpacing="3"
+                            CharacterSpacing="1"
                             FontSize="22"
                             FontFamily="MainFont"
                             HorizontalTextAlignment="Center"
