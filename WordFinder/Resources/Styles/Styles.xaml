@@ -203,7 +203,7 @@
     <Style TargetType="Label" x:Key="Headline">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource Text}}" />
         <Setter Property="FontSize" Value="32" />
-        <Setter Property="FontFamily" Value="MainFontMedium" />
+        <Setter Property="FontFamily" Value="MainFont" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
