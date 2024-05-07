@@ -117,12 +117,13 @@ public partial class GamePage : ContentPage
 
         if (button.Parent?.BindingContext is GameLetter letter)
         {
-            HapticFeedback.Default.Perform(HapticFeedbackType.Click);
+            _feedback.Perform();
+            
             await _viewModel.ToggleLetter(letter);
+            await button.AnimateScale();
         }
 
-        _feedback.Perform();
-        await button.AnimateScale();
+
     }
 
     private void OnClearClicked(object sender, EventArgs e)
