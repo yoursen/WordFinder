@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Converters;
 using WordFinder.Models;
 using WordFinder.Services;
 using WordFinder.ViewModels;
@@ -48,19 +49,45 @@ public partial class GamePage : ContentPage
 
     private async Task OnPenaltyApplied(object args) => await PenaltyLabel.AnimateDrop();
 
+    private bool _isExecuting = false;
+
     private async void OnNextClicked(object sender, EventArgs e)
     {
-        _feedback.DoFeedback();
-        await _viewModel.RevealAnswer();
-        await UserTextLabel.AnimateScale(1.15);
-        await Task.Delay(750);
-        await _viewModel.Next();
+        if (_isExecuting)
+            return;
+
+        try
+        {
+            _isExecuting = true;
+
+            _feedback.DoFeedback();
+            await _viewModel.RevealAnswer();
+            await UserTextLabel.AnimateScale(1.15);
+            await Task.Delay(750);
+            await _viewModel.Next();
+        }
+        finally
+        {
+            _isExecuting = false;
+        }
     }
+
 
     private async void OnHintClicked(object sender, EventArgs e)
     {
-        _feedback.DoFeedback();
-        await _viewModel.Hint();
+        if (_isExecuting)
+            return;
+
+        try
+        {
+            _isExecuting = true;
+            _feedback.DoFeedback();
+            await _viewModel.Hint();
+        }
+        finally
+        {
+            _isExecuting = false;
+        }
     }
 
     private async void OnBackClicked(object sender, EventArgs e)
@@ -81,6 +108,9 @@ public partial class GamePage : ContentPage
 
     private async void OnLetterClicked(object sender, EventArgs e)
     {
+        if (_isExecuting)
+            return;
+
         var button = sender as Button;
         if (button is null)
             return;
@@ -97,9 +127,19 @@ public partial class GamePage : ContentPage
 
     private void OnClearClicked(object sender, EventArgs e)
     {
-        _feedback.DoFeedback();
-        _viewModel.ClearUserWord();
+        if (_isExecuting)
+            return;
 
+        try
+        {
+            _isExecuting = true;
+            _feedback.DoFeedback();
+            _viewModel.ClearUserWord();
+        }
+        finally
+        {
+            _isExecuting = false;
+        }
     }
     private void OnClearLastLetter(object sender, EventArgs e)
     {
