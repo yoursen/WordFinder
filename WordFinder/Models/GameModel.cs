@@ -12,10 +12,13 @@ public partial class GameModel : ObservableObject
     private WordFitter _wordFitter;
     public TimeSpan HintPenaltyTimeSpan { get; init; } = TimeSpan.FromSeconds(5);
     private AwaitableMessageService _ams;
-    public GameModel(GameDatabase db, WordFitter wordFitter, GameTimer gameTimer, AwaitableMessageService ams)
+    private TouchFeedbackService _touchFeedback;
+    public GameModel(GameDatabase db, WordFitter wordFitter, GameTimer gameTimer, AwaitableMessageService ams
+    , TouchFeedbackService touchFeedback)
     {
         _db = db;
         _wordFitter = wordFitter;
+        _touchFeedback = touchFeedback;
         _gameTimer = gameTimer;
         _gameTimer.PropertyChanged += (s, e) => OnPropertyChanged(e);
         _gameTimer.TimeOver += OnTimeOver;
@@ -179,6 +182,7 @@ public partial class GameModel : ObservableObject
                 continue;
 
             await ToggleLetter(letter);
+            _touchFeedback.Perform();
             await Task.Delay(40);
         }
     }
@@ -233,6 +237,7 @@ public partial class GameModel : ObservableObject
             {
                 letter.IsFixed = true;
                 await ToggleLetter(letter);
+                _touchFeedback.Perform();
                 await Task.Delay(40);
             }
         }

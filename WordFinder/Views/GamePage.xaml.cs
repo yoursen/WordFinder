@@ -60,7 +60,7 @@ public partial class GamePage : ContentPage
         {
             _isExecuting = true;
 
-            _feedback.DoFeedback();
+            _feedback.Perform();
             await _viewModel.RevealAnswer();
             await UserTextLabel.AnimateScale(1.15);
             await Task.Delay(750);
@@ -81,7 +81,7 @@ public partial class GamePage : ContentPage
         try
         {
             _isExecuting = true;
-            _feedback.DoFeedback();
+            _feedback.Perform();
             await _viewModel.Hint();
         }
         finally
@@ -92,7 +92,7 @@ public partial class GamePage : ContentPage
 
     private async void OnBackClicked(object sender, EventArgs e)
     {
-        _feedback.DoFeedback();
+        _feedback.Perform();
         await (sender as VisualElement).AnimateScale();
         var exit = await _viewModel.AskExitGame();
         if (exit)
@@ -121,7 +121,7 @@ public partial class GamePage : ContentPage
             await _viewModel.ToggleLetter(letter);
         }
 
-        _feedback.DoFeedback();
+        _feedback.Perform();
         await button.AnimateScale();
     }
 
@@ -133,7 +133,7 @@ public partial class GamePage : ContentPage
         try
         {
             _isExecuting = true;
-            _feedback.DoFeedback();
+            _feedback.Perform();
             _viewModel.ClearUserWord();
         }
         finally
@@ -143,7 +143,7 @@ public partial class GamePage : ContentPage
     }
     private void OnClearLastLetter(object sender, EventArgs e)
     {
-        _feedback.DoFeedback();
+        _feedback.Perform();
         _viewModel.RemoveLastLetter();
     }
 }

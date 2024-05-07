@@ -14,7 +14,7 @@ public class TouchFeedbackService
         _sound = sound;
     }
 
-    public void DoFeedback()
+    public void Perform()
     {
         if (_settings.Vibrate)
             HapticFeedback.Default.Perform(HapticFeedbackType.Click);
