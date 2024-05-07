@@ -127,7 +127,7 @@ public partial class GameModel : ObservableObject
 
     public async Task ToggleLetter(GameLetter letter)
     {
-        if (letter.IsFixed)
+        if (letter.IsFixed && letter.IsChecked)
             return;
 
         if (letter.IsChecked)
@@ -221,13 +221,19 @@ public partial class GameModel : ObservableObject
 
     public async Task RevealAnswer()
     {
+        await RemoveWrongLetters();
+
         _userWordLetters.Clear();
         foreach (var letter in Letters.OrderBy(l => l.LetterIndex))
         {
             letter.IsFixed = false;
             letter.IsChecked = false;
             if (!letter.IsChecked && letter.IsMainLetter)
+            {
+                letter.IsFixed = true;
                 await ToggleLetter(letter);
+                await Task.Delay(40);
+            }
         }
 
         UpdateUserWord();
