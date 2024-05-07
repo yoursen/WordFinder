@@ -50,10 +50,12 @@
                     HorizontalOptions="Start"
                     VerticalOptions="Center"
                     Grid.Row="2"
+                    IsVisible="{Binding IsPlayerReady}"
                     Style="{StaticResource NormalLabel}"/>
                 <Switch Grid.Column="2"
                     HorizontalOptions="End"
                     Grid.Row="2"
+                    IsVisible="{Binding IsPlayerReady}"
                     IsToggled="{Binding Click}"/>
             </Grid>
 

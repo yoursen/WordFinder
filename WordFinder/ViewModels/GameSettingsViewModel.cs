@@ -1,3 +1,4 @@
+using WordFinder.Interfaces;
 using WordFinder.Models;
 
 namespace WordFinder.ViewModels;
@@ -5,10 +6,14 @@ namespace WordFinder.ViewModels;
 public class GameSettingsViewModel : BindableObject
 {
     private readonly GameSettings _gameSettings;
+    private readonly ISound _sound;
 
-    public GameSettingsViewModel(GameSettings gameSettings)
+    public bool IsPlayerReady => _sound.IsPlayerReady;
+
+    public GameSettingsViewModel(GameSettings gameSettings, ISound sound)
     {
         _gameSettings = gameSettings;
+        _sound = sound;
     }
 
     public bool Vibrate

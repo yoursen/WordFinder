@@ -1,5 +1,6 @@
 namespace WordFinder.Interfaces;
 public interface ISound
 {
-    void KeyboardClick () ;
+    bool IsPlayerReady { get; }
+    void KeyboardClick();
 }
