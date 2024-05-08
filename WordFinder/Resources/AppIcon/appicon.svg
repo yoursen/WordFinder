@@ -24,9 +24,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
      showguides="true"
-     inkscape:zoom="0.0661861"
-     inkscape:cx="-468.37629"
-     inkscape:cy="234.18815"
+     inkscape:zoom="0.060150654"
+     inkscape:cx="-3017.4236"
+     inkscape:cy="-989.18294"
      inkscape:window-width="1472"
      inkscape:window-height="822"
      inkscape:window-x="0"
@@ -50,27 +50,16 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:149.991px;font-family:Roboto;-inkscape-font-specification:'Roboto, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ed8952;fill-opacity:1;fill-rule:nonzero;stroke-width:0.781203"
-       x="28.858463"
-       y="153.59286"
-       id="text3"><tspan
-         sodipodi:role="line"
-         id="tspan3"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:149.991px;font-family:Roboto;-inkscape-font-specification:'Roboto, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ed8952;fill-opacity:1;fill-rule:nonzero;stroke-width:0.781203"
-         x="28.858463"
-         y="153.59286">W</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:152.02px;font-family:Roboto;-inkscape-font-specification:'Roboto, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#5c97ae;fill-opacity:1;stroke-width:0.791769"
-       x="152.1947"
-       y="226.67398"
-       id="text4"><tspan
-         sodipodi:role="line"
-         id="tspan4"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:152.02px;font-family:Roboto;-inkscape-font-specification:'Roboto, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#5c97ae;fill-opacity:1;stroke-width:0.791769"
-         x="152.1947"
-         y="226.67398">F</tspan></text>
+    <rect
+       style="fill:#5c97ae;fill-opacity:1;stroke-width:10"
+       id="rect2"
+       width="270.93332"
+       height="270.93332"
+       x="0"
+       y="-4.4408921e-16" />
+    <path
+       id="text3"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:192.031px;font-family:Roboto;-inkscape-font-specification:'Roboto, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke-width:1.00016"
+       d="M 175.2787 66.521003 L 175.2787 66.550459 L 175.20894 66.550459 L 154.20557 169.31679 L 128.42007 66.550459 L 108.54169 66.550459 L 82.475068 169.12921 L 61.284114 66.550459 L 37.749117 66.550459 L 69.25417 203.07236 L 92.039342 203.07236 L 118.57467 103.39989 L 144.54776 203.07236 L 167.23889 203.07236 L 181.18635 142.63212 L 219.75351 142.63212 L 219.75351 118.81962 L 186.68163 118.81962 L 193.25538 90.333503 L 236.31839 90.333503 L 236.31839 66.521003 L 175.2787 66.521003 z " />
   </g>
 </svg>
