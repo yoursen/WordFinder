@@ -37,11 +37,12 @@ public class Sound : ISound
         if (!IsPlayerReady)
             return;
 
-        if (_player.Playing)
-            _player.Stop();
-
         try
         {
+            if (_player.Playing)
+            {
+                _player.Stop();
+            }
             _player.Play();
         }
         catch { }

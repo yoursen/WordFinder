@@ -74,6 +74,7 @@
                         HorizontalOptions="Center"/>
                     <Label Text="{Binding Score}"
                         TextColor="{DynamicResource Primary}"
+                        x:Name="ScoreLabel"
                         FontSize="20"
                         FontFamily="MainFontMedium"
                         HorizontalOptions="Center"/>

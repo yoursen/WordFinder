@@ -39,7 +39,12 @@ public partial class GamePage : ContentPage
         _ams.Unregister("PenaltyApplied", OnPenaltyApplied);
     }
 
-    private async Task OnCorrectTextEntered(object args) => await UserTextLabel.AnimateScale(1.15);
+    private async Task OnCorrectTextEntered(object args)
+    {
+        await Task.WhenAll(
+            ScoreLabel.AnimateScale(1.15),
+            UserTextLabel.AnimateScale(1.15));
+    }
 
     private async Task OnWrongTextEntered(object args)
     {
