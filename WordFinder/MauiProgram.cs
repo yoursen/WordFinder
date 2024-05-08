@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Plugin.MauiMTAdmob;
 using WordFinder.Interfaces;
 using WordFinder.Models;
 using WordFinder.Services;
@@ -28,7 +29,8 @@ public static class MauiProgram
 			fonts.AddFont("Roboto-Medium.ttf", "MainFontMedium");
 			fonts.AddFont("FontAwesome.oft", "FontAwesome");
 		});
-
+		builder.UseMauiMTAdmob();
+		
 		// models
 		builder.Services.AddSingleton<GameModel>();
 		builder.Services.AddSingleton<WordFitter>();
