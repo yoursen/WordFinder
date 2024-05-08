@@ -8,9 +8,8 @@ public static class VisualElementExtensions
         visualElement.Scale = 1;
     }
 
-    public static void AnimateShake(this VisualElement element)
+    public static void AnimateShake(this VisualElement element, double shakeTranslation = 10)
     {
-        double shakeTranslation = 10;
         var shakeXAnimation = new Animation
             {
                 { 0, 0.2, new Animation(v => element.TranslationX = v, 0, shakeTranslation) },
@@ -27,15 +26,19 @@ public static class VisualElementExtensions
 
     public static async Task AnimateDrop(this VisualElement element, double yTranslate = 10, uint speed = 750)
     {
-        element.Opacity = 1;
-        element.IsVisible = true;
-        var originalY = element.TranslationY;
-        var targetY = originalY + yTranslate;
+        try
+        {
+            element.Opacity = 1;
+            element.IsVisible = true;
+            var originalY = element.TranslationY;
+            var targetY = originalY + yTranslate;
 
-        await element.TranslateTo(element.TranslationX, targetY, speed, Easing.SinIn);
-        await element.FadeTo(0, 250, Easing.Linear);
+            await element.TranslateTo(element.TranslationX, targetY, speed, Easing.SinIn);
+            await element.FadeTo(0, 250, Easing.Linear);
 
-        element.IsVisible = false;
-        element.TranslationY = originalY;
+            element.IsVisible = false;
+            element.TranslationY = originalY;
+        }
+        catch { }
     }
 }

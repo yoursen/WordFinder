@@ -101,6 +101,7 @@
                         HorizontalOptions="Center"/>
                     <Label Text="{Binding TimeLeft, StringFormat=\{0:mm\\:ss\}}"
                         TextColor="{DynamicResource Primary}"
+                        x:Name="TimeLeftLabel"
                         FontSize="20"
                         FontFamily="MainFontMedium"
                         HorizontalOptions="Center">
@@ -111,17 +112,6 @@
                         </Label.Triggers>
                     </Label>
                 </VerticalStackLayout>
-
-                <Label x:Name="PenaltyLabel"
-                    VerticalOptions="End"
-                    HorizontalOptions="Center"
-                    Grid.Column="1"
-                    FontSize="20"
-                    FontFamily="MainFontMedium"
-                    Text="{Binding HintPenaltyTimeSpan, StringFormat=-\{0:mm\\:ss\}}"
-                    IsVisible="false"
-                    TranslationY="15"
-                    TextColor="{DynamicResource Accent}"/>
             </Grid>
 
             <Label Text="{Binding GuessWord.Description}"

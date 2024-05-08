@@ -47,7 +47,11 @@ public partial class GamePage : ContentPage
         await Task.CompletedTask;
     }
 
-    private async Task OnPenaltyApplied(object args) => await PenaltyLabel.AnimateDrop();
+    private Task OnPenaltyApplied(object args)
+    {
+        TimeLeftLabel.AnimateShake(5);
+        return Task.CompletedTask;
+    }
 
     private bool _isExecuting = false;
 
@@ -118,7 +122,7 @@ public partial class GamePage : ContentPage
         if (button.Parent?.BindingContext is GameLetter letter)
         {
             _feedback.Perform();
-            
+
             await _viewModel.ToggleLetter(letter);
             await button.AnimateScale();
         }
