@@ -1,0 +1,5 @@
+{
+    "dotnet.defaultSolution": "WordFinder.sln",
+    "svg.preview.background": "dark-transparent",
+    "git.ignoreLimitWarning": true
+}

@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "dotnet publish for iOS",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "publish",
+                "-f",
+                "net8.0-ios",
+                "-c",
+                "Release",
+                "-p:ArchiveOnBuild=true",
+                "-p:RuntimeIdentifier=ios-arm64",
+                "-p:CodesignKey=\"iPhone Distribution\"",
+                "-p:CodesignProvision=\"WordFinderDistribution\""
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        }
+    ]
+}
