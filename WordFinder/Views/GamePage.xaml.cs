@@ -1,4 +1,5 @@
 using CommunityToolkit.Maui.Converters;
+using WordFinder.Interfaces;
 using WordFinder.Models;
 using WordFinder.Services;
 using WordFinder.ViewModels;
@@ -10,14 +11,16 @@ public partial class GamePage : ContentPage
     private GamePageViewModel _viewModel;
     private AwaitableMessageService _ams;
     private TouchFeedbackService _feedback;
+    private ISound _sound;
     public GamePage(GamePageViewModel viewModel, GameDatabase db, AwaitableMessageService ams,
-        TouchFeedbackService touchFeedbackService)
+        TouchFeedbackService touchFeedbackService, ISound sound)
     {
         InitializeComponent();
         _viewModel = viewModel;
         BindingContext = _viewModel;
         _ams = ams;
         _feedback = touchFeedbackService;
+        _sound = sound;
     }
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
@@ -41,6 +44,7 @@ public partial class GamePage : ContentPage
 
     private async Task OnCorrectTextEntered(object args)
     {
+        _sound.Success();
         await Task.WhenAll(
             ScoreLabel.AnimateScale(1.15),
             UserTextLabel.AnimateScale(1.15));
@@ -48,6 +52,7 @@ public partial class GamePage : ContentPage
 
     private async Task OnWrongTextEntered(object args)
     {
+        _sound.Fail();
         UserTextLabel.AnimateShake();
         await Task.CompletedTask;
     }

@@ -6,7 +6,9 @@ namespace WordFinder;
 
 public class Sound : ISound
 {
-    private AVAudioPlayer _player;
+    private readonly AVAudioPlayer _playerTap;
+    private readonly AVAudioPlayer _playerSuccess;
+    private readonly AVAudioPlayer _playerFail;
     public bool IsPlayerReady { get; init; }
 
     public Sound()
@@ -19,31 +21,41 @@ public class Sound : ISound
             if (error != null)
                 return;
 
-            string path = NSBundle.MainBundle.PathForResource("sounds/tap", "wav");
-            var url = NSUrl.FromString(path);
-
-            _player = new AVAudioPlayer(url, "wav", out error);
+            var url = NSUrl.FromString(NSBundle.MainBundle.PathForResource("sounds/tap", "m4a"));
+            _playerTap = new AVAudioPlayer(url, "m4a", out error);
 
             if (error != null)
                 return;
 
-            IsPlayerReady = _player.PrepareToPlay();
+            url = NSUrl.FromString(NSBundle.MainBundle.PathForResource("sounds/success", "m4a"));
+            _playerSuccess = new AVAudioPlayer(url, "m4a", out _);
+
+            url = NSUrl.FromString(NSBundle.MainBundle.PathForResource("sounds/fail", "m4a"));
+            _playerFail = new AVAudioPlayer(url, "m4a", out _);
+
+            IsPlayerReady = _playerTap.PrepareToPlay()
+                && _playerSuccess.PrepareToPlay()
+                && _playerFail.PrepareToPlay();
         }
         catch { }
     }
 
-    public void KeyboardClick()
+    public void KeyboardClick() => Play(_playerTap);
+    public void Success() => Play(_playerSuccess);
+    public void Fail() => Play(_playerFail);
+
+    private void Play(AVAudioPlayer player)
     {
         if (!IsPlayerReady)
             return;
 
         try
         {
-            if (_player.Playing)
+            if (player.Playing)
             {
-                _player.Stop();
+                player.Stop();
             }
-            _player.Play();
+            player.Play();
         }
         catch { }
     }
