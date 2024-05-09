@@ -200,10 +200,23 @@
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </FlexLayout>
+
         <controls:MTAdView BackgroundColor="Transparent"
-                    x:Name="myAds"
-                    AdsId="ca-app-pub-4999851819408381/1070219026"
-                    AdSize="AnchoredAdaptive"
-                    VerticalOptions="End"/>
+            x:Name="myAds"
+            AdsId="ca-app-pub-4999851819408381/1070219026"
+            AdSize="AnchoredAdaptive"
+            VerticalOptions="End">
+            <controls:MTAdView.Style>
+                <Style TargetType="controls:MTAdView">
+                    <Setter Property="HeightRequest">
+                        <Setter.Value>
+                            <x:OnIdiom Phone="50"
+                                Tablet="90"></x:OnIdiom>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </controls:MTAdView.Style>
+        </controls:MTAdView>
+
     </Grid>
 </ContentPage>
