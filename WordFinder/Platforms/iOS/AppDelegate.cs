@@ -15,6 +15,7 @@ public class AppDelegate : MauiUIApplicationDelegate
 
 	public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 	{
+		InitAds();
 		return base.FinishedLaunching(app, options);
 	}
 
@@ -110,5 +111,9 @@ public class AppDelegate : MauiUIApplicationDelegate
 
 	public void InitAds(bool isConsentObtained = false)
 	{
+		if (Google.MobileAds.MobileAds.SharedInstance == null)
+			return;
+
+		Google.MobileAds.MobileAds.SharedInstance.Start(completionHandler: null);
 	}
 }
