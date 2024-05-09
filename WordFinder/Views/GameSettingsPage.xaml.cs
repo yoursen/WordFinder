@@ -18,7 +18,6 @@ public partial class GameSettingsPage : ContentPage
     private async void OnMainMenuClicked(object sender, EventArgs e)
     {
         _feedback.Perform();
-        await (sender as VisualElement)?.AnimateScale();
         await GoHome();
     }
 

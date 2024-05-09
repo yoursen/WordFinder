@@ -18,15 +18,13 @@ public partial class GameOverPage : ContentPage
     private async void OnMainMenuClicked(object sender, EventArgs e)
     {
         _feedback.Perform();
-        await (sender as VisualElement)?.AnimateScale();
         await GoHome();
     }
 
     private async void OnTryAgainClicked(object sender, EventArgs e)
     {
         _feedback.Perform();
-        await (sender as VisualElement)?.AnimateScale();
-        await Shell.Current.GoToAsync("..");
+        await Navigation.PopAsync();
     }
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)

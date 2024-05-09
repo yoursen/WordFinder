@@ -107,7 +107,6 @@ public partial class GamePage : ContentPage
     private async void OnBackClicked(object sender, EventArgs e)
     {
         _feedback.Perform();
-        await (sender as VisualElement).AnimateScale();
         var exit = await _viewModel.AskExitGame();
         if (exit)
             await _viewModel.DoGameOver();
@@ -134,10 +133,7 @@ public partial class GamePage : ContentPage
             _feedback.Perform();
 
             await _viewModel.ToggleLetter(letter);
-            await button.AnimateScale();
         }
-
-
     }
 
     private void OnClearClicked(object sender, EventArgs e)

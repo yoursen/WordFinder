@@ -19,14 +19,12 @@ public partial class ExitGamePopup : Popup
     private async void YesClicked(object sender, EventArgs e)
     {
         _feedback.Perform();
-        await (sender as VisualElement).AnimateScale();
         await CloseAsync(true);
     }
 
     private async void NoClicked(object sender, EventArgs e)
     {
         _feedback.Perform();
-        await (sender as VisualElement).AnimateScale();
         await CloseAsync(false);
     }
 }

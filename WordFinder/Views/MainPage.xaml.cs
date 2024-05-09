@@ -18,23 +18,20 @@ public partial class MainPage : ContentPage
 		BindingContext = viewModel;
 	}
 
-	private async void OnPlayGameClicked(object sender, EventArgs args)
+	private void OnPlayGameClicked(object sender, EventArgs args)
 	{
 		_feedback.Perform();
-		await (sender as Button).AnimateScale();
 		_viewModel.PlayGameCommmand.Execute(null);
 	}
 
-	private async void OnBestScoreClicked(object sender, EventArgs args)
+	private void OnBestScoreClicked(object sender, EventArgs args)
 	{
 		_feedback.Perform();
-		await (sender as Button).AnimateScale();
 		_viewModel.BestScoreCommmand.Execute(null);
 	}
-	private async void OnSettingsClicked(object sender, EventArgs args)
+	private void OnSettingsClicked(object sender, EventArgs args)
 	{
 		_feedback.Perform();
-		await (sender as Button).AnimateScale();
 		_viewModel.GameSettingsCommmand.Execute(null);
 	}
 
