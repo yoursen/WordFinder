@@ -6,7 +6,8 @@
     x:Class="WordFinder.Views.GamePage"
     xmlns:vm="clr-namespace:WordFinder.ViewModels"
     xmlns:model="clr-namespace:WordFinder.Models"
-    x:DataType="vm:GamePageViewModel"    
+    xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
+    x:DataType="vm:GamePageViewModel"
     Shell.NavBarIsVisible="False"
     BackgroundColor="{DynamicResource PrimaryBackground}">
     <ContentPage.Resources>
@@ -64,8 +65,7 @@
         <FlexLayout Direction="Column"
             JustifyContent="SpaceAround">
 
-            <Grid ColumnDefinitions="*,*"
-                >
+            <Grid ColumnDefinitions="*,*">
                 <VerticalStackLayout Margin="0,10,0,0">
                     <Label Text="Answers"
                         TextColor="{DynamicResource Primary}"
@@ -94,7 +94,8 @@
                 </ImageButton>
 
                 <!-- Time Left group -->
-                <VerticalStackLayout Grid.Column="1" Margin="0,10,0,0">
+                <VerticalStackLayout Grid.Column="1"
+                    Margin="0,10,0,0">
                     <Label Text="Time left"
                         TextColor="{DynamicResource Primary}"
                         FontSize="18"
@@ -107,8 +108,11 @@
                         FontFamily="MainFontMedium"
                         HorizontalOptions="Center">
                         <Label.Triggers>
-                            <DataTrigger TargetType="Label" Binding="{Binding IsFreeplayMode}" Value="True">
-                                <Setter Property="Text" Value="--:--"/>
+                            <DataTrigger TargetType="Label"
+                                Binding="{Binding IsFreeplayMode}"
+                                Value="True">
+                                <Setter Property="Text"
+                                    Value="--:--"/>
                             </DataTrigger>
                         </Label.Triggers>
                     </Label>
@@ -143,7 +147,7 @@
                             </ImageButton.Source>
                         </ImageButton>
 
-                        <Label x:Name="UserTextLabel" 
+                        <Label x:Name="UserTextLabel"
                             Text="{Binding UserWord}"
                             Grid.Column="1"
                             CharacterSpacing="1"
@@ -196,5 +200,10 @@
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </FlexLayout>
+        <controls:MTAdView BackgroundColor="Transparent"
+                    x:Name="myAds"
+                    AdsId="ca-app-pub-4999851819408381/1070219026"
+                    AdSize="AnchoredAdaptive"
+                    VerticalOptions="End"/>
     </Grid>
 </ContentPage>

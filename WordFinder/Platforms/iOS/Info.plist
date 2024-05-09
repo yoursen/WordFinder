@@ -30,5 +30,11 @@
 	<string>com.seniuk.wordfinder</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-4999851819408381~4065129591</string>
+	<key>GADIsAdManagerApp</key>
+	<true/>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>We use your data to provide personalized ads and to measure ad performance.</string>
 </dict>
 </plist>

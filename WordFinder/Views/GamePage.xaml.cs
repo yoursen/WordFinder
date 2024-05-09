@@ -3,6 +3,8 @@ using WordFinder.Interfaces;
 using WordFinder.Models;
 using WordFinder.Services;
 using WordFinder.ViewModels;
+using Plugin.MauiMTAdmob;
+using Plugin.MauiMTAdmob.Extra;
 
 namespace WordFinder.Views;
 
@@ -21,6 +23,13 @@ public partial class GamePage : ContentPage
         _ams = ams;
         _feedback = touchFeedbackService;
         _sound = sound;
+
+        /*
+        CrossMauiMTAdmob.Current.TagForChildDirectedTreatment = MTTagForChildDirectedTreatment.TagForChildDirectedTreatmentUnspecified;
+        CrossMauiMTAdmob.Current.TagForUnderAgeOfConsent = MTTagForUnderAgeOfConsent.TagForUnderAgeOfConsentUnspecified;
+        CrossMauiMTAdmob.Current.MaxAdContentRating = MTMaxAdContentRating.MaxAdContentRatingG;
+        CrossMauiMTAdmob.Current.AdChoicesCorner = AdChoicesCorner.ADCHOICES_BOTTOM_RIGHT;
+        */
     }
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
@@ -31,6 +40,8 @@ public partial class GamePage : ContentPage
         _ams.Register("WrongTextEntered", OnWrongTextEntered);
         _ams.Register("CorrectTextEntered", OnCorrectTextEntered);
         _ams.Register("PenaltyApplied", OnPenaltyApplied);
+
+        myAds.LoadAd();
     }
 
     protected override async void OnNavigatingFrom(NavigatingFromEventArgs args)
@@ -158,5 +169,10 @@ public partial class GamePage : ContentPage
     {
         _feedback.Perform();
         _viewModel.RemoveLastLetter();
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
     }
 }
