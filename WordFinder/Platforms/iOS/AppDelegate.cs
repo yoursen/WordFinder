@@ -32,7 +32,7 @@ public class AppDelegate : MauiUIApplicationDelegate
 			var requestParameters = new RequestParameters();
 			requestParameters.TagForUnderAgeOfConsent = false;
 			requestParameters.DebugSettings = new DebugSettings() { };
-			ConsentInformation.SharedInstance.RequestConsentInfoUpdateWithParameters(requestParameters, delegate (NSError? requestConsentError)
+			ConsentInformation.SharedInstance.RequestConsentInfoUpdateWithParameters(requestParameters, delegate (NSError requestConsentError)
 						{
 
 							if (requestConsentError != null)
@@ -40,14 +40,16 @@ public class AppDelegate : MauiUIApplicationDelegate
 							}
 							else
 							{
-								ConsentForm.LoadWithCompletionHandler(delegate (ConsentForm? f, NSError? e)
+								ConsentForm.LoadWithCompletionHandler(delegate (ConsentForm f, NSError e)
 								{
 									if (f != null)
 									{
-										UIViewController rootViewController = UIApplication.SharedApplication.KeyWindow.RootViewController;
-										if (rootViewController != null)
+#pragma warning disable CA1422 // Validate platform compatibility
+                                        UIViewController rootViewController = UIApplication.SharedApplication.KeyWindow.RootViewController;
+#pragma warning restore CA1422 // Validate platform compatibility
+                                        if (rootViewController != null)
 										{
-											f.PresentFromViewController(rootViewController, delegate (NSError? e)
+											f.PresentFromViewController(rootViewController, delegate (NSError e)
 											{
 												if (e != null)
 												{
@@ -64,7 +66,6 @@ public class AppDelegate : MauiUIApplicationDelegate
 									}
 								});
 							}
-
 						});
 		}
 	}
