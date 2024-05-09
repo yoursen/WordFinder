@@ -3,6 +3,8 @@ using Foundation;
 using Google.MobileAds;
 using Google.UserMessagingPlatform;
 using UIKit;
+using Plugin.MauiMTAdmob;
+using Plugin.MauiMTAdmob.Extra;
 
 namespace WordFinder;
 
@@ -20,11 +22,6 @@ public class AppDelegate : MauiUIApplicationDelegate
 	{
 		base.OnActivated(application);
 		RequestTrackingPermission();
-	}
-
-	private void InitializationHandler(InitializationStatus status)
-	{
-
 	}
 
 	public void RequestTrackingPermission()
@@ -113,28 +110,5 @@ public class AppDelegate : MauiUIApplicationDelegate
 
 	public void InitAds(bool isConsentObtained = false)
 	{
-		if (ConsentInformation.SharedInstance == null || ConsentInformation.SharedInstance.ConsentStatus != Google.UserMessagingPlatform.ConsentStatus.Obtained )
-		{
-			return;
-		}
-		MobileAds.SharedInstance.Start(delegate
-		{
-
-		});
-	}
-
-	private void ConsentFormCompletionHandler(ConsentForm consentForm, NSError error)
-	{
-		if (error != null)
-		{
-
-		}
-
-		var infp = ConsentInformation.SharedInstance;
-
-		var status = ConsentInformation.SharedInstance.ConsentStatus;
-		if (status == ConsentStatus.Required)
-		{
-		}
 	}
 }
