@@ -178,7 +178,7 @@ public partial class GameModel : ObservableObject
     {
         foreach (var letter in _userWordLetters.ToArray().Reverse())
         {
-            if (letter is null || !letter.IsChecked)
+            if (letter is null || letter.IsFixed)
                 continue;
 
             await ToggleLetter(letter);
