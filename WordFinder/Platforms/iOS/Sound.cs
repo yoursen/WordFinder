@@ -29,9 +29,11 @@ public class Sound : ISound
 
             url = NSUrl.FromString(NSBundle.MainBundle.PathForResource("sounds/success", "m4a"));
             _playerSuccess = new AVAudioPlayer(url, "m4a", out _);
+            _playerSuccess.Volume = 0.15f;
 
             url = NSUrl.FromString(NSBundle.MainBundle.PathForResource("sounds/fail", "m4a"));
             _playerFail = new AVAudioPlayer(url, "m4a", out _);
+            _playerFail.Volume = 0.15f;
 
             IsPlayerReady = _playerTap.PrepareToPlay()
                 && _playerSuccess.PrepareToPlay()
@@ -53,7 +55,7 @@ public class Sound : ISound
         {
             if (player.Playing)
             {
-                player.Stop();
+                return;
             }
             player.Play();
         }
