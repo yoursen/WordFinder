@@ -3,8 +3,6 @@ using WordFinder.Interfaces;
 using WordFinder.Models;
 using WordFinder.Services;
 using WordFinder.ViewModels;
-using Plugin.MauiMTAdmob;
-using Plugin.MauiMTAdmob.Extra;
 
 namespace WordFinder.Views;
 
