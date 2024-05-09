@@ -37,12 +37,6 @@ public class AppDelegate : MauiUIApplicationDelegate
 
 							if (requestConsentError != null)
 							{
-								// mauiMTAdmob.MOnConsentInfoUpdateFailure(new MTEventArgs
-								// {
-								// 	ErrorCode = (int)requestConsentError.Code,
-								// 	ErrorMessage = requestConsentError.Description,
-								// 	ErrorDomain = requestConsentError.Domain
-								// });
 							}
 							else
 							{
@@ -57,56 +51,22 @@ public class AppDelegate : MauiUIApplicationDelegate
 											{
 												if (e != null)
 												{
-													// mauiMTAdmob.MOnConsentFormLoadFailure(new MTEventArgs
-													// {
-													// 	ErrorCode = (int)e.Code,
-													// 	ErrorMessage = e.Description,
-													// 	ErrorDomain = e.Domain
-													// });
 												}
 												else
 												{
 													InitAds();
-													//mauiMTAdmob.MOnConsentFormLoadSuccess();
 												}
 											});
 										}
 									}
 									if (e != null)
 									{
-										// mauiMTAdmob.MOnConsentFormLoadFailure(new MTEventArgs
-										// {
-										// 	ErrorCode = (int)e.Code,
-										// 	ErrorMessage = e.Description,
-										// 	ErrorDomain = e.Domain
-										// });
 									}
 								});
-								//mauiMTAdmob.MOnConsentInfoUpdateSuccess();
 							}
 
 						});
 		}
-
-		// if (UIDevice.CurrentDevice.CheckSystemVersion(14, 0))
-		// {
-		// 	ATTrackingManager.RequestTrackingAuthorization((status) =>
-		// 	{
-		// 		// Handle the authorization status here
-		// 		if (status == ATTrackingManagerAuthorizationStatus.Authorized)
-		// 		{
-		// 			// Tracking permission granted, you can now proceed with tracking
-		// 		}
-		// 		else
-		// 		{
-		// 			// Tracking permission not granted, handle accordingly
-		// 		}
-		// 	});
-		// }
-		// else
-		// {
-
-		// }
 	}
 
 	public void InitAds(bool isConsentObtained = false)

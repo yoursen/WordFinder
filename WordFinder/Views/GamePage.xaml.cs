@@ -23,13 +23,6 @@ public partial class GamePage : ContentPage
         _ams = ams;
         _feedback = touchFeedbackService;
         _sound = sound;
-
-        CrossMauiMTAdmob.Current.TagForChildDirectedTreatment = MTTagForChildDirectedTreatment.TagForChildDirectedTreatmentUnspecified;
-        CrossMauiMTAdmob.Current.TagForUnderAgeOfConsent = MTTagForUnderAgeOfConsent.TagForUnderAgeOfConsentUnspecified;
-        CrossMauiMTAdmob.Current.MaxAdContentRating = MTMaxAdContentRating.MaxAdContentRatingG;
-        CrossMauiMTAdmob.Current.AdChoicesCorner = AdChoicesCorner.ADCHOICES_TOP_RIGHT;
-        var status = CrossMauiMTAdmob.Current.GetConsentStatus();
-
     }
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
