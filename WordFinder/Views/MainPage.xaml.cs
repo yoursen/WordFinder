@@ -23,6 +23,7 @@ public partial class MainPage : ContentPage
         CrossMauiMTAdmob.Current.TagForUnderAgeOfConsent = MTTagForUnderAgeOfConsent.TagForUnderAgeOfConsentUnspecified;
         CrossMauiMTAdmob.Current.MaxAdContentRating = MTMaxAdContentRating.MaxAdContentRatingG;
         CrossMauiMTAdmob.Current.AdChoicesCorner = AdChoicesCorner.ADCHOICES_TOP_RIGHT;
+        CrossMauiMTAdmob.Current.Init();
 	}
 
 	private void OnPlayGameClicked(object sender, EventArgs args)

@@ -3,6 +3,10 @@ using WordFinder.Interfaces;
 using WordFinder.Models;
 using WordFinder.Services;
 using WordFinder.ViewModels;
+using Plugin.MauiMTAdmob;
+using Plugin.MauiMTAdmob.Extra;
+using Microsoft.Maui.Controls.Compatibility.Platform.iOS;
+using System.Collections;
 
 namespace WordFinder.Views;
 
@@ -18,9 +22,44 @@ public partial class GamePage : ContentPage
         InitializeComponent();
         _viewModel = viewModel;
         BindingContext = _viewModel;
+        LastShownInterstial = DateTime.Now;
+
         _ams = ams;
         _feedback = touchFeedbackService;
         _sound = sound;
+    }
+
+    private void OnInterstitialLoaded(object sender, EventArgs e)
+    {
+        IsInterstitialLoaded = true;
+    }
+    private TimeSpan InterstitialThreshold { get; set; } = TimeSpan.FromMinutes(2);
+
+    private void ShowInterstitialAds()
+    {
+        if (!IsInterstitialLoaded)
+            return;
+
+        if (DateTime.Now - LastShownInterstial > InterstitialThreshold)
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
+        }
+    }
+
+    private bool IsInterstitialLoaded { get; set; }
+    private DateTime LastShownInterstial { get; set; }
+
+    private void LoadInterstitial() => CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-4999851819408381/6366330626");
+    private void OnInterstitialClosed(object sender, EventArgs e)
+    {
+        _viewModel.ResumeGame();
+        LoadInterstitial();
+        LastShownInterstial = DateTime.Now;
+    }
+
+    private void OnInterstitialOpened(object sender, EventArgs e)
+    {
+        _viewModel.SuspendGame();
     }
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
@@ -33,12 +72,21 @@ public partial class GamePage : ContentPage
         _ams.Register("PenaltyApplied", OnPenaltyApplied);
 
         myAds.LoadAd();
+        LoadInterstitial();
+
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded += OnInterstitialLoaded;
+        CrossMauiMTAdmob.Current.OnInterstitialClosed += OnInterstitialClosed;
+        CrossMauiMTAdmob.Current.OnInterstitialOpened += OnInterstitialOpened;
     }
+
 
     protected override async void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
         base.OnNavigatingFrom(args);
         await _viewModel.OnNavigatingFrom();
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded -= OnInterstitialLoaded;
+        CrossMauiMTAdmob.Current.OnInterstitialClosed -= OnInterstitialClosed;
+        CrossMauiMTAdmob.Current.OnInterstitialOpened -= OnInterstitialOpened;
         _ams.Unregister("WrongTextEntered", OnWrongTextEntered);
         _ams.Unregister("CorrectTextEntered", OnCorrectTextEntered);
         _ams.Unregister("PenaltyApplied", OnPenaltyApplied);
@@ -50,12 +98,14 @@ public partial class GamePage : ContentPage
         await Task.WhenAll(
             ScoreLabel.AnimateScale(1.15),
             UserTextLabel.AnimateScale(1.15));
+        ShowInterstitialAds();
     }
 
     private async Task OnWrongTextEntered(object args)
     {
         _sound.Fail();
         UserTextLabel.AnimateShake();
+        ShowInterstitialAds();
         await Task.CompletedTask;
     }
 
@@ -81,6 +131,8 @@ public partial class GamePage : ContentPage
             await UserTextLabel.AnimateScale(1.15);
             await Task.Delay(750);
             await _viewModel.Next();
+
+            ShowInterstitialAds();
         }
         finally
         {

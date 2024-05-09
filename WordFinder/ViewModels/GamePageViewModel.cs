@@ -31,9 +31,12 @@ public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>
     public TimeSpan HintPenaltyTimeSpan => _gameModel.HintPenaltyTimeSpan;
     public bool IsFreeplayMode => _gameModel.IsFreeplayMode;
 
+    public void SuspendGame() => _gameModel.SuspendGame();
+    public void ResumeGame() => _gameModel.ResumeGame();
+
     public async Task<bool> AskExitGame()
     {
-        _gameModel.SuspendGame();
+        SuspendGame();
         var result = await _popupService.ShowPopupAsync<ExitGamePopupViewModel>();
         if (result is bool b && b)
         {
@@ -41,7 +44,7 @@ public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>
         }
         else
         {
-            _gameModel.ResumeGame();
+            ResumeGame();
             return false;
         }
     }
