@@ -117,8 +117,10 @@ public partial class GamePage : ContentPage
         await Task.CompletedTask;
     }
 
-    private void OnSwipedLeft(object sender, SwipedEventArgs e) => _viewModel.RemoveLastLetter();
-
+    private void OnSwipedLeft(object sender, SwipedEventArgs e)
+    {
+        // do nothing
+    }
     private async void OnLetterClicked(object sender, EventArgs e)
     {
         if (_isExecuting)
