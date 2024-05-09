@@ -105,7 +105,6 @@ public partial class GamePage : ContentPage
     {
         _sound.Fail();
         UserTextLabel.AnimateShake();
-        ShowInterstitialAds();
         await Task.CompletedTask;
     }
 
