@@ -47,7 +47,7 @@
 
     </ContentPage.Resources>
 
-    <Grid>
+    <Grid RowDefinitions="*,auto">
 
         <Grid.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Right"
@@ -202,6 +202,7 @@
         </FlexLayout>
 
         <controls:MTAdView BackgroundColor="Transparent"
+            Grid.Row="1"
             x:Name="myAds"
             AdsId="ca-app-pub-4999851819408381/1070219026"
             AdSize="AnchoredAdaptive"
