@@ -55,7 +55,7 @@ public class Sound : ISound
         {
             if (player.Playing)
             {
-                return;
+                player.Stop();
             }
             player.Play();
         }
