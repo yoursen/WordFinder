@@ -1,4 +1,6 @@
 
+using IntentsUI;
+
 namespace WordFinder.Models;
 
 public enum Direction
@@ -47,11 +49,57 @@ public class WordFitter
         return letters;
     }
 
+    private void ResetField()
+    {
+        _col = -1;
+        _row = -1;
+        for (int i = 0; i < _gridSize; i++)
+            for (int j = 0; j < _gridSize; j++)
+                _table[i, j] = null;
+    }
+
+    /// <summary>
+    /// Uses dummy alg for fitting word, when random position failed. */
+    /// </summary>
+    public void FitWordDummy(GameWord gameWord)
+    {
+        ResetField();
+
+        int letterIndex = 0;
+        int direction = 1;
+        _row = 1;
+        _col = 1;
+        foreach (var ch in gameWord.Word)
+        {
+            _table[_row, _col] = new GameLetter(ch.ToString().ToUpper())
+            {
+                IsMainLetter = true,
+                LetterIndex = letterIndex
+            };
+            letterIndex++;
+
+            _col += direction;
+            if (_col == 5)
+            {
+                _row++;
+                _col = 4;
+                direction = -1;
+            }
+            else if (_col == -1)
+            {
+                _col = 0;
+                _row++;
+                direction = 1;
+            }
+        }
+    }
+
     public bool FitWord(GameWord gameWord)
     {
         if (gameWord is null)
             return false;
 
+        ResetField();
         bool success = true;
         for (int attempt = 0; attempt < 50; attempt++)
         {
@@ -62,11 +110,7 @@ public class WordFitter
                 if (!UpdateCursorPosition(letterIndex, Direction.Any))
                 {
                     success = false;
-                    _col = -1;
-                    _row = -1;
-                    for (int i = 0; i < _gridSize; i++)
-                        for (int j = 0; j < _gridSize; j++)
-                            _table[i, j] = null;
+                    ResetField();
                     break;
                 }
                 _table[_row, _col] = new GameLetter(ch.ToString().ToUpper())
@@ -97,7 +141,7 @@ public class WordFitter
             _table[_row, _col] = new GameLetter(ch.ToString().ToUpper());
             letterIndex++;
 
-            if (!UpdateCursorPosition(letterIndex, Direction.Right | Direction.Top | Direction.Bottom))
+            if (!UpdateCursorPosition(letterIndex, Direction.Right | Direction.Top | Direction.Bottom, false))
                 break;
         }
     }
@@ -149,7 +193,7 @@ public class WordFitter
         return possibleValues[index];
     }
 
-    private bool UpdateCursorPosition(int letterIndex, Direction allowedDirections)
+    private bool UpdateCursorPosition(int letterIndex, Direction allowedDirections, bool shiftAllowed = true)
     {
         if (_row < 0 || _col < 0)
         {
@@ -164,6 +208,8 @@ public class WordFitter
             case Direction.Left:
                 if (_col == 0 && _tableService.CanShiftRight())
                 {
+                    if (!shiftAllowed)
+                        return false;
                     _tableService.ShiftRight();
                     _col++;
                 }
@@ -174,6 +220,8 @@ public class WordFitter
             case Direction.Top:
                 if (_row == 0 && _tableService.CanShiftBottom())
                 {
+                    if (!shiftAllowed)
+                        return false;
                     _tableService.ShiftBottom();
                     _row++;
                 }
@@ -184,6 +232,8 @@ public class WordFitter
             case Direction.Right:
                 if (_col == _gridSize - 1 && _tableService.CanShiftLeft())
                 {
+                    if (!shiftAllowed)
+                        return false;
                     _tableService.ShiftLeft();
                     _col--;
                 }
@@ -194,6 +244,8 @@ public class WordFitter
             case Direction.Bottom:
                 if (_row == _gridSize - 1 && _tableService.CanShiftTop())
                 {
+                    if (!shiftAllowed)
+                        return false;
                     _tableService.ShiftTop();
                     _row--;
                 }

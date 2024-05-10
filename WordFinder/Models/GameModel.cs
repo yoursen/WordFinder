@@ -205,7 +205,7 @@ public partial class GameModel : ObservableObject
         {
             if (!_wordFitter.FitWord(GuessWord))
             {
-                return false;
+                _wordFitter.FitWordDummy(GuessWord);
             }
             var noiseWords = await _db.GameRandomWords(5);
             foreach (var word in noiseWords)

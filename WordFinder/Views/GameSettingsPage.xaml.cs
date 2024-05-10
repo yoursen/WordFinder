@@ -24,6 +24,7 @@ public partial class GameSettingsPage : ContentPage
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
+        _viewModel.Refresh();
     }
 
     protected override void OnNavigatingFrom(NavigatingFromEventArgs args)
@@ -31,6 +32,12 @@ public partial class GameSettingsPage : ContentPage
         base.OnNavigatingFrom(args);
     }
     private async Task GoHome() => await Navigation.PopToRootAsync();
+
+    private void OnBuyProClicked(object s, EventArgs e) 
+    {
+        _feedback.Perform();
+        _viewModel.BuyPro();
+    }
 
     protected async void OnSwipedRight(object sender, SwipedEventArgs e) => await GoHome();
 }

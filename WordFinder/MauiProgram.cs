@@ -47,6 +47,7 @@ public static class MauiProgram
 		// services
 		builder.Services.AddSingleton<AwaitableMessageService>();
 		builder.Services.AddSingleton<TouchFeedbackService>();
+		builder.Services.AddSingleton<LicenseService>();
 		builder.Services.AddSingleton<ISound, Sound>();
 
 		// view models
