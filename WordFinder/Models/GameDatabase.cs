@@ -17,7 +17,7 @@ public class GameDatabase
         _database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
         await _database.CreateTableAsync<GameScore>();
 
-        Categories = await _database.Table<GameWordCategory>().ToArrayAsync();
+        Categories = await _database.Table<GameWordCategory>().ToArrayAsync();        
     }
 
     public async Task DeployDB()
@@ -70,11 +70,42 @@ public class GameDatabase
         var res = await _database.ExecuteAsync(sql, isPlayed, id);
     }
 
-    public async Task ResetIsPlayed()
+    public async Task<int> ResetIsPlayed(bool includeIsAnswered)
     {
         await Init();
 
-        const string sql = $"UPDATE GameWords SET IsPlayed = FALSE";
+        string sql = $"UPDATE GameWords SET IsPlayed = FALSE WHERE IsPlayed = TRUE";
+        if (includeIsAnswered)
+            sql += " AND IsAnswered = TRUE";
+        else
+            sql += " AND IsAnswered = FALSE";
+
+        return await _database.ExecuteAsync(sql);
+    }
+
+    public async Task SetIsAnswered(int id, bool isAnswered)
+    {
+        await Init();
+
+        const string sql = $"UPDATE GameWords SET IsAnswered = ? WHERE Id = ?";
+        var res = await _database.ExecuteAsync(sql, isAnswered, id);
+    }
+
+    public async Task<int> CountWordsAnswered() => await CountWords(w => w.IsAnswered);
+    public async Task<int> CountWordsNotAnswered() => await CountWords(w => !w.IsAnswered);
+
+    public async Task<int> CountWords() => await CountWords(w => true);
+
+    public async Task<int> CountWords(System.Linq.Expressions.Expression<Func<GameWord, bool>> predicate)
+    {
+        return await _database.Table<GameWord>().Where(predicate).CountAsync();
+    }
+
+    public async Task ResetIsAnswered()
+    {
+        await Init();
+
+        const string sql = $"UPDATE GameWords SET IsAnswered = FALSE";
         var res = await _database.ExecuteAsync(sql);
     }
 

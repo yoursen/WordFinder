@@ -12,7 +12,7 @@
             <SwipeGestureRecognizer Direction="Right"
                 Swiped="OnSwipedRight"/>
         </Grid.GestureRecognizers>
-        
+
         <Image Source="game_background_image2.png"
             Aspect="AspectFill"
             VerticalOptions="CenterAndExpand"
@@ -36,7 +36,7 @@
 
             <Grid Margin="30,0"
                 ColumnDefinitions="*,90"
-                RowDefinitions="*,10,*,10,*,10,*"
+                RowDefinitions="*,10,*,10,*,10,*,10,*"
                 HorizontalOptions="Center">
                 <Label Text="2 minutes game"
                     HorizontalOptions="Start"
@@ -76,6 +76,26 @@
                     Text="{Binding ScoreFreeplay}"
                     HorizontalOptions="End"
                     Style="{StaticResource NormalLabel}"/>
+
+                <Label Grid.Row="8"
+                    Text="Answered/Total"
+                    HorizontalOptions="Start"
+                    Style="{StaticResource NormalLabel}"/>
+
+                <HorizontalStackLayout 
+                    Grid.Row="8"
+                    Grid.Column="1"
+                    HorizontalOptions="End">
+
+                    <Label Text="{Binding TotalWordsAnswered}"
+                        Style="{StaticResource NormalLabel}"/>
+                    <Label Text="/"
+                        Style="{StaticResource NormalLabel}"/>
+                    <Label Text="{Binding TotalWords}"
+                        Style="{StaticResource NormalLabel}"/>
+
+                </HorizontalStackLayout>
+
             </Grid>
 
             <VerticalStackLayout Spacing="20"

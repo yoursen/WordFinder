@@ -54,7 +54,13 @@ public partial class GameModel : ObservableObject
 
             if (GuessWord is null)
             {
-                await _db.ResetIsPlayed();
+                var wordsLeft = await _db.ResetIsPlayed(false);
+                if (wordsLeft == 0)
+                {
+                    await DoGameOver();
+                    return;
+                }
+
                 success = false;
                 continue;
             }
@@ -66,6 +72,11 @@ public partial class GameModel : ObservableObject
             _userWordLetters.Clear();
             UpdateUserWord();
             success = await CreateGameField();
+            if (!success)
+            {
+                // cannot fill the word
+            }
+
         } while (!success);
 
         HintsLeft = GuessWord.Word.Length - 2;
@@ -228,7 +239,7 @@ public partial class GameModel : ObservableObject
     {
         await RemoveWrongLetters();
         UpdateUserWord();
-        
+
         foreach (var letter in Letters.OrderBy(l => l.LetterIndex))
         {
             letter.IsFixed = false;
@@ -292,6 +303,22 @@ public partial class GameModel : ObservableObject
         GameDuration = gameDurationSec;
         await Next();
         _gameTimer.Start(TimeSpan.FromMinutes(gameDurationSec));
+    }
+
+    public async Task CheckWordAndDoNext()
+    {
+        if (IsGuessWordCorrect())
+        {
+            Score++;
+            HighlightUserLetters();
+            await _db.SetIsAnswered(GuessWord.Id, true);
+            await _ams.Send("CorrectTextEntered");
+            await Next();
+        }
+        else if (!UserWord.Contains("_"))
+        {
+            await _ams.Send("WrongTextEntered");
+        }
     }
 
     private async void OnTimeOver(object sender, EventArgs e) => await DoGameOver();

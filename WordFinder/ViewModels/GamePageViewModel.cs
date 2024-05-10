@@ -62,32 +62,16 @@ public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>
     public async Task Hint()
     {
         await _gameModel.Hint();
-        await CheckWordAndDoNext();
-
+        await _gameModel.CheckWordAndDoNext();
     }
     public async Task ToggleLetter(GameLetter letter)
     {
         await _gameModel.ToggleLetter(letter);
-        await CheckWordAndDoNext();
+        await _gameModel.CheckWordAndDoNext();
     }
 
     public async void RemoveLastLetter() => await _gameModel.RemoveLastLetter();
     public async void ClearUserWord() => await _gameModel.ClearUserWord();
-
-    private async Task CheckWordAndDoNext()
-    {
-        if (_gameModel.IsGuessWordCorrect())
-        {
-            _gameModel.Score++;
-            _gameModel.HighlightUserLetters();
-            await _ams.Send("CorrectTextEntered");
-            await Next();
-        }
-        else if (!UserWord.Contains("_"))
-        {
-            await _ams.Send("WrongTextEntered");
-        }
-    }
 
     private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         => OnPropertyChanged(e.PropertyName);
