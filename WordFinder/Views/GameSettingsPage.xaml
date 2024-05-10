@@ -46,7 +46,7 @@
                     HorizontalOptions="End"
                     IsToggled="{Binding Vibrate}"/>
 
-                <Label Text="Click"
+                <Label Text="Sound"
                     HorizontalOptions="Start"
                     VerticalOptions="Center"
                     Grid.Row="2"

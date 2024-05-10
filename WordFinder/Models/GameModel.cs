@@ -182,7 +182,7 @@ public partial class GameModel : ObservableObject
                 continue;
 
             await ToggleLetter(letter);
-            _touchFeedback.Perform();
+            _touchFeedback.Vibrate();
             await Task.Delay(40);
         }
     }
@@ -238,7 +238,7 @@ public partial class GameModel : ObservableObject
 
                 if (!letter.IsChecked)
                 {
-                    _touchFeedback.Perform();
+                    _touchFeedback.Vibrate();
                     await Task.Delay(40);
                 }
 

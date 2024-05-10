@@ -172,7 +172,8 @@ public partial class GamePage : ContentPage
 
     private void OnSwipedLeft(object sender, SwipedEventArgs e)
     {
-        // do nothing
+        _feedback.Vibrate();
+        _viewModel.RemoveLastLetter();
     }
     private async void OnLetterClicked(object sender, EventArgs e)
     {

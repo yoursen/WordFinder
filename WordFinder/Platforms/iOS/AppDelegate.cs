@@ -1,5 +1,4 @@
-﻿using AppTrackingTransparency;
-using Foundation;
+﻿using Foundation;
 using Google.MobileAds;
 using Google.UserMessagingPlatform;
 using UIKit;

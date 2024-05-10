@@ -14,12 +14,21 @@ public class TouchFeedbackService
         _sound = sound;
     }
 
-    public void Perform()
+    public void Vibrate()
     {
         if (_settings.Vibrate)
             HapticFeedback.Default.Perform(HapticFeedbackType.Click);
+    }
 
+    public void KeyboardClick()
+    {
         if (_settings.Click)
             _sound.KeyboardClick();
+    }
+
+    public void Perform()
+    {
+        Vibrate();
+        KeyboardClick();
     }
 }
