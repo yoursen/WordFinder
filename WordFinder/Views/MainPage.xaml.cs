@@ -1,8 +1,6 @@
 ﻿using WordFinder.Models;
 using WordFinder.Services;
 using WordFinder.ViewModels;
-using Plugin.MauiMTAdmob;
-using Plugin.MauiMTAdmob.Extra;
 
 namespace WordFinder.Views;
 
@@ -18,12 +16,6 @@ public partial class MainPage : ContentPage
 		_db = db;
 		_feedback = feedback;
 		BindingContext = viewModel;
-
-		CrossMauiMTAdmob.Current.TagForChildDirectedTreatment = MTTagForChildDirectedTreatment.TagForChildDirectedTreatmentUnspecified;
-        CrossMauiMTAdmob.Current.TagForUnderAgeOfConsent = MTTagForUnderAgeOfConsent.TagForUnderAgeOfConsentUnspecified;
-        CrossMauiMTAdmob.Current.MaxAdContentRating = MTMaxAdContentRating.MaxAdContentRatingG;
-        CrossMauiMTAdmob.Current.AdChoicesCorner = AdChoicesCorner.ADCHOICES_TOP_RIGHT;
-        CrossMauiMTAdmob.Current.Init();
 	}
 
 	private void OnPlayGameClicked(object sender, EventArgs args)

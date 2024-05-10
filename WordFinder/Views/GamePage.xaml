@@ -6,7 +6,6 @@
     x:Class="WordFinder.Views.GamePage"
     xmlns:vm="clr-namespace:WordFinder.ViewModels"
     xmlns:model="clr-namespace:WordFinder.Models"
-    xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
     x:DataType="vm:GamePageViewModel"
     Shell.NavBarIsVisible="False"
     BackgroundColor="{DynamicResource PrimaryBackground}">
@@ -200,24 +199,5 @@
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </FlexLayout>
-
-        <controls:MTAdView BackgroundColor="Transparent"
-            Grid.Row="1"
-            x:Name="myAds"
-            AdsId="ca-app-pub-4999851819408381/1070219026"
-            AdSize="AnchoredAdaptive"
-            VerticalOptions="End">
-            <controls:MTAdView.Style>
-                <Style TargetType="controls:MTAdView">
-                    <Setter Property="HeightRequest">
-                        <Setter.Value>
-                            <x:OnIdiom Phone="50"
-                                Tablet="90"></x:OnIdiom>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </controls:MTAdView.Style>
-        </controls:MTAdView>
-
     </Grid>
 </ContentPage>
