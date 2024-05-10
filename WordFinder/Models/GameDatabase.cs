@@ -17,7 +17,16 @@ public class GameDatabase
         _database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
         await _database.CreateTableAsync<GameScore>();
 
-        Categories = await _database.Table<GameWordCategory>().ToArrayAsync();        
+        Categories = await _database.Table<GameWordCategory>().ToArrayAsync();
+
+        if (await _database.Table<GameWord>().FirstOrDefaultAsync(w => w.IsPro) == null)
+        {
+            var candidates = await _database.Table<GameWord>().Take(200).ToArrayAsync();
+            foreach (var c in candidates)
+                c.IsPro = true;
+
+            await _database.UpdateAllAsync(candidates);
+        }
     }
 
     public async Task DeployDB()

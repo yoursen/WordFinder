@@ -19,6 +19,7 @@ public class GameWord
     public string Description { get; set; }
     public bool IsPlayed { get; set; }
     public bool IsAnswered { get; set; }
+    public bool IsPro { get; set; }
     public int CategoryId { get; set; }
     public ComplexityEnum Complexity { get; set; }
 
