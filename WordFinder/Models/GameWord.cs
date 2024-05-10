@@ -18,10 +18,27 @@ public class GameWord
     public string Word { get; set; }
     public string Description { get; set; }
     public bool IsPlayed { get; set; }
+    public int CategoryId { get; set; }
+    public ComplexityEnum Complexity { get; set; }
 
-    // further development 
-    // public string Category { get; set; }
-    // public ComplexityEnum Complexity { get; set; }
-    // public int PlayTime { get; set; }
-    // public bool IsSuccess { get; set; }
+    [Ignore]
+    public GameWordCategory Category { get; set; }
+}
+
+[Table("GameWordCategories")]
+public class GameWordCategory
+{
+    [PrimaryKey, AutoIncrement]
+    public int Id { get; set; }
+
+    public string Name { get; set; }
+
+    public override string ToString() => Name ?? base.ToString();
+}
+
+public enum ComplexityEnum
+{
+    Easy = 0,
+    Medium = 1,
+    Hard = 2
 }

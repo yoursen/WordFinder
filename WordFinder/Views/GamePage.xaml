@@ -118,15 +118,23 @@
                 </VerticalStackLayout>
             </Grid>
 
-            <Label Text="{Binding GuessWord.Description}"
-                HeightRequest="75"
-                Margin="15,0,15,0"
-                FontSize="18"
-                FontFamily="MainFont"
-                HorizontalOptions="Center"
-                VerticalOptions="Start"
-                HorizontalTextAlignment="Center"
-                VerticalTextAlignment="Center"/>
+            <VerticalStackLayout>
+                <Label Text="{Binding GuessWord.Category}"
+                    TextColor="{DynamicResource Primary}"
+                    FontSize="18"
+                    FontFamily="MainFont"
+                    HorizontalOptions="Center"/>
+
+                <Label Text="{Binding GuessWord.Description}"
+                    HeightRequest="75"
+                    Margin="15,0,15,0"
+                    FontSize="18"
+                    FontFamily="MainFont"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Start"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"/>
+            </VerticalStackLayout>
 
             <!-- bottom group panel -->
             <VerticalStackLayout Margin="0,0,0,25">

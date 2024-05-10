@@ -5,6 +5,7 @@ namespace WordFinder.Models;
 public class GameDatabase
 {
     private SQLiteAsyncConnection _database;
+    public GameWordCategory[] Categories { get; private set; }
 
     public async Task Init()
     {
@@ -15,6 +16,8 @@ public class GameDatabase
 
         _database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
         await _database.CreateTableAsync<GameScore>();
+
+        Categories = await _database.Table<GameWordCategory>().ToArrayAsync();
     }
 
     public async Task DeployDB()
@@ -36,7 +39,12 @@ public class GameDatabase
 
         const string RandomWordQuery = "SELECT * FROM GameWords WHERE Id = (SELECT Id FROM GameWords WHERE IsPlayed = FALSE ORDER BY RANDOM() LIMIT 1)";
         var randomWord = await _database.QueryAsync<GameWord>(RandomWordQuery);
-        return randomWord.FirstOrDefault();
+        var word = randomWord.FirstOrDefault();
+
+        if (word is not null)
+            SetWordCategory(word);
+
+        return word;
     }
 
     public async Task<GameWord[]> GameRandomWords(int count)
@@ -45,7 +53,13 @@ public class GameDatabase
 
         string RandomWordQuery = $"SELECT * FROM GameWords ORDER BY RANDOM() LIMIT {count}";
         var randomWord = await _database.QueryAsync<GameWord>(RandomWordQuery);
-        return randomWord.ToArray();
+        return randomWord.Select(SetWordCategory).ToArray();
+    }
+
+    private GameWord SetWordCategory(GameWord word)
+    {
+        word.Category = Categories.FirstOrDefault(c => c.Id == word.CategoryId);
+        return word;
     }
 
     public async Task SetIsPlayed(int id, bool isPlayed)
