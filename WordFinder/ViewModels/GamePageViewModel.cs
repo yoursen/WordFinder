@@ -10,9 +10,9 @@ namespace WordFinder.ViewModels;
 [QueryProperty(nameof(GameDuration), "GameDuration")]
 public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>, IRecipient<AppResumedMessage>
 {
-    private GameModel _gameModel;
-    private IPopupService _popupService;
-    private AwaitableMessageService _ams;
+    private readonly GameModel _gameModel;
+    private readonly IPopupService _popupService;
+    private readonly AwaitableMessageService _ams;
 
     public GamePageViewModel(GameModel gameModel, IPopupService popupService, AwaitableMessageService ams)
     {

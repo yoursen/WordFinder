@@ -8,7 +8,7 @@ public class MainPageViewModel
     public ICommand PlayGameCommmand { get; }
     public ICommand GameSettingsCommmand { get; }
     public ICommand BestScoreCommmand { get; }
-    private IPopupService _popupService;
+    private readonly IPopupService _popupService;
 
     public MainPageViewModel(IPopupService popupService)
     {

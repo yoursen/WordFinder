@@ -21,10 +21,10 @@ public partial class GameSettingsPage : ContentPage
         await GoHome();
     }
 
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
-        _viewModel.Refresh();
+        await _viewModel.Refresh();
     }
 
     protected override void OnNavigatingFrom(NavigatingFromEventArgs args)
