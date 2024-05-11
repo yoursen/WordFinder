@@ -27,22 +27,23 @@ public partial class GamePage : ContentPage
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        base.OnNavigatedTo(args);
-        await _viewModel.OnNavigatedTo();
-
         _ams.Register("WrongTextEntered", OnWrongTextEntered);
         _ams.Register("CorrectTextEntered", OnCorrectTextEntered);
         _ams.Register("PenaltyApplied", OnPenaltyApplied);
+
+        base.OnNavigatedTo(args);
+        await _viewModel.OnNavigatedTo();
     }
 
 
     protected override async void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
-        base.OnNavigatingFrom(args);
-        await _viewModel.OnNavigatingFrom();
         _ams.Unregister("WrongTextEntered", OnWrongTextEntered);
         _ams.Unregister("CorrectTextEntered", OnCorrectTextEntered);
         _ams.Unregister("PenaltyApplied", OnPenaltyApplied);
+
+        base.OnNavigatingFrom(args);
+        await _viewModel.OnNavigatingFrom();
     }
 
     private async Task OnCorrectTextEntered(object args)
