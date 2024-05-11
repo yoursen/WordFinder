@@ -29,7 +29,7 @@ public class Sound : ISound
 
             url = NSUrl.FromString(NSBundle.MainBundle.PathForResource("sounds/success", "m4a"));
             _playerSuccess = new AVAudioPlayer(url, "m4a", out _);
-            _playerSuccess.Volume = 0.15f;
+            _playerSuccess.Volume = 0.4f;
 
             url = NSUrl.FromString(NSBundle.MainBundle.PathForResource("sounds/fail", "m4a"));
             _playerFail = new AVAudioPlayer(url, "m4a", out _);
