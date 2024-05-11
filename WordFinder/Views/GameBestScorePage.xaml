@@ -7,13 +7,14 @@
     x:DataType="vm:GameBestScoreViewModel"
     Shell.NavBarIsVisible="False">
 
-    <Grid >
+    <Grid RowDefinitions="*,auto">
         <Grid.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Right"
                 Swiped="OnSwipedRight"/>
         </Grid.GestureRecognizers>
 
         <Image Source="game_background_image2.png"
+            Grid.RowSpan="2"
             Aspect="AspectFill"
             VerticalOptions="CenterAndExpand"
             HorizontalOptions="CenterAndExpand"
@@ -82,8 +83,7 @@
                     HorizontalOptions="Start"
                     Style="{StaticResource NormalLabel}"/>
 
-                <HorizontalStackLayout 
-                    Grid.Row="8"
+                <HorizontalStackLayout Grid.Row="8"
                     Grid.Column="1"
                     HorizontalOptions="End">
 
@@ -93,7 +93,6 @@
                         Style="{StaticResource NormalLabel}"/>
                     <Label Text="{Binding TotalWords}"
                         Style="{StaticResource NormalLabel}"/>
-
                 </HorizontalStackLayout>
 
             </Grid>
@@ -105,6 +104,26 @@
                     Clicked="OnMainMenuClicked"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
+
+        <Frame VerticalOptions="End"
+            Grid.Row="1"
+            Margin="20,0,20,20"
+            BackgroundColor="White"
+            CornerRadius="20"
+            IsVisible="{Binding IsFree}">
+            <VerticalStackLayout Spacing="20">
+
+                <Label Text="{Binding TotalWordsPro, StringFormat='Ready to level up your game? Unlock {0} more words in the premium version and broaden your guessing horizons!'}"
+                    Style="{StaticResource NormalLabel}"
+                    />
+
+                <Button Style="{StaticResource MenuButtonStyle}"
+                    Text="Buy premium version"
+                    BackgroundColor="{StaticResource Accent}"
+                    Clicked="OnBuyProClicked"/>
+
+            </VerticalStackLayout>
+        </Frame>
 
         <ImageButton Clicked="OnMainMenuClicked"
             Margin="5,10,0,0"

@@ -7,13 +7,14 @@
     x:DataType="vm:GameSettingsViewModel"    
     Shell.NavBarIsVisible="False">
 
-    <Grid >
+    <Grid RowDefinitions="*,auto">
         <Grid.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Right"
                 Swiped="OnSwipedRight"/>
         </Grid.GestureRecognizers>
 
         <Image Source="game_background_image2.png"
+            Grid.RowSpan="2"
             Aspect="AspectFill"
             VerticalOptions="CenterAndExpand"
             HorizontalOptions="CenterAndExpand"
@@ -64,17 +65,29 @@
                 <Button Style="{StaticResource MenuButtonStyle}"
                     Text="Main menu"
                     Clicked="OnMainMenuClicked"/>
-
-                <Button Style="{StaticResource MenuButtonStyle}"
-                    BackgroundColor="{StaticResource Accent}"
-                    Text="Buy premium version"
-                    IsVisible="{Binding IsFree}"
-                    Clicked="OnBuyProClicked"/>
             </VerticalStackLayout>
 
-            <Slider Maximum="2" Minimum="0"/>
-
         </VerticalStackLayout>
+
+        <Frame VerticalOptions="End"
+            Grid.Row="1"
+            Margin="20,0,20,20"
+            BackgroundColor="White"
+            CornerRadius="20"
+            IsVisible="{Binding IsFree}">
+            <VerticalStackLayout Spacing="20">
+
+                <Label Text="Upgrade to premium for even more control over your gaming experience! Gain access to customizable word complexity levels and a variety of word categories."
+                    Style="{StaticResource NormalLabel}"
+                    />
+
+                <Button Style="{StaticResource MenuButtonStyle}"
+                    Text="Buy premium version"
+                    BackgroundColor="{StaticResource Accent}"
+                    Clicked="OnBuyProClicked"/>
+
+            </VerticalStackLayout>
+        </Frame>
 
         <ImageButton Clicked="OnMainMenuClicked"
             Margin="5,10,0,0"

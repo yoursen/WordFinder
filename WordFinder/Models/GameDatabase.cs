@@ -1,11 +1,19 @@
 using SQLite;
+using WordFinder.Services;
 
 namespace WordFinder.Models;
 
 public class GameDatabase
 {
     private SQLiteAsyncConnection _database;
+    private LicenseService _license;
+
     public GameWordCategory[] Categories { get; private set; }
+
+    public GameDatabase(LicenseService license)
+    {
+        _license = license;
+    }
 
     public async Task Init()
     {
@@ -18,15 +26,6 @@ public class GameDatabase
         await _database.CreateTableAsync<GameScore>();
 
         Categories = await _database.Table<GameWordCategory>().ToArrayAsync();
-
-        if (await _database.Table<GameWord>().FirstOrDefaultAsync(w => w.IsPro) == null)
-        {
-            var candidates = await _database.Table<GameWord>().Take(200).ToArrayAsync();
-            foreach (var c in candidates)
-                c.IsPro = true;
-
-            await _database.UpdateAllAsync(candidates);
-        }
     }
 
     public async Task DeployDB()
@@ -46,7 +45,8 @@ public class GameDatabase
     {
         await Init();
 
-        const string RandomWordQuery = "SELECT * FROM GameWords WHERE Id = (SELECT Id FROM GameWords WHERE IsPlayed = FALSE ORDER BY RANDOM() LIMIT 1)";
+        string licenseFilter = _license.IsFree ? "IsPro = 0 AND" : string.Empty;
+        string RandomWordQuery = $"SELECT * FROM GameWords WHERE {licenseFilter} Id = (SELECT Id FROM GameWords WHERE IsPlayed = FALSE ORDER BY RANDOM() LIMIT 1)";
         var randomWord = await _database.QueryAsync<GameWord>(RandomWordQuery);
         var word = randomWord.FirstOrDefault();
 
@@ -102,20 +102,27 @@ public class GameDatabase
 
     public async Task<int> CountWordsAnswered() => await CountWords(w => w.IsAnswered);
     public async Task<int> CountWordsNotAnswered() => await CountWords(w => !w.IsAnswered);
-
-    public async Task<int> CountWords() => await CountWords(w => true);
-
-    public async Task<int> CountWords(System.Linq.Expressions.Expression<Func<GameWord, bool>> predicate)
+    public async Task<int> CountWordsPro() => await CountWords(w => w.IsPro);
+    public async Task<int> CountWords()
     {
-        return await _database.Table<GameWord>().Where(predicate).CountAsync();
+        System.Linq.Expressions.Expression<Func<GameWord, bool>> predicate;
+        if (_license.IsFree)
+            predicate = (w) => !w.IsPro;
+        else
+            predicate = (w) => true;
+
+        return await CountWords(predicate);
     }
+
+    private async Task<int> CountWords(System.Linq.Expressions.Expression<Func<GameWord, bool>> predicate)
+        => await _database.Table<GameWord>().Where(predicate).CountAsync();
 
     public async Task ResetIsAnswered()
     {
         await Init();
 
         const string sql = $"UPDATE GameWords SET IsAnswered = FALSE";
-        var res = await _database.ExecuteAsync(sql);
+        await _database.ExecuteAsync(sql);
     }
 
     public async Task<GameScore> GetLastGameScore()

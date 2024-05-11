@@ -9,6 +9,7 @@ public class GameSettingsViewModel : BindableObject
     private readonly GameSettings _gameSettings;
     private readonly ISound _sound;
     private readonly LicenseService _license;
+    private bool _isPurchangeInProgress;
 
     public bool IsPlayerReady => _sound.IsPlayerReady;
     public bool IsFree => _license.IsFree;
@@ -35,13 +36,25 @@ public class GameSettingsViewModel : BindableObject
 
     public async void BuyPro()
     {
-        await _license.BuyPro();
-        Refresh();
+        if (_isPurchangeInProgress)
+            return;
+
+        try
+        {
+            _isPurchangeInProgress = true;
+            await _license.BuyPro();
+            await Refresh();
+        }
+        finally
+        {
+            _isPurchangeInProgress = false;
+        }
     }
 
-    public void Refresh()
+    public async Task Refresh()
     {
         OnPropertyChanged(nameof(IsFree));
         OnPropertyChanged(nameof(IsPro));
+        await Task.CompletedTask;
     }
 }
