@@ -100,16 +100,34 @@ public class GameDatabase
         var res = await _database.ExecuteAsync(sql, isAnswered, id);
     }
 
-    public async Task<int> CountWordsAnswered() => await CountWords(w => w.IsAnswered);
-    public async Task<int> CountWordsNotAnswered() => await CountWords(w => !w.IsAnswered);
+    public async Task<int> CountWordsAnswered()
+    {
+        System.Linq.Expressions.Expression<Func<GameWord, bool>> predicate;
+        if (_license.IsFree)
+            predicate = w => w.IsAnswered && !w.IsPro;
+        else
+            predicate = w => w.IsAnswered;
+
+        return await CountWords(predicate);
+    }
+    public async Task<int> CountWordsNotAnswered()
+    {
+        System.Linq.Expressions.Expression<Func<GameWord, bool>> predicate;
+        if (_license.IsFree)
+            predicate = w => !w.IsAnswered && !w.IsPro;
+        else
+            predicate = w => !w.IsAnswered;
+
+        return await CountWords(predicate);
+    }
     public async Task<int> CountWordsPro() => await CountWords(w => w.IsPro);
     public async Task<int> CountWords()
     {
         System.Linq.Expressions.Expression<Func<GameWord, bool>> predicate;
         if (_license.IsFree)
-            predicate = (w) => !w.IsPro;
+            predicate = w => !w.IsPro;
         else
-            predicate = (w) => true;
+            predicate = w => true;
 
         return await CountWords(predicate);
     }

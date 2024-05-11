@@ -7,13 +7,14 @@
     x:DataType="vm:GameOverViewModel"
     Shell.NavBarIsVisible="False">
 
-    <Grid>
+    <Grid RowDefinitions="*,auto">
         <Grid.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Right"
                 Swiped="OnSwipedRight"/>
         </Grid.GestureRecognizers>
 
         <Image Source="game_background_image2.png"
+            Grid.RowSpan="2"
             Aspect="AspectFill"
             VerticalOptions="CenterAndExpand"
             HorizontalOptions="CenterAndExpand"
@@ -88,7 +89,27 @@
                     Clicked="OnMainMenuClicked"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
-        
+
+        <Frame VerticalOptions="End"
+            Grid.Row="1"
+            Margin="20,0,20,20"
+            BackgroundColor="White"
+            MaximumWidthRequest="600"
+            CornerRadius="20"
+            IsVisible="{Binding IsFree}">
+            <VerticalStackLayout Spacing="20">
+
+                <Label Text="{Binding BuyProVersionText}"
+                    Style="{StaticResource NormalLabel}" />
+
+                <Button Style="{StaticResource MenuButtonStyle}"
+                    Text="Buy premium version"
+                    BackgroundColor="{StaticResource Accent}"
+                    Clicked="OnBuyProClicked"/>
+
+            </VerticalStackLayout>
+        </Frame>
+
         <ImageButton Clicked="OnMainMenuClicked"
             Margin="5,10,0,0"
             WidthRequest="22"

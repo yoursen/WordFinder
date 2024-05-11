@@ -1,23 +1,33 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using WordFinder.Models;
+using WordFinder.Services;
 
 namespace WordFinder.ViewModels;
 
 public partial class GameOverViewModel : ObservableObject
 {
-    private GameModel _gameModel;
-    private GameDatabase _db;
-    public GameOverViewModel(GameModel gameModel, GameDatabase db)
+    private readonly GameModel _gameModel;
+    private readonly GameDatabase _db;
+    private readonly LicenseService _license;
+    private bool _isPurchangeInProgress;
+    public GameOverViewModel(GameModel gameModel, GameDatabase db, LicenseService license)
     {
         _gameModel = gameModel;
         _db = db;
+        _license = license;
     }
 
     [ObservableProperty] private int _score;
     [ObservableProperty] private int _bestScore;
     [ObservableProperty] private bool _isRecord;
     [ObservableProperty] private int _gameDuration;
+    [ObservableProperty] private int _totalWordsNotAnswered;
+    [ObservableProperty] private int _totalWordsPro = 512;
 
+    public string BuyProVersionText
+        => $"{(TotalWordsNotAnswered <= 20 ? "Only " : string.Empty)}{TotalWordsNotAnswered} not guessed words left in the free version. Unlock an additional {TotalWordsPro} words in the premium version and keep the excitement going!'";
+
+    public bool IsFree => _license.IsFree;
     public async Task Refresh()
     {
         var gameScore = await _db.GetLastGameScore();
@@ -28,14 +38,37 @@ public partial class GameOverViewModel : ObservableObject
         BestScore = bestScore?.Score ?? Score;
         IsRecord = Score > BestScore;
 
+        TotalWordsNotAnswered = await _db.CountWordsNotAnswered();
+        TotalWordsPro = await _db.CountWordsPro();
+        OnPropertyChanged(nameof(IsFree));
+        OnPropertyChanged(nameof(BuyProVersionText));
+
         await Task.CompletedTask;
         return;
     }
 
-    public void OnNavigatingFrom(){
+    public void OnNavigatingFrom()
+    {
         GameDuration = 0;
         BestScore = 0;
         Score = 0;
         IsRecord = false;
+    }
+
+    public async void BuyPro()
+    {
+        if (_isPurchangeInProgress)
+            return;
+
+        try
+        {
+            _isPurchangeInProgress = true;
+            await _license.BuyPro();
+            await Refresh();
+        }
+        finally
+        {
+            _isPurchangeInProgress = false;
+        }
     }
 }

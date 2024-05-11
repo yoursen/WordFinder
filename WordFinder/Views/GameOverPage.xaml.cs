@@ -41,4 +41,10 @@ public partial class GameOverPage : ContentPage
     private async Task GoHome() => await Navigation.PopToRootAsync();
 
     protected async void OnSwipedRight(object sender, SwipedEventArgs e) => await GoHome();
+
+    private void OnBuyProClicked(object sender, EventArgs e)
+    {
+        _feedback.Perform();
+        _viewModel.BuyPro();
+    }
 }
