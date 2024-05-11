@@ -6,8 +6,8 @@ namespace WordFinder.Views;
 
 public partial class ExitGamePopup : Popup
 {
-    private ExitGamePopupViewModel _viewModel;
-    private TouchFeedbackService _feedback;
+    private readonly ExitGamePopupViewModel _viewModel;
+    private readonly TouchFeedbackService _feedback;
     public ExitGamePopup(ExitGamePopupViewModel viewModel, TouchFeedbackService feedback)
     {
         InitializeComponent();

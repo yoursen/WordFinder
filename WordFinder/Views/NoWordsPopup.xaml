@@ -1,0 +1,27 @@
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="WordFinder.Views.NoWordsPopup"
+    xmlns:vm="clr-namespace:WordFinder.ViewModels"
+    x:DataType="vm:NoWordsPopupViewModel"
+    Color="White">
+
+    <VerticalStackLayout Spacing="20"
+        MaximumWidthRequest="800"
+        Padding="20">
+
+        <Label Text="Congratulations!"
+            Style="{StaticResource Headline}"/>
+
+        <Label Text="{Binding Message}"
+            Style="{StaticResource NormalLabel}"/>
+
+        <Grid Margin="0,20">
+            <Button Style="{StaticResource MenuButtonStyle}"
+                BackgroundColor="{StaticResource Accent}"
+                Text="Dismiss"
+                Clicked="OKClicked"/>
+        </Grid>
+    </VerticalStackLayout>
+
+</toolkit:Popup>

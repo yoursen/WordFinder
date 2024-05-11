@@ -54,7 +54,7 @@ public partial class GameModel : ObservableObject
 
             if (GuessWord is null)
             {
-                var wordsLeft = await _db.ResetIsPlayed(false);
+                var wordsLeft = await _db.ResetIsPlayed();
                 if (wordsLeft == 0)
                 {
                     await DoGameOver();

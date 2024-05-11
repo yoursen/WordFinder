@@ -15,11 +15,12 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 
 		// app
-		builder.UseMauiApp<App>().ConfigureMauiHandlers((handlers)=>{  
-#if IOS  
-               handlers.AddHandler(typeof(Shell), typeof(CustomShellRenderer));  
-#endif  
-        }); 
+		builder.UseMauiApp<App>().ConfigureMauiHandlers((handlers) =>
+		{
+#if IOS
+			handlers.AddHandler(typeof(Shell), typeof(CustomShellRenderer));
+#endif
+		});
 
 		builder.UseMauiCommunityToolkit();
 		builder.ConfigureFonts(fonts =>
@@ -28,7 +29,7 @@ public static class MauiProgram
 			fonts.AddFont("Roboto-Medium.ttf", "MainFontMedium");
 			fonts.AddFont("FontAwesome.oft", "FontAwesome");
 		});
-		
+
 		// models
 		builder.Services.AddSingleton<GameModel>();
 		builder.Services.AddSingleton<WordFitter>();
@@ -60,11 +61,12 @@ public static class MauiProgram
 		// popups
 		builder.Services.AddTransientPopup<GameModePopup, GameModePopupViewModel>();
 		builder.Services.AddTransientPopup<ExitGamePopup, ExitGamePopupViewModel>();
+		builder.Services.AddTransientPopup<NoWordsPopup, NoWordsPopupViewModel>();
 
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
 
-		return  builder.Build();
+		return builder.Build();
 	}
 }

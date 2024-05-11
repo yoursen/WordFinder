@@ -94,7 +94,7 @@
             Grid.Row="1"
             Margin="20,0,20,20"
             BackgroundColor="White"
-            MaximumWidthRequest="600"
+            MaximumWidthRequest="500"
             CornerRadius="20"
             IsVisible="{Binding IsFree}">
             <VerticalStackLayout Spacing="20">

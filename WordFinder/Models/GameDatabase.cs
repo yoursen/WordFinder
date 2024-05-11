@@ -79,16 +79,11 @@ public class GameDatabase
         var res = await _database.ExecuteAsync(sql, isPlayed, id);
     }
 
-    public async Task<int> ResetIsPlayed(bool includeIsAnswered)
+    public async Task<int> ResetIsPlayed()
     {
         await Init();
 
-        string sql = $"UPDATE GameWords SET IsPlayed = FALSE WHERE IsPlayed = TRUE";
-        if (includeIsAnswered)
-            sql += " AND IsAnswered = TRUE";
-        else
-            sql += " AND IsAnswered = FALSE";
-
+        const string sql = $"UPDATE GameWords SET IsPlayed = FALSE WHERE IsPlayed = TRUE AND IsAnswered = FALSE";
         return await _database.ExecuteAsync(sql);
     }
 

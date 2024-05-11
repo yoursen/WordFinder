@@ -80,16 +80,18 @@ public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>
     {
         _gameModel.PropertyChanged += OnPropertyChanged;
         _gameModel.GameOver += OnGameOver;
-        await _gameModel.StartGame(GameDuration);
         WeakReferenceMessenger.Default.RegisterAll(this);
+
+        await _gameModel.StartGame(GameDuration);
     }
 
     public async Task OnNavigatingFrom()
     {
-        await _gameModel.Reset();
+        WeakReferenceMessenger.Default.UnregisterAll(this);
+
         _gameModel.PropertyChanged -= OnPropertyChanged;
         _gameModel.GameOver -= OnGameOver;
-        WeakReferenceMessenger.Default.UnregisterAll(this);
+        await _gameModel.Reset();
     }
 
     private async void OnGameOver(object sender, EventArgs e)

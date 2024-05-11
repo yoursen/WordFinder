@@ -1,3 +1,5 @@
+using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using WordFinder.Models;
 using WordFinder.Services;
@@ -9,12 +11,14 @@ public partial class GameOverViewModel : ObservableObject
     private readonly GameModel _gameModel;
     private readonly GameDatabase _db;
     private readonly LicenseService _license;
+    private readonly IPopupService _popup;
     private bool _isPurchangeInProgress;
-    public GameOverViewModel(GameModel gameModel, GameDatabase db, LicenseService license)
+    public GameOverViewModel(GameModel gameModel, GameDatabase db, LicenseService license, IPopupService popup)
     {
         _gameModel = gameModel;
         _db = db;
         _license = license;
+        _popup = popup;
     }
 
     [ObservableProperty] private int _score;
@@ -42,6 +46,13 @@ public partial class GameOverViewModel : ObservableObject
         TotalWordsPro = await _db.CountWordsPro();
         OnPropertyChanged(nameof(IsFree));
         OnPropertyChanged(nameof(BuyProVersionText));
+
+        if (TotalWordsNotAnswered == 0)
+        {
+            await _popup.ShowPopupAsync<NoWordsPopupViewModel>();
+            await _db.ResetIsAnswered();
+            await _db.ResetIsPlayed();
+        }
 
         await Task.CompletedTask;
         return;

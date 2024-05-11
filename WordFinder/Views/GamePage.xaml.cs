@@ -1,9 +1,7 @@
-using CommunityToolkit.Maui.Converters;
 using WordFinder.Interfaces;
 using WordFinder.Models;
 using WordFinder.Services;
 using WordFinder.ViewModels;
-using System.Collections;
 
 namespace WordFinder.Views;
 
@@ -13,7 +11,7 @@ public partial class GamePage : ContentPage
     private AwaitableMessageService _ams;
     private TouchFeedbackService _feedback;
     private ISound _sound;
-    public GamePage(GamePageViewModel viewModel, GameDatabase db, AwaitableMessageService ams,
+    public GamePage(GamePageViewModel viewModel, AwaitableMessageService ams,
         TouchFeedbackService touchFeedbackService, ISound sound)
     {
         InitializeComponent();
