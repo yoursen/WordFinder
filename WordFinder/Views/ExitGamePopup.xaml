@@ -8,7 +8,7 @@
         Padding="20">
 
         <Label Text="Exit game"
-            Style="{StaticResource Headline}"/>
+            Style="{StaticResource SubHeadline}"/>
 
         <Grid ColumnDefinitions="*,20,*">
             <Button Style="{StaticResource MenuButtonStyle}"

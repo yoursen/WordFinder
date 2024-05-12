@@ -8,7 +8,7 @@
         Padding="20">
 
         <Label Text="Game duration"
-            Style="{StaticResource Headline}"/>
+            Style="{StaticResource SubHeadline}"/>
 
         <Button Style="{StaticResource MenuButtonStyle}"
             Margin="5,0"
