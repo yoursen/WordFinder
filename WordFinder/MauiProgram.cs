@@ -32,6 +32,7 @@ public static class MauiProgram
 
 		// models
 		builder.Services.AddSingleton<GameModel>();
+		builder.Services.AddSingleton<GameHintsModel>();
 		builder.Services.AddSingleton<WordFitter>();
 		builder.Services.AddSingleton<TableService>();
 		builder.Services.AddSingleton<GameDatabase>();

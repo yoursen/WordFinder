@@ -7,14 +7,16 @@ namespace WordFinder.Models;
 public partial class GameModel : ObservableObject
 {
     private const int GridSize = 5;
-    private GameDatabase _db;
-    private GameTimer _gameTimer;
-    private WordFitter _wordFitter;
+    private readonly GameDatabase _db;
+    private readonly GameTimer _gameTimer;
+    private readonly WordFitter _wordFitter;
+    private readonly GameHintsModel _hintsModel;
+    private readonly AwaitableMessageService _ams;
+    private readonly TouchFeedbackService _touchFeedback;
     public TimeSpan HintPenaltyTimeSpan { get; init; } = TimeSpan.FromSeconds(5);
-    private AwaitableMessageService _ams;
-    private TouchFeedbackService _touchFeedback;
+
     public GameModel(GameDatabase db, WordFitter wordFitter, GameTimer gameTimer, AwaitableMessageService ams
-    , TouchFeedbackService touchFeedback)
+    , TouchFeedbackService touchFeedback, GameHintsModel hintsModel)
     {
         _db = db;
         _wordFitter = wordFitter;
@@ -23,6 +25,8 @@ public partial class GameModel : ObservableObject
         _gameTimer.PropertyChanged += (s, e) => OnPropertyChanged(e);
         _gameTimer.TimeOver += OnTimeOver;
         _ams = ams;
+        _hintsModel = hintsModel;
+        _hintsModel.PropertyChanged += (s, e) => OnPropertyChanged(e);
 
         GuessWord = GameWord.Empty;
         Letters = Enumerable.Range(0, GridSize * GridSize).Select(r => new GameLetter("")).ToArray();
@@ -36,10 +40,10 @@ public partial class GameModel : ObservableObject
     [ObservableProperty] private string _userWord;
     [ObservableProperty] private GameLetter[] _letters;
     [ObservableProperty] private int _score;
-    [ObservableProperty] private int _hintsLeft;
     [ObservableProperty] private int _gameDuration;
     [ObservableProperty] private bool _isFreeplayMode;
 
+    public int HintsLeft => _hintsModel.HintsLeft;
     public TimeSpan TimeLeft => _gameTimer.TimeLeft;
 
     public void SuspendGame() => _gameTimer.Stop();
@@ -47,7 +51,7 @@ public partial class GameModel : ObservableObject
 
     public async Task Next()
     {
-        bool success = false;
+        bool success;
         do
         {
             GuessWord = await _db.GameRandomGameWord();
@@ -72,14 +76,10 @@ public partial class GameModel : ObservableObject
             _userWordLetters.Clear();
             UpdateUserWord();
             success = await CreateGameField();
-            if (!success)
-            {
-                // cannot fill the word
-            }
 
         } while (!success);
 
-        HintsLeft = GuessWord.Word.Length - 2;
+        _hintsModel.UpdateHintsPerWord(GuessWord.Word.Length);
     }
 
     public void HighlightUserLetters()
@@ -90,10 +90,9 @@ public partial class GameModel : ObservableObject
 
     public async Task Hint()
     {
-        if (HintsLeft <= 0)
+        if (_hintsModel.UseHint() is false)
             return;
 
-        HintsLeft--;
         await RemoveWrongLetters();
 
         var hintLetter = Letters.Where(el => el.IsMainLetter && !el.IsChecked)
