@@ -122,6 +122,14 @@
                     BackgroundColor="{StaticResource Accent}"
                     Clicked="OnBuyProClicked"/>
 
+                <Label Text="Restore purchase"
+                    HorizontalOptions="Center"
+                    TextDecorations="Underline"
+                    Style="{StaticResource NormalLabel}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RestorePurchaseCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
             </VerticalStackLayout>
         </Frame>
 

@@ -78,8 +78,9 @@
             IsVisible="{Binding IsFree}">
             <VerticalStackLayout Spacing="20">
 
-                <Label Text="Upgrade to premium for even more control over your gaming experience! Gain access to customizable word complexity levels and a variety of word categories."
-                    Style="{StaticResource NormalLabel}" />
+                <Label Text="{Binding TotalWordsPro, StringFormat='Ready to level up your game? Unlock {0} more words in the premium version and broaden your guessing horizons!'}"
+                    Style="{StaticResource NormalLabel}"
+                    />
 
                 <Button Style="{StaticResource MenuButtonStyle}"
                     Text="Buy premium version"
@@ -87,8 +88,9 @@
                     Clicked="OnBuyProClicked"/>
 
                 <Label Text="Restore purchase"
-                HorizontalOptions="Center"
-                    TextDecorations="Underline">
+                    HorizontalOptions="Center"
+                    TextDecorations="Underline"
+                    Style="{StaticResource NormalLabel}">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding RestorePurchaseCommand}"/>
                     </Label.GestureRecognizers>

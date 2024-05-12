@@ -1,3 +1,4 @@
+using System.Windows.Input;
 using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -12,13 +13,20 @@ public partial class GameOverViewModel : ObservableObject
     private readonly GameDatabase _db;
     private readonly LicenseService _license;
     private readonly IPopupService _popup;
+    private readonly TouchFeedbackService _feedback;
+    public ICommand RestorePurchaseCommand { get; }
+
     private bool _isPurchangeInProgress;
-    public GameOverViewModel(GameModel gameModel, GameDatabase db, LicenseService license, IPopupService popup)
+    public GameOverViewModel(GameModel gameModel, GameDatabase db, LicenseService license, IPopupService popup,
+        TouchFeedbackService feedback)
     {
         _gameModel = gameModel;
         _db = db;
         _license = license;
         _popup = popup;
+        _feedback = feedback;
+
+        RestorePurchaseCommand = new Command(RestorePurchaseCommandHandler);
     }
 
     [ObservableProperty] private int _score;
@@ -75,6 +83,25 @@ public partial class GameOverViewModel : ObservableObject
         {
             _isPurchangeInProgress = true;
             await _license.BuyPro();
+            await Refresh();
+        }
+        finally
+        {
+            _isPurchangeInProgress = false;
+        }
+    }
+
+    private async void RestorePurchaseCommandHandler(object obj)
+    {
+        _feedback.Perform();
+
+        if (_isPurchangeInProgress)
+            return;
+
+        try
+        {
+            _isPurchangeInProgress = true;
+            await _license.RestoreProLicense();
             await Refresh();
         }
         finally

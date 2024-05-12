@@ -1,3 +1,4 @@
+using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using WordFinder.Models;
 using WordFinder.Services;
@@ -8,7 +9,10 @@ public partial class GameBestScoreViewModel : ObservableObject
 {
     private readonly GameDatabase _db;
     private readonly LicenseService _license;
+    private readonly TouchFeedbackService _feedback;
+
     private bool _isPurchangeInProgress;
+    public ICommand RestorePurchaseCommand { get; }
 
     [ObservableProperty] private int _score2min;
     [ObservableProperty] private int _score5min;
@@ -20,10 +24,12 @@ public partial class GameBestScoreViewModel : ObservableObject
 
     public bool IsFree => _license.IsFree;
 
-    public GameBestScoreViewModel(GameDatabase db, LicenseService license)
+    public GameBestScoreViewModel(GameDatabase db, LicenseService license, TouchFeedbackService feedback)
     {
         _db = db;
         _license = license;
+        _feedback = feedback;
+        RestorePurchaseCommand = new Command(RestorePurchaseCommandHandler);
     }
 
     public async Task Refresh()
@@ -47,6 +53,25 @@ public partial class GameBestScoreViewModel : ObservableObject
         {
             _isPurchangeInProgress = true;
             await _license.BuyPro();
+            await Refresh();
+        }
+        finally
+        {
+            _isPurchangeInProgress = false;
+        }
+    }
+
+    private async void RestorePurchaseCommandHandler(object obj)
+    {
+        _feedback.Perform();
+
+        if (_isPurchangeInProgress)
+            return;
+
+        try
+        {
+            _isPurchangeInProgress = true;
+            await _license.RestoreProLicense();
             await Refresh();
         }
         finally
