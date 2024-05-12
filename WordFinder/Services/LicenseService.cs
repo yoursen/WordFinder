@@ -45,7 +45,7 @@ public class LicenseService
                 IsPro = true;
             }
 
-            await ShowToast("IsPro:" + IsPro + " State:" + purchase.State);
+            await ShowToast("IsPro:" + IsPro + " State:" + purchase?.State ?? "null");
         }
         catch (InAppBillingPurchaseException purchaseEx)
         {
