@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "dotnet publish for iOS",
+            "label": "dotnet PUBLISH for iOS",
             "type": "shell",
             "command": "dotnet",
             "args": [
@@ -20,6 +20,24 @@
                 "kind": "build",
                 "isDefault": false
             }
+        },
+        {
+            "label": "dotnet build iOS RELEASE",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "-t:Build",
+                "-p:Configuration=Release",
+                "-f",
+                "net8.0-ios",
+                "-r",
+                "ios-arm64",
+                "-p:CodesignKey=\"Apple Development\"",
+                "-p:CodesignProvision=\"DevProfile\"",
+                "/Users/yuriyseniuk/Documents/GitHub/WordFinder/WordFinder/WordFinder.csproj"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }
