@@ -4,7 +4,7 @@
     xmlns:local="clr-namespace:WordFinder.Views"
     x:Class="WordFinder.Views.GameSettingsPage"
     xmlns:vm="clr-namespace:WordFinder.ViewModels"
-    x:DataType="vm:GameSettingsViewModel"    
+    x:DataType="vm:GameSettingsViewModel"
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="*,auto">
@@ -79,13 +79,20 @@
             <VerticalStackLayout Spacing="20">
 
                 <Label Text="Upgrade to premium for even more control over your gaming experience! Gain access to customizable word complexity levels and a variety of word categories."
-                    Style="{StaticResource NormalLabel}"
-                    />
+                    Style="{StaticResource NormalLabel}" />
 
                 <Button Style="{StaticResource MenuButtonStyle}"
                     Text="Buy premium version"
                     BackgroundColor="{StaticResource Accent}"
                     Clicked="OnBuyProClicked"/>
+
+                <Label Text="Restore purchase"
+                HorizontalOptions="Center"
+                    TextDecorations="Underline">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RestorePurchaseCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
 
             </VerticalStackLayout>
         </Frame>
