@@ -6,7 +6,7 @@ namespace WordFinder.Services;
 
 public class LicenseService
 {
-    private const string WordFinderPremiumProductId = "WordFinderPremium";
+    private const string WordFinderPremiumProductId = "com.seniuk.wordfinder.premium";
 
     public bool IsPro { get; private set; }
     public bool IsFree => !IsPro;
@@ -26,6 +26,7 @@ public class LicenseService
                 await ShowToast("Cannot connect");
                 return false;
             }
+            var pruducts = await billing.GetProductInfoAsync(ItemType.InAppPurchase);
             var purchase = await billing.PurchaseAsync(WordFinderPremiumProductId, ItemType.InAppPurchase);
 
             //possibility that a null came through.
