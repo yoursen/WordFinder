@@ -8,11 +8,31 @@ public class LicenseService
 {
     private const string WordFinderPremiumProductId = "com.seniuk.wordfinder.premium";
 
-    public bool IsPro { get; private set; }
+    public LicenseService()
+    {
+        _isPro = Preferences.Default.Get(nameof(IsPro), false);
+    }
+
+    private bool _isPro;
+    public bool IsPro
+    {
+        get => _isPro;
+        private set
+        {
+            if (_isPro != value && value)
+            {
+                _isPro = value;
+                Preferences.Default.Set(nameof(IsPro), value);
+            }
+        }
+    }
     public bool IsFree => !IsPro;
 
     public async Task<bool> BuyPro()
     {
+        if (IsPro)
+            return true;
+
         if (!CrossInAppBilling.IsSupported)
             return false;
 
@@ -23,40 +43,30 @@ public class LicenseService
             var connected = await billing.ConnectAsync();
             if (!connected)
             {
-                await ShowToast("Cannot connect");
+                await ShowToast("Cannot connect to store.");
                 return false;
             }
-            var pruducts = await billing.GetProductInfoAsync(ItemType.InAppPurchase);
-            var purchase = await billing.PurchaseAsync(WordFinderPremiumProductId, ItemType.InAppPurchase);
 
-            //possibility that a null came through.
+            var purchase = await billing.PurchaseAsync(WordFinderPremiumProductId, ItemType.InAppPurchase);
             if (purchase == null)
             {
-                IsPro = false;
             }
             else if (purchase.State == PurchaseState.Purchased)
             {
-                // only need to finalize if on Android unless you turn off auto finalize on iOS
-                // var ack = await CrossInAppBilling.Current.FinalizePurchaseAsync(purchase.TransactionIdentifier);
-                // handle if acknowledge was successful or not
                 IsPro = true;
             }
             else if (purchase.State == PurchaseState.Restored)
             {
                 IsPro = true;
             }
-
-            await ShowToast("IsPro:" + IsPro + " State:" + purchase?.State ?? "null");
         }
         catch (InAppBillingPurchaseException purchaseEx)
         {
             Debug.WriteLine("Error: " + purchaseEx);
-            await ShowToast(purchaseEx.Message);
         }
         catch (Exception ex)
         {
             Debug.WriteLine("Error: " + ex);
-            await ShowToast(ex.Message);
         }
         finally
         {
@@ -67,41 +77,40 @@ public class LicenseService
 
     public async Task<bool> RestoreProLicense()
     {
+        if (IsPro)
+            return true;
+
         var billing = CrossInAppBilling.Current;
         try
         {
             var connected = await billing.ConnectAsync();
-
             if (!connected)
             {
-                //Couldn't connect
-                await ShowToast("Cannot connect");
+                await ShowToast("Cannot connect to store.");
                 return false;
             }
+
             var list = await billing.GetProductInfoAsync(ItemType.InAppPurchase);
             var purchases = await billing.GetPurchasesAsync(ItemType.InAppPurchase);
 
             //check for null just in case
             if (purchases?.Any(p => p.ProductId == WordFinderPremiumProductId) ?? false)
             {
-                // purchase restored
-                // if on Android may be good to check if these purchases need to be acknowledge
                 IsPro = true;
+                await ShowToast("Purchase succesfully restored.");
             }
             else
             {
+                await ShowToast("Cannot find the purchase.");
             }
-            await ShowToast("IsPro:" + IsPro);
         }
         catch (InAppBillingPurchaseException purchaseEx)
         {
             Debug.WriteLine("Error: " + purchaseEx);
-            await ShowToast(purchaseEx.Message);
         }
         catch (Exception ex)
         {
             Debug.WriteLine("Error: " + ex);
-            await ShowToast(ex.Message);
         }
         finally
         {
