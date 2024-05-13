@@ -60,13 +60,11 @@ public class LicenseService
                 IsPro = true;
             }
         }
-        catch (InAppBillingPurchaseException purchaseEx)
+        catch (InAppBillingPurchaseException)
         {
-            Debug.WriteLine("Error: " + purchaseEx);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            Debug.WriteLine("Error: " + ex);
         }
         finally
         {
@@ -104,13 +102,11 @@ public class LicenseService
                 await ShowToast("Cannot find the purchase.");
             }
         }
-        catch (InAppBillingPurchaseException purchaseEx)
+        catch (InAppBillingPurchaseException)
         {
-            Debug.WriteLine("Error: " + purchaseEx);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            Debug.WriteLine("Error: " + ex);
         }
         finally
         {
