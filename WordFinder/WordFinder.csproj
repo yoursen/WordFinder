@@ -55,8 +55,12 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*.png" />
+
 		<MauiImage Update="Resources\Images\main_background_image2.png" />
 		<MauiImage Update="Resources\Images\game_background_image2.png" />
+		<MauiImage Update="Resources\Images\tap.png" />
+		<MauiImage Update="Resources\Images\hint.png" />
+		<MauiImage Update="Resources\Images\next.png" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />

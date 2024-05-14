@@ -1,0 +1,118 @@
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="WordFinder.Views.HowToPlayPopup"
+    xmlns:vm="clr-namespace:WordFinder.ViewModels"
+    x:DataType="vm:HowToPlayPopupViewModel"
+    CanBeDismissedByTappingOutsideOfPopup="false"
+    Color="White">
+
+
+    <Grid RowDefinitions="*,auto">
+        <VerticalStackLayout
+            MaximumWidthRequest="600"
+            Padding="20">
+
+            <VerticalStackLayout Spacing="5"
+                IsVisible="false">
+                <Label Text="How to play?"
+                    Style="{StaticResource SubHeadline}"/>
+                <Label Text="Tap the letters to form the word that matches the description."
+                    Style="{StaticResource NormalLabel}" />
+
+                <Image Source="tap.png"
+                    Margin="0,10,0,0"
+                    HeightRequest="200"
+                    HorizontalOptions="Center" />
+
+                <VerticalStackLayout.Triggers>
+                    <DataTrigger TargetType="VerticalStackLayout"
+                        Binding="{Binding PageNumber}"
+                        Value="0">
+                        <Setter Property="IsVisible"
+                            Value="True"/>
+                    </DataTrigger>
+                </VerticalStackLayout.Triggers>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5"
+                IsVisible="false">
+                <Label Text="Get a Hint"
+                    Style="{StaticResource SubHeadline}"/>
+                <Label Text="If you're stuck, tap the Hint button. You can use up to 3 hints per word and 20 hints per day in the free version."
+                    Style="{StaticResource NormalLabel}" />
+
+                <Image Source="hint.png"
+                    Margin="0,10,0,0"
+                    HeightRequest="200"
+                    HorizontalOptions="Center" />
+
+                <VerticalStackLayout.Triggers>
+                    <DataTrigger TargetType="VerticalStackLayout"
+                        Binding="{Binding PageNumber}"
+                        Value="1">
+                        <Setter Property="IsVisible"
+                            Value="True"/>
+                    </DataTrigger>
+                </VerticalStackLayout.Triggers>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5"
+                IsVisible="false">
+                <Label Text="Skip the Word"
+                    Style="{StaticResource SubHeadline}"/>
+                <Label Text="Tap the Next button to skip the current word and move to the next one."
+                    Style="{StaticResource NormalLabel}" />
+
+                <Image Source="next.png"
+                    Margin="0,10,0,0"
+                    HeightRequest="200"
+                    VerticalOptions="End"/>
+
+                <VerticalStackLayout.Triggers>
+                    <DataTrigger TargetType="VerticalStackLayout"
+                        Binding="{Binding PageNumber}"
+                        Value="2">
+                        <Setter Property="IsVisible"
+                            Value="True"/>
+                    </DataTrigger>
+                </VerticalStackLayout.Triggers>
+            </VerticalStackLayout>
+
+
+        </VerticalStackLayout>
+
+        <Grid Grid.Row="1"
+            Margin="20">
+            <Button Style="{StaticResource MenuButtonStyle}"
+                BackgroundColor="{StaticResource Accent}"
+                Text="Next"
+                Clicked="NextClicked"
+                IsVisible="true">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button"
+                        Binding="{Binding PageNumber}"
+                        Value="2">
+                        <Setter Property="IsVisible"
+                            Value="false"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+
+            <Button Style="{StaticResource MenuButtonStyle}"
+                BackgroundColor="{StaticResource Accent}"
+                Text="Play"
+                Clicked="CloseClicked"
+                IsVisible="false">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button"
+                        Binding="{Binding PageNumber}"
+                        Value="2">
+                        <Setter Property="IsVisible"
+                            Value="True"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+        </Grid>
+    </Grid>
+</toolkit:Popup>

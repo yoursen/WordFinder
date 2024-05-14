@@ -12,13 +12,13 @@ public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>
 {
     private readonly GameModel _gameModel;
     private readonly IPopupService _popupService;
-    private readonly AwaitableMessageService _ams;
+    private readonly GameSettings _gameSettings;
 
-    public GamePageViewModel(GameModel gameModel, IPopupService popupService, AwaitableMessageService ams)
+    public GamePageViewModel(GameModel gameModel, IPopupService popupService, GameSettings gameSettings)
     {
         _gameModel = gameModel;
         _popupService = popupService;
-        _ams = ams;
+        _gameSettings = gameSettings;
     }
 
     public GameLetter[] Letters => _gameModel.Letters;
@@ -83,6 +83,14 @@ public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>
         WeakReferenceMessenger.Default.RegisterAll(this);
 
         await _gameModel.StartGame(GameDuration);
+
+        if (_gameSettings.IsFirstGame)
+        {
+            _gameModel.SuspendGame();
+            _gameSettings.IsFirstGame = false;
+            await _popupService.ShowPopupAsync<HowToPlayPopupViewModel>();
+            _gameModel.ResumeGame();
+        }
     }
 
     public async Task OnNavigatingFrom()

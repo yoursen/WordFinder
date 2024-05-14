@@ -63,6 +63,7 @@ public static class MauiProgram
 		builder.Services.AddTransientPopup<GameModePopup, GameModePopupViewModel>();
 		builder.Services.AddTransientPopup<ExitGamePopup, ExitGamePopupViewModel>();
 		builder.Services.AddTransientPopup<NoWordsPopup, NoWordsPopupViewModel>();
+		builder.Services.AddTransientPopup<HowToPlayPopup, HowToPlayPopupViewModel>();
 
 #if DEBUG
 		builder.Logging.AddDebug();

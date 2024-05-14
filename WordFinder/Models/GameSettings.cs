@@ -6,6 +6,7 @@ public class GameSettings
     {
         _vibrate = Preferences.Default.Get(nameof(Vibrate), true);
         _click = Preferences.Default.Get(nameof(Click), true);
+        _isFirstGame = Preferences.Default.Get(nameof(IsFirstGame), true);
     }
 
     private bool _vibrate;
@@ -27,6 +28,17 @@ public class GameSettings
         {
             _click = value;
             Preferences.Default.Set(nameof(Click), _click);
+        }
+    }
+
+    private bool _isFirstGame;
+    public bool IsFirstGame
+    {
+        get => _isFirstGame;
+        set
+        {
+            _isFirstGame = value;
+            Preferences.Default.Set(nameof(IsFirstGame), _isFirstGame);
         }
     }
 }
