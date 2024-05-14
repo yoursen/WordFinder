@@ -20,7 +20,7 @@ public partial class GameBestScoreViewModel : ObservableObject
     [ObservableProperty] private int _scoreFreeplay;
     [ObservableProperty] private int _totalWords;
     [ObservableProperty] private int _totalWordsAnswered;
-    [ObservableProperty] private int _totalWordsPro = 512;
+    [ObservableProperty] private int _totalWordsPro = 583;
 
     public bool IsFree => _license.IsFree;
 

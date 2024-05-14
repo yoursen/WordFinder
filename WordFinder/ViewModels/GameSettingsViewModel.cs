@@ -18,7 +18,7 @@ public partial class GameSettingsViewModel : ObservableObject
     public bool IsPlayerReady => _sound.IsPlayerReady;
     public bool IsFree => _license.IsFree;
     public bool IsPro => _license.IsPro;
-    [ObservableProperty] private int _totalWordsPro = 512;
+    [ObservableProperty] private int _totalWordsPro = 583;
     public ICommand RestorePurchaseCommand { get; }
 
     public GameSettingsViewModel(GameSettings gameSettings, ISound sound, LicenseService license, 

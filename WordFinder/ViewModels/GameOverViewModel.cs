@@ -34,7 +34,7 @@ public partial class GameOverViewModel : ObservableObject
     [ObservableProperty] private bool _isRecord;
     [ObservableProperty] private int _gameDuration;
     [ObservableProperty] private int _totalWordsNotAnswered;
-    [ObservableProperty] private int _totalWordsPro = 512;
+    [ObservableProperty] private int _totalWordsPro = 583;
 
     public string BuyProVersionText
         => $"{(TotalWordsNotAnswered <= 20 ? "Only " : string.Empty)}{TotalWordsNotAnswered} not guessed words left in the free version. Unlock an additional {TotalWordsPro} words in the premium version and keep the excitement going!'";
