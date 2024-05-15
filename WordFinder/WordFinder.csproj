@@ -20,6 +20,9 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 
+		<AndroidSdkDirectory>/Users/yuriyseniuk/Documents/AndroidSdk</AndroidSdkDirectory>
+		<JavaSdkDirectory>/Users/yuriyseniuk/Documents/JavaSdk</JavaSdkDirectory>
+
 		<!-- Display name -->
 		<ApplicationTitle>Word Finder</ApplicationTitle>
 
@@ -28,7 +31,7 @@
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>1.0.6</ApplicationVersion>
+		<ApplicationVersion>10007</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
