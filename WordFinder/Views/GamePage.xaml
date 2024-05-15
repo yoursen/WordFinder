@@ -19,7 +19,7 @@
                 CornerRadius="4"
                 WidthRequest="48"
                 HeightRequest="48"
-                Margin="4"
+                Margin="{OnPlatform 4, Android=3}"
                 FontFamily="MainFontMedium"
                 FontSize="22"
                 TextColor="{DynamicResource White}"
