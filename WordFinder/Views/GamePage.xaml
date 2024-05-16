@@ -142,7 +142,7 @@
                 <VerticalStackLayout>
 
                     <!-- user word and buttons -->
-                    <Grid ColumnDefinitions="32,280,32"
+                    <Grid ColumnDefinitions="32,auto,32"
                         HorizontalOptions="Center">
                         <ImageButton Clicked="OnClearClicked"
                             Grid.Column="0">
@@ -160,6 +160,7 @@
                             CharacterSpacing="1"
                             FontSize="22"
                             FontFamily="MainFont"
+                            WidthRequest="280"
                             HorizontalTextAlignment="Center"
                             VerticalTextAlignment="Center">
                         </Label>

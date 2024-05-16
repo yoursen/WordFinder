@@ -11,9 +11,9 @@
             VerticalOptions="CenterAndExpand"
             HorizontalOptions="CenterAndExpand"
             Margin="-10"/>
-        <VerticalStackLayout Padding="40,0"
+        <VerticalStackLayout
             VerticalOptions="Center"
-            HorizontalOptions="Center"
+            HorizontalOptions="Fill"
             Spacing="20">
 
             <Label Text="Word Finder"
