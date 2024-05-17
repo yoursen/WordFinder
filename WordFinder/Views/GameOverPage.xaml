@@ -5,20 +5,14 @@
     x:Class="WordFinder.Views.GameOverPage"
     xmlns:vm="clr-namespace:WordFinder.ViewModels"
     x:DataType="vm:GameOverViewModel"
-    Shell.NavBarIsVisible="False">
+    Shell.NavBarIsVisible="False"
+    BackgroundImageSource="game_background_image2.png">
 
     <Grid RowDefinitions="*,auto">
         <Grid.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Right"
                 Swiped="OnSwipedRight"/>
         </Grid.GestureRecognizers>
-
-        <Image Source="game_background_image2.png"
-            Grid.RowSpan="2"
-            Aspect="AspectFill"
-            VerticalOptions="CenterAndExpand"
-            HorizontalOptions="CenterAndExpand"
-            Margin="-10,-50,-10,-10"/>
 
         <VerticalStackLayout VerticalOptions="CenterAndExpand"
             HorizontalOptions="Fill"

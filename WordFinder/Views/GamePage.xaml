@@ -8,7 +8,7 @@
     xmlns:model="clr-namespace:WordFinder.Models"
     x:DataType="vm:GamePageViewModel"
     Shell.NavBarIsVisible="False"
-    BackgroundColor="{DynamicResource PrimaryBackground}">
+    BackgroundImageSource="game_background_image2.png">
     <ContentPage.Resources>
         <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
 
@@ -54,12 +54,6 @@
             <SwipeGestureRecognizer Direction="Left"
                 Swiped="OnSwipedLeft"/>
         </Grid.GestureRecognizers>
-
-        <Image Source="game_background_image2.png"
-            Aspect="AspectFill"
-            VerticalOptions="Fill"
-            HorizontalOptions="Fill"
-            Margin="-10,-50"/>
 
         <FlexLayout Direction="Column"
             JustifyContent="SpaceAround">
