@@ -27,7 +27,7 @@ public static class MauiProgram
 		{
 			fonts.AddFont("Roboto-Regular.ttf", "MainFont");
 			fonts.AddFont("Roboto-Medium.ttf", "MainFontMedium");
-			fonts.AddFont("FontAwesome.oft", "FontAwesome");
+			fonts.AddFont("Free-Solid-900.otf", "FontAwesome");
 		});
 
 		// models
