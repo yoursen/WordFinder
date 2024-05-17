@@ -5,14 +5,16 @@ using WordFinder.ViewModels;
 
 namespace WordFinder.Views;
 
-public partial class GamePage : ContentPage
+public partial class GamePage : ContentPage, INavigationPage
 {
-    private GamePageViewModel _viewModel;
-    private AwaitableMessageService _ams;
-    private TouchFeedbackService _feedback;
-    private ISound _sound;
+    private readonly GamePageViewModel _viewModel;
+    private readonly AwaitableMessageService _ams;
+    private readonly TouchFeedbackService _feedback;
+    private readonly ISound _sound;
+    private readonly IBackNavigationHandler _backNavigationHandler;
     public GamePage(GamePageViewModel viewModel, AwaitableMessageService ams,
-        TouchFeedbackService touchFeedbackService, ISound sound)
+        TouchFeedbackService touchFeedbackService, ISound sound,
+        IBackNavigationHandler backNavigationHandler)
     {
         InitializeComponent();
         _viewModel = viewModel;
@@ -21,10 +23,12 @@ public partial class GamePage : ContentPage
         _ams = ams;
         _feedback = touchFeedbackService;
         _sound = sound;
+        _backNavigationHandler = backNavigationHandler;
     }
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
+        _backNavigationHandler.Page = this;
         _ams.Register("WrongTextEntered", OnWrongTextEntered);
         _ams.Register("CorrectTextEntered", OnCorrectTextEntered);
         _ams.Register("PenaltyApplied", OnPenaltyApplied);
@@ -36,6 +40,7 @@ public partial class GamePage : ContentPage
 
     protected override async void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
+        _backNavigationHandler.Page = null;
         _ams.Unregister("WrongTextEntered", OnWrongTextEntered);
         _ams.Unregister("CorrectTextEntered", OnCorrectTextEntered);
         _ams.Unregister("PenaltyApplied", OnPenaltyApplied);
@@ -163,8 +168,9 @@ public partial class GamePage : ContentPage
         _viewModel.RemoveLastLetter();
     }
 
-    protected override void OnAppearing()
+    public bool OnBackPressed()
     {
-        base.OnAppearing();
+        OnBackClicked(null, null);
+        return true;
     }
 }

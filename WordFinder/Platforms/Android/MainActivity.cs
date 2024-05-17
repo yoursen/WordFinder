@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using WordFinder.Interfaces;
 
 namespace WordFinder;
 
@@ -13,5 +14,14 @@ public class MainActivity : MauiAppCompatActivity
         if(DeviceInfo.Current.Idiom != DeviceIdiom.Tablet){
             RequestedOrientation = ScreenOrientation.Portrait;
         }
+    }
+
+    public override void OnBackPressed()
+    {
+        var handled = IPlatformApplication.Current?.Services?.GetService<IBackNavigationHandler>()?.OnBackPressed();
+        if (handled == true)
+            return;
+
+        OnBackPressedDispatcher.OnBackPressed();
     }
 }

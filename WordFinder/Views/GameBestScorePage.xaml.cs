@@ -1,18 +1,22 @@
+using WordFinder.Interfaces;
 using WordFinder.Services;
 using WordFinder.ViewModels;
 
 namespace WordFinder.Views;
 
-public partial class GameBestScorePage : ContentPage
+public partial class GameBestScorePage : ContentPage, INavigationPage
 {
-    private GameBestScoreViewModel _viewModel;
-    private TouchFeedbackService _feedback;
-    public GameBestScorePage(GameBestScoreViewModel viewModel, TouchFeedbackService feedback)
+    private readonly GameBestScoreViewModel _viewModel;
+    private readonly TouchFeedbackService _feedback;
+    private readonly IBackNavigationHandler _backNavigationHandler;
+    public GameBestScorePage(GameBestScoreViewModel viewModel, TouchFeedbackService feedback,
+        IBackNavigationHandler backNavigationHandler)
     {
         InitializeComponent();
         _viewModel = viewModel;
         BindingContext = _viewModel;
         _feedback = feedback;
+        _backNavigationHandler = backNavigationHandler;
     }
 
     private async void OnMainMenuClicked(object sender, EventArgs e)
@@ -24,12 +28,14 @@ public partial class GameBestScorePage : ContentPage
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
+        _backNavigationHandler.Page = this;
         base.OnNavigatedTo(args);
         await _viewModel.Refresh();
     }
 
     protected override void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
+        _backNavigationHandler.Page = null;
         base.OnNavigatingFrom(args);
     }
     private async Task GoHome() => await Navigation.PopToRootAsync();
@@ -39,5 +45,11 @@ public partial class GameBestScorePage : ContentPage
     private void OnBuyProClicked(object sender, EventArgs e){
         _feedback.Perform();
         _viewModel.BuyPro();
+    }
+
+    public bool OnBackPressed()
+    {
+        _ = GoHome();
+        return true;
     }
 }

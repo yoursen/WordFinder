@@ -51,6 +51,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<TouchFeedbackService>();
 		builder.Services.AddSingleton<LicenseService>();
 		builder.Services.AddSingleton<ISound, Sound>();
+		builder.Services.AddSingleton<IBackNavigationHandler, BackNavigationHandler>();
 
 		// view models
 		builder.Services.AddSingleton<MainPageViewModel>();

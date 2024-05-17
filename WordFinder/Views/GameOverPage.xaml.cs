@@ -1,18 +1,22 @@
+using WordFinder.Interfaces;
 using WordFinder.Services;
 using WordFinder.ViewModels;
 
 namespace WordFinder.Views;
 
-public partial class GameOverPage : ContentPage
+public partial class GameOverPage : ContentPage, INavigationPage
 {
-    private GameOverViewModel _viewModel;
-    private TouchFeedbackService _feedback;
-    public GameOverPage(GameOverViewModel viewModel, TouchFeedbackService feedback)
+    private readonly GameOverViewModel _viewModel;
+    private readonly TouchFeedbackService _feedback;
+    private readonly IBackNavigationHandler _backNavigationHandle;
+    public GameOverPage(GameOverViewModel viewModel, TouchFeedbackService feedback,
+        IBackNavigationHandler backNavigationHandler)
     {
         InitializeComponent();
         _viewModel = viewModel;
         BindingContext = _viewModel;
         _feedback = feedback;
+        _backNavigationHandle = backNavigationHandler;
     }
 
     private async void OnMainMenuClicked(object sender, EventArgs e)
@@ -29,12 +33,14 @@ public partial class GameOverPage : ContentPage
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
+        _backNavigationHandle.Page = this;
         base.OnNavigatedTo(args);
         await _viewModel.Refresh();
     }
 
     protected override void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
+        _backNavigationHandle.Page = null;
         base.OnNavigatingFrom(args);
         _viewModel.OnNavigatingFrom();
     }
@@ -46,5 +52,11 @@ public partial class GameOverPage : ContentPage
     {
         _feedback.Perform();
         _viewModel.BuyPro();
+    }
+
+    public bool OnBackPressed()
+    {
+        _ = GoHome();
+        return true;
     }
 }

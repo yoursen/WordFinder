@@ -1,17 +1,21 @@
+using WordFinder.Interfaces;
 using WordFinder.Services;
 using WordFinder.ViewModels;
 
 namespace WordFinder.Views;
 
-public partial class GameSettingsPage : ContentPage
+public partial class GameSettingsPage : ContentPage, INavigationPage
 {
-    private GameSettingsViewModel _viewModel;
-    private TouchFeedbackService _feedback;
-    public GameSettingsPage(GameSettingsViewModel viewModel, TouchFeedbackService touchFeedbackService)
+    private readonly GameSettingsViewModel _viewModel;
+    private readonly TouchFeedbackService _feedback;
+    private readonly IBackNavigationHandler _backNavigationHandler;
+    public GameSettingsPage(GameSettingsViewModel viewModel, TouchFeedbackService touchFeedbackService,
+        IBackNavigationHandler backNavigationHandler)
     {
         InitializeComponent();
         _viewModel = viewModel;
         _feedback = touchFeedbackService;
+        _backNavigationHandler = backNavigationHandler;
         BindingContext = _viewModel;
     }
 
@@ -23,12 +27,14 @@ public partial class GameSettingsPage : ContentPage
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
+        _backNavigationHandler.Page = this;
         base.OnNavigatedTo(args);
         await _viewModel.Refresh();
     }
 
     protected override void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
+        _backNavigationHandler.Page = null;
         base.OnNavigatingFrom(args);
     }
     private async Task GoHome() => await Navigation.PopToRootAsync();
@@ -40,4 +46,10 @@ public partial class GameSettingsPage : ContentPage
     }
 
     protected async void OnSwipedRight(object sender, SwipedEventArgs e) => await GoHome();
+
+    public bool OnBackPressed()
+    {
+        _ = GoHome();
+        return true;
+    }
 }
