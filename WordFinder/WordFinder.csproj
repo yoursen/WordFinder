@@ -22,12 +22,12 @@
 
 		<AndroidSdkDirectory>/Users/yuriyseniuk/Documents/AndroidSdk</AndroidSdkDirectory>
 		<JavaSdkDirectory>/Users/yuriyseniuk/Documents/JavaSdk</JavaSdkDirectory>
-
+		
 		<!-- Display name -->
 		<ApplicationTitle>Word Finder</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.WordFinder</ApplicationId>
+		<ApplicationId>com.seniuk.wordfinder</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
