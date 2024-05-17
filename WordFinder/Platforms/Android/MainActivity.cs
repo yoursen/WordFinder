@@ -24,4 +24,10 @@ public class MainActivity : MauiAppCompatActivity
 
         OnBackPressedDispatcher.OnBackPressed();
     }
+
+    protected override void OnResume()
+    {
+        base.OnResume();
+        Microsoft.Maui.ApplicationModel.Platform.OnResume(this);
+    }
 }

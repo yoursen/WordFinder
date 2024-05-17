@@ -17,7 +17,13 @@ public class TouchFeedbackService
     public void Vibrate()
     {
         if (_settings.Vibrate)
+        {
+#if __ANDROID__
+            Vibration.Vibrate(40);
+#else
             HapticFeedback.Default.Perform(HapticFeedbackType.Click);
+#endif
+        }
     }
 
     public void KeyboardClick()
