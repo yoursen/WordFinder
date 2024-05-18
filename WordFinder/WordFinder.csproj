@@ -47,8 +47,18 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg"
-			color="#ffffff"
+		<MauiIcon Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'"
+			Include="Resources\AppIcon\appicon.svg"
+			ForegroundFile="Resources\AppIcon\appiconfg.svg"
+			ForegroundScale="0.65"
+			Color="#5c97ae"
+			BaseSize="1024,1024" />
+
+		<MauiIcon Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'"
+			Include="Resources\AppIcon\appicon.svg"
+			ForegroundFile="Resources\AppIcon\appiconfg.svg"
+			ForegroundScale="1"
+			Color="#5c97ae"
 			BaseSize="1024,1024" />
 
 		<!-- Splash Screen -->
