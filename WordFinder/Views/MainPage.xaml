@@ -3,11 +3,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:WordFinder.Views"
     x:Class="WordFinder.Views.MainPage"
-    Shell.NavBarIsVisible="False"
-    BackgroundImageSource="main_background_image2.png">
+    Shell.NavBarIsVisible="False">
 
     <Grid>
-        
+        <Image Source="main_background_image2.png"
+            Aspect="AspectFill"
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand"
+            Margin="-10"/>
         <VerticalStackLayout
             VerticalOptions="Center"
             HorizontalOptions="Fill"
