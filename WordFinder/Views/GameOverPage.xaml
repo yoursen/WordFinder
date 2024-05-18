@@ -5,7 +5,8 @@
     x:Class="WordFinder.Views.GameOverPage"
     xmlns:vm="clr-namespace:WordFinder.ViewModels"
     x:DataType="vm:GameOverViewModel"
-    Shell.NavBarIsVisible="False">
+    Shell.NavBarIsVisible="False"
+    BackgroundImageSource="main_background_image2.png">
 
     <Grid RowDefinitions="*,auto">
         <Grid.GestureRecognizers>

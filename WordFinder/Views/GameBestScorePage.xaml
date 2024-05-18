@@ -5,7 +5,8 @@
     x:Class="WordFinder.Views.GameBestScorePage"
     xmlns:vm="clr-namespace:WordFinder.ViewModels"
     x:DataType="vm:GameBestScoreViewModel"
-    Shell.NavBarIsVisible="False">
+    Shell.NavBarIsVisible="False"
+    BackgroundImageSource="main_background_image2.png">
 
     <Grid RowDefinitions="*,auto">
         <Grid.GestureRecognizers>
