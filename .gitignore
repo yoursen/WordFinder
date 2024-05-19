@@ -3,3 +3,4 @@
 .DS_Store
 WordFinder/Resources/Raw/Words.db-shm
 WordFinder/Resources/Raw/Words.db-wal
+wordfinder.keystore
