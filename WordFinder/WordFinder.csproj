@@ -86,19 +86,19 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui"
-			Version="7.0.1" />
+			Version="9.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm"
 			Version="8.2.2" />
 		<PackageReference Include="Microsoft.Maui.Controls"
-			Version="$(MauiVersion)" />
+			Version="8.0.40" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility"
-			Version="$(MauiVersion)" />
+			Version="8.0.40" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug"
 			Version="8.0.0" />
 		<PackageReference Include="sqlite-net-pcl"
-			Version="1.8.116" />
+			Version="1.9.172" />
 		<PackageReference Include="SQLitePCLRaw.bundle_green"
-			Version="2.1.7" />
+			Version="2.1.8" />
 		<PackageReference Include="Plugin.InAppBilling"
 			Version="7.1.0" />
 	</ItemGroup>
