@@ -40,9 +40,6 @@ public class Sound : ISound
         if (!IsPlayerReady)
             return;
 
-        if (player.IsPlaying)
-            player.Stop();
-
         player.Start();
     }
 
