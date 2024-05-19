@@ -9,8 +9,8 @@
     <Grid>
         <Image Source="main_background_image2.png"
             Aspect="AspectFill"
-            VerticalOptions="CenterAndExpand"
-            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="Fill"
+            HorizontalOptions="Fill"
             Margin="-10"/>
         <VerticalStackLayout
             VerticalOptions="Center"

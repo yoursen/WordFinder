@@ -17,8 +17,8 @@
         <Image Source="game_background_image2.png"
             Grid.RowSpan="2"
             Aspect="AspectFill"
-            VerticalOptions="CenterAndExpand"
-            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="Fill"
+            HorizontalOptions="Fill"
             Margin="-10,-50,-10,-10"/>
 
         <VerticalStackLayout VerticalOptions="CenterAndExpand"
