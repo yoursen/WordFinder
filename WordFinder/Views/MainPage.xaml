@@ -11,7 +11,7 @@
             Aspect="AspectFill"
             VerticalOptions="Fill"
             HorizontalOptions="Fill"
-            Margin="-10"/>
+            Margin="-10,-50"/>
         <VerticalStackLayout
             VerticalOptions="Center"
             HorizontalOptions="Fill"
