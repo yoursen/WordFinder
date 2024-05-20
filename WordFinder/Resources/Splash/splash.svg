@@ -11,7 +11,7 @@
     <g class="layer">
         <line x1="15" y1="96" x2="15" y2="172"
         stroke="#ed8952"
-        stroke-width="6"/>
+        stroke-width="4"/>
         <text fill="#eeeeee"
             fill-opacity="null"
             font-family="Roboto"
