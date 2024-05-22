@@ -37,10 +37,11 @@ public class LicenseService
             return false;
 
         IInAppBilling billing = null;
+        bool pendingPurchase = false;
         try
         {
             billing = CrossInAppBilling.Current;
-            var connected = await billing.ConnectAsync();
+            var connected = billing.IsConnected ? true : await billing.ConnectAsync();
             if (!connected)
             {
                 await ShowToast("Cannot connect to store.");
@@ -54,6 +55,9 @@ public class LicenseService
             else if (purchase.State == PurchaseState.Purchased)
             {
                 IsPro = true;
+#if __ANDROID__
+                await CrossInAppBilling.Current.FinalizePurchaseAsync(purchase.TransactionIdentifier);
+#endif
             }
             else if (purchase.State == PurchaseState.Restored)
             {
@@ -68,7 +72,8 @@ public class LicenseService
         }
         finally
         {
-            await billing?.DisconnectAsync();
+            if (!pendingPurchase)
+                await billing?.DisconnectAsync();
         }
         return await Task.FromResult(IsPro);
     }
@@ -81,7 +86,7 @@ public class LicenseService
         var billing = CrossInAppBilling.Current;
         try
         {
-            var connected = await billing.ConnectAsync();
+            var connected = billing.IsConnected ? true : await billing.ConnectAsync();
             if (!connected)
             {
                 await ShowToast("Cannot connect to store.");
@@ -91,8 +96,13 @@ public class LicenseService
             var purchases = await billing.GetPurchasesAsync(ItemType.InAppPurchase);
 
             //check for null just in case
-            if (purchases?.Any(p => p.ProductId == WordFinderPremiumProductId) ?? false)
+            var purchase = purchases?.FirstOrDefault(p => p.ProductId == WordFinderPremiumProductId);
+            if (purchase != null)
             {
+#if __ANDROID__
+                if(purchase.IsAcknowledged != true)
+                    await CrossInAppBilling.Current.FinalizePurchaseAsync(purchase.TransactionIdentifier);
+#endif
                 IsPro = true;
                 await ShowToast("Purchase succesfully restored.");
             }
@@ -101,11 +111,13 @@ public class LicenseService
                 await ShowToast("Cannot find the purchase.");
             }
         }
-        catch (InAppBillingPurchaseException)
+        catch (InAppBillingPurchaseException ex)
         {
+            await ShowToast(ex.Message);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            await ShowToast(ex.Message);
         }
         finally
         {
