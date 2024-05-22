@@ -113,10 +113,21 @@ public partial class GamePage : ContentPage, INavigationPage
 
     private async void OnBackClicked(object sender, EventArgs e)
     {
-        _feedback.Perform();
-        var exit = await _viewModel.AskExitGame();
-        if (exit)
-            await _viewModel.DoGameOver();
+        if (_isExecuting)
+            return;
+
+        try
+        {
+            _isExecuting = true;
+            _feedback.Perform();
+            var exit = await _viewModel.AskExitGame();
+            if (exit)
+                await _viewModel.DoGameOver();
+        }
+        finally
+        {
+            _isExecuting = false;
+        }
     }
 
     private async void OnSwipedRight(object sender, SwipedEventArgs e)
