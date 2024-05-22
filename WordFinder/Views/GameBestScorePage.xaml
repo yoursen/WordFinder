@@ -37,36 +37,39 @@
             </Label>
 
             <Grid Margin="30,0"
-                ColumnDefinitions="*,90"
+                ColumnDefinitions="*,auto"
                 RowDefinitions="*,10,*,10,*,10,*,10,*"
                 HorizontalOptions="Center">
-                <Label Text="2 minutes game"
+                <Label Text="2 minutes"
                     HorizontalOptions="Start"
                     Style="{StaticResource NormalLabel}"/>
                 <Label Grid.Column="1"
                     Text="{Binding Score2min}"
                     HorizontalOptions="End"
+                    Margin="10,0,0,0"
                     Style="{StaticResource NormalLabel}"/>
 
                 <Label Grid.Row="2"
-                    Text="5 minutes game"
+                    Text="5 minutes"
                     HorizontalOptions="Start"
                     Style="{StaticResource NormalLabel}"/>
                 <Label Grid.Row = "2"
                     Grid.Column="1"
                     Text="{Binding Score5min}"
                     HorizontalOptions="End"
+                    Margin="10,0,0,0"
                     Style="{StaticResource NormalLabel}"/>
 
 
                 <Label Grid.Row="4"
-                    Text="10 minutes game"
+                    Text="10 minutes"
                     HorizontalOptions="Start"
                     Style="{StaticResource NormalLabel}"/>
                 <Label Grid.Row = "4"
                     Grid.Column="1"
                     Text="{Binding Score10min}"
                     HorizontalOptions="End"
+                    Margin="10,0,0,0"
                     Style="{StaticResource NormalLabel}"/>
 
                 <Label Grid.Row="6"
@@ -77,6 +80,7 @@
                     Grid.Column="1"
                     Text="{Binding ScoreFreeplay}"
                     HorizontalOptions="End"
+                    Margin="10,0,0,0"
                     Style="{StaticResource NormalLabel}"/>
 
                 <Label Grid.Row="8"
@@ -85,6 +89,7 @@
                     Style="{StaticResource NormalLabel}"/>
                 <HorizontalStackLayout Grid.Row="8"
                     Grid.Column="1"
+                    Margin="10,0,0,0"
                     HorizontalOptions="End">
 
                     <Label Text="{Binding TotalWordsAnswered}"
