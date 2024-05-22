@@ -88,7 +88,6 @@ public class LicenseService
                 return false;
             }
 
-            var list = await billing.GetProductInfoAsync(ItemType.InAppPurchase);
             var purchases = await billing.GetPurchasesAsync(ItemType.InAppPurchase);
 
             //check for null just in case
