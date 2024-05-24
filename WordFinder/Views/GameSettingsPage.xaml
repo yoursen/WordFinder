@@ -101,8 +101,9 @@
         </Frame>
 
         <ImageButton Clicked="OnMainMenuClicked"
-            Margin="5,10,0,0"
-            WidthRequest="22"
+            Margin="10,20,0,0"
+            WidthRequest="40"
+            HeightRequest="40"
             VerticalOptions="Start"
             HorizontalOptions="Start">
             <ImageButton.Source>
