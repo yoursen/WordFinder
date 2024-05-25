@@ -78,7 +78,7 @@ public class GameDatabase
         await Init();
 
         string licenseFilter = _license.IsFree ? "IsPro = 0 AND" : string.Empty;
-        string RandomWordQuery = $"SELECT * FROM GameWords{TableSuffix} WHERE Id = (SELECT Id FROM GameWords WHERE {licenseFilter} IsPlayed = FALSE ORDER BY RANDOM() LIMIT 1)";
+        string RandomWordQuery = $"SELECT * FROM GameWords{TableSuffix} WHERE Id = (SELECT Id FROM GameWords{TableSuffix} WHERE {licenseFilter} IsPlayed = FALSE ORDER BY RANDOM() LIMIT 1)";
         var randomWord = await _database.QueryAsync<GameWord>(RandomWordQuery);
         var word = randomWord.FirstOrDefault();
 
