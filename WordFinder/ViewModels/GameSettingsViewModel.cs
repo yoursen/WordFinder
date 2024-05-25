@@ -21,7 +21,7 @@ public partial class GameSettingsViewModel : ObservableObject
     [ObservableProperty] private int _totalWordsPro = 583;
     public ICommand RestorePurchaseCommand { get; }
 
-    public GameSettingsViewModel(GameSettings gameSettings, ISound sound, LicenseService license, 
+    public GameSettingsViewModel(GameSettings gameSettings, ISound sound, LicenseService license,
         TouchFeedbackService feedback, GameDatabase db)
     {
         _gameSettings = gameSettings;
@@ -43,6 +43,32 @@ public partial class GameSettingsViewModel : ObservableObject
     {
         get => _gameSettings.Click;
         set => _gameSettings.Click = value;
+    }
+
+    public bool IsEnglish
+    {
+        get => _gameSettings.Language == GameLanguage.English;
+        set
+        {
+            if (value)
+                _gameSettings.Language = GameLanguage.English;
+
+            OnPropertyChanged(nameof(IsUkrainian));
+            OnPropertyChanged(nameof(IsEnglish));
+        }
+    }
+
+    public bool IsUkrainian
+    {
+        get => _gameSettings.Language == GameLanguage.Ukrainian;
+        set
+        {
+            if (value)
+                _gameSettings.Language = GameLanguage.Ukrainian;
+
+            OnPropertyChanged(nameof(IsUkrainian));
+            OnPropertyChanged(nameof(IsEnglish));
+        }
     }
 
     public async void BuyPro()

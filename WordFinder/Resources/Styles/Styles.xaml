@@ -274,25 +274,54 @@
         </Setter>
     </Style>
 
+    <ControlTemplate x:Key="RadioButtonTemplate">
+        <Border Stroke="Transparent" BackgroundColor="Transparent">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CheckedStates">
+                        <VisualState x:Name="Checked">
+                            <VisualState.Setters>
+                                <Setter TargetName="check" Property="Opacity" Value="1" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Unchecked">
+                            <VisualState.Setters>
+                                <Setter TargetName="check" Property="Opacity" Value="0" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </VisualStateManager.VisualStateGroups>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid WidthRequest="30" HeightRequest="30" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center">
+                    <Ellipse x:Name="border_circle" StrokeThickness="2" Stroke="{TemplateBinding BorderColor}" Fill="White" WidthRequest="28" HeightRequest="28" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Ellipse x:Name="check" Fill="{TemplateBinding BorderColor}" WidthRequest="20" HeightRequest="20" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Grid>
+                <ContentPresenter Margin="10,0,0,0" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" />
+            </Grid>
+        </Border>
+    </ControlTemplate>
+
     <Style TargetType="RadioButton">
         <Setter Property="BackgroundColor" Value="Transparent"/>
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="TextColor" Value="{StaticResource Primary}" />
         <Setter Property="FontFamily" Value="MainFont"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="MinimumHeightRequest" Value="44"/>
-        <Setter Property="MinimumWidthRequest" Value="44"/>
-        <Setter Property="VisualStateManager.VisualStateGroups">
-            <VisualStateGroupList>
-                <VisualStateGroup x:Name="CommonStates">
-                    <VisualState x:Name="Normal" />
-                    <VisualState x:Name="Disabled">
-                        <VisualState.Setters>
-                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
-                        </VisualState.Setters>
-                    </VisualState>
-                </VisualStateGroup>
-            </VisualStateGroupList>
-        </Setter>
+        <Setter Property="MinimumHeightRequest" Value="20"/>
+        <Setter Property="MinimumWidthRequest" Value="20"/>
+        <Setter Property="ControlTemplate" Value="{StaticResource RadioButtonTemplate}" />
+        <Style.Triggers>
+            <Trigger TargetType="RadioButton" Property="IsEnabled" Value="False">
+                <Setter Property="BorderColor" Value="LightGray" />
+            </Trigger>
+            <Trigger TargetType="RadioButton" Property="IsEnabled" Value="True">
+                <Setter Property="BorderColor" Value="{StaticResource Primary}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style TargetType="RefreshView">

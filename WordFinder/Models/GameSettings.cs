@@ -7,6 +7,18 @@ public class GameSettings
         _vibrate = Preferences.Default.Get(nameof(Vibrate), true);
         _click = Preferences.Default.Get(nameof(Click), true);
         _isFirstGame = Preferences.Default.Get(nameof(IsFirstGame), true);
+        _language = (GameLanguage)Preferences.Default.Get(nameof(Language), (int)GameLanguage.English);
+    }
+
+    private GameLanguage _language;
+    public GameLanguage Language
+    {
+        get => _language;
+        set
+        {
+            _language = value;
+            Preferences.Default.Set(nameof(Language), (int)_language);
+        }
     }
 
     private bool _vibrate;

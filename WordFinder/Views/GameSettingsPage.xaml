@@ -1,97 +1,133 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:WordFinder.Views"
-    x:Class="WordFinder.Views.GameSettingsPage"
-    xmlns:vm="clr-namespace:WordFinder.ViewModels"
-    x:DataType="vm:GameSettingsViewModel"
-    Shell.NavBarIsVisible="False"
-    BackgroundImageSource="main_background_image2.png">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:WordFinder.Views"
+             x:Class="WordFinder.Views.GameSettingsPage"
+             xmlns:vm="clr-namespace:WordFinder.ViewModels"
+             x:DataType="vm:GameSettingsViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundImageSource="main_background_image2.png">
 
     <Grid RowDefinitions="*,auto">
         <Grid.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Right"
-                Swiped="OnSwipedRight"/>
+                                    Swiped="OnSwipedRight"/>
         </Grid.GestureRecognizers>
 
         <Image Source="game_background_image2.png"
-            Grid.RowSpan="2"
-            Aspect="AspectFill"
-            VerticalOptions="Fill"
-            HorizontalOptions="Fill"
-            Margin="-10,-50"/>
+               Grid.RowSpan="2"
+               Aspect="AspectFill"
+               VerticalOptions="Fill"
+               HorizontalOptions="Fill"
+               Margin="-10,-50"/>
 
         <VerticalStackLayout VerticalOptions="CenterAndExpand"
-            HorizontalOptions="Fill"
-            Padding="40,0"
-            Spacing="40">
+                             HorizontalOptions="Fill"
+                             Padding="40,0"
+                             Spacing="40">
             <Label Text="Settings"
-                Style="{StaticResource Headline}"
-                CharacterSpacing="1">
+                   Style="{StaticResource Headline}"
+                   CharacterSpacing="1">
                 <Label.Shadow>
                     <Shadow Brush="White"
-                        Offset="2,2"
-                        Radius="2"
-                        Opacity="0.5" />
+                            Offset="2,2"
+                            Radius="2"
+                            Opacity="0.5"/>
                 </Label.Shadow>
             </Label>
 
-            <Grid ColumnDefinitions="*,40,*"
-                RowDefinitions="*,20,*"
-                WidthRequest="210"
-                HorizontalOptions="Center">
-                <Label Text="Vibrate"
-                    HorizontalOptions="Start"
-                    VerticalOptions="Center"
-                    Style="{StaticResource NormalLabel}"/>
-                <Switch Grid.Column="2"
-                    HorizontalOptions="End"
-                    IsToggled="{Binding Vibrate}"/>
+            <VerticalStackLayout Spacing="20"
+                                 WidthRequest="210"
+                                 HorizontalOptions="Center">
 
-                <Label Text="Sound"
-                    HorizontalOptions="Start"
-                    VerticalOptions="Center"
-                    Grid.Row="2"
-                    IsVisible="{Binding IsPlayerReady}"
-                    Style="{StaticResource NormalLabel}"/>
-                <Switch Grid.Column="2"
-                    HorizontalOptions="End"
-                    Grid.Row="2"
-                    IsVisible="{Binding IsPlayerReady}"
-                    IsToggled="{Binding Click}"/>
-            </Grid>
+                <Grid HorizontalOptions="Fill"
+                      ColumnDefinitions="*,*">
+                    <Label Text="Vibrate"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           Style="{StaticResource NormalLabel}"/>
+                    <Switch HorizontalOptions="End"
+                            Grid.Column="1"
+                            IsToggled="{Binding Vibrate}"/>
+                </Grid>
+
+                <Grid HorizontalOptions="Fill"
+                      ColumnDefinitions="*,*"
+                      IsVisible="{Binding IsPlayerReady}">
+                    <Label Text="Sound"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           Style="{StaticResource NormalLabel}"/>
+                    <Switch HorizontalOptions="End"
+                            Grid.Column="1"
+                            IsToggled="{Binding Click}"/>
+                </Grid>
+
+                <VerticalStackLayout Spacing="20">
+                    <Grid HorizontalOptions="Fill"
+                          ColumnDefinitions="*,*">
+                        <Label Text="English"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center"
+                               Style="{StaticResource NormalLabel}"/>
+                        <RadioButton HorizontalOptions="End"
+                                     Grid.Column="1"
+                                     IsChecked="{Binding IsEnglish}">
+                            <RadioButton.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnIsEnglishTapped"
+                                                      NumberOfTapsRequired="1"/>
+                            </RadioButton.GestureRecognizers>
+                        </RadioButton>
+                    </Grid>
+
+                    <Grid HorizontalOptions="Fill"
+                          ColumnDefinitions="*,*">
+                        <Label Text="Ukrainian"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center"
+                               Style="{StaticResource NormalLabel}"/>
+                        <RadioButton HorizontalOptions="End"
+                                     Grid.Column="1"
+                                     IsChecked="{Binding IsUkrainian}">
+                            <RadioButton.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnIsUkrainianTapped"
+                                                      NumberOfTapsRequired="1"/>
+                            </RadioButton.GestureRecognizers>
+                        </RadioButton>
+                    </Grid>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="20"
-                HorizontalOptions="Center">
+                                 HorizontalOptions="Center">
                 <Button Style="{StaticResource MenuButtonStyle}"
-                    Text="Main menu"
-                    Clicked="OnMainMenuClicked"/>
+                        Text="Main menu"
+                        Clicked="OnMainMenuClicked"/>
             </VerticalStackLayout>
 
         </VerticalStackLayout>
 
         <Frame VerticalOptions="End"
-            Grid.Row="1"
-            Margin="20,0,20,20"
-            BackgroundColor="White"
-            MaximumWidthRequest="600"
-            CornerRadius="20"
-            IsVisible="{Binding IsFree}">
+               Grid.Row="1"
+               Margin="20,0,20,20"
+               BackgroundColor="White"
+               MaximumWidthRequest="600"
+               CornerRadius="20"
+               IsVisible="{Binding IsFree}">
             <VerticalStackLayout Spacing="20">
 
                 <Label Text="{Binding TotalWordsPro, StringFormat='Ready to level up your game? Unlock {0} more words in the premium version and broaden your guessing horizons!'}"
-                    Style="{StaticResource NormalLabel}"
-                    />
+                       Style="{StaticResource NormalLabel}"/>
 
                 <Button Style="{StaticResource MenuButtonStyle}"
-                    Text="Buy premium version"
-                    BackgroundColor="{StaticResource Accent}"
-                    Clicked="OnBuyProClicked"/>
+                        Text="Buy premium version"
+                        BackgroundColor="{StaticResource Accent}"
+                        Clicked="OnBuyProClicked"/>
 
                 <Label Text="Restore purchase"
-                    HorizontalOptions="Center"
-                    TextDecorations="Underline"
-                    Style="{StaticResource NormalLabel}">
+                       HorizontalOptions="Center"
+                       TextDecorations="Underline"
+                       Style="{StaticResource NormalLabel}">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding RestorePurchaseCommand}"/>
                     </Label.GestureRecognizers>
@@ -101,15 +137,15 @@
         </Frame>
 
         <ImageButton Clicked="OnMainMenuClicked"
-            Margin="10,20,0,0"
-            WidthRequest="40"
-            HeightRequest="40"
-            VerticalOptions="Start"
-            HorizontalOptions="Start">
+                     Margin="10,20,0,0"
+                     WidthRequest="40"
+                     HeightRequest="40"
+                     VerticalOptions="Start"
+                     HorizontalOptions="Start">
             <ImageButton.Source>
                 <FontImageSource Glyph="&#xf104;"
-                    Color="{DynamicResource Primary}"
-                    FontFamily="FontAwesome" />
+                                 Color="{DynamicResource Primary}"
+                                 FontFamily="FontAwesome"/>
             </ImageButton.Source>
         </ImageButton>
     </Grid>

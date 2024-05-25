@@ -39,7 +39,7 @@ public partial class GameSettingsPage : ContentPage, INavigationPage
     }
     private async Task GoHome() => await Navigation.PopToRootAsync();
 
-    private void OnBuyProClicked(object s, EventArgs e) 
+    private void OnBuyProClicked(object s, EventArgs e)
     {
         _feedback.Perform();
         _viewModel.BuyPro();
@@ -52,4 +52,7 @@ public partial class GameSettingsPage : ContentPage, INavigationPage
         _ = GoHome();
         return true;
     }
+
+    public void OnIsEnglishTapped(object sendeer, EventArgs e) => _viewModel.IsEnglish = true;
+    public void OnIsUkrainianTapped(object sendeer, EventArgs e) => _viewModel.IsUkrainian = true;
 }
