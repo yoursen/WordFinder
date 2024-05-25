@@ -12,6 +12,14 @@ public enum Direction
 
 public class WordFitter
 {
+    private readonly string[] UALetters = new[] { "Й", "Ц", "У", "К", "Е", "Н", "Г", "Ѓ", "Ш", "Щ"
+        , "З", "Х", "Ї", "Ф", "І", "В", "А", "П", "Р", "О"
+        , "Л", "Д", "Ж", "Є", "Я", "Ч", "С", "М", "И", "Т"
+        , "Ь", "Б", "Ю"};
+
+    private readonly string[] ENLetters = new[] { "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"
+        , "A", "S", "D", "F", "G", "H", "J", "K", "L", "Z"
+        , "X", "C", "V", "B", "N", "M"};
     private GameLetter[,] _table;
     private int _gridSize;
     private int _row;
@@ -157,7 +165,7 @@ public class WordFitter
         return (-1, -1);
     }
 
-    public void FitBlank()
+    public void FitBlank(GameLanguage language)
     {
         for (int i = 0; i < _gridSize; i++)
         {
@@ -166,9 +174,27 @@ public class WordFitter
                 if (_table[i, j] is not null)
                     continue;
 
-                _table[i, j] = new GameLetter(((char)Random.Shared.Next(65, 90)).ToString());
+                string letter = null;
+                switch (language)
+                {
+                    case GameLanguage.Ukrainian:
+                        letter = GetLetter(UALetters);
+                        break;
+                    default:
+                        letter = GetLetter(ENLetters);
+                        break;
+                }
+                _table[i, j] = new GameLetter(letter);
             }
         }
+    }
+
+    private static string GetLetter(string[] alphabet)
+    {
+        string letter;
+        var idx = Random.Shared.Next(0, alphabet.Length);
+        letter = alphabet[idx];
+        return letter;
     }
 
     private Direction GetRandomDirection(Direction allowedDirections)

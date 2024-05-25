@@ -8,6 +8,7 @@ public partial class GameModel : ObservableObject
 {
     private const int GridSize = 5;
     private readonly GameDatabase _db;
+    private readonly GameSettings _gameSettings;
     private readonly GameTimer _gameTimer;
     private readonly WordFitter _wordFitter;
     private readonly GameHintsModel _hintsModel;
@@ -16,10 +17,11 @@ public partial class GameModel : ObservableObject
     public TimeSpan HintPenaltyTimeSpan { get; init; } = TimeSpan.FromSeconds(5);
 
     public GameModel(GameDatabase db, WordFitter wordFitter, GameTimer gameTimer, AwaitableMessageService ams
-    , TouchFeedbackService touchFeedback, GameHintsModel hintsModel)
+    , TouchFeedbackService touchFeedback, GameHintsModel hintsModel, GameSettings gameSettings)
     {
         _db = db;
         _wordFitter = wordFitter;
+        _gameSettings = gameSettings;
         _touchFeedback = touchFeedback;
         _gameTimer = gameTimer;
         _gameTimer.PropertyChanged += (s, e) => OnPropertyChanged(e);
@@ -217,7 +219,7 @@ public partial class GameModel : ObservableObject
                 _wordFitter.FitSecondaryWord(word);
             }
         }
-        _wordFitter.FitBlank();
+        _wordFitter.FitBlank(_gameSettings.Language);
         Letters = _wordFitter.Flush();
         return true;
     }

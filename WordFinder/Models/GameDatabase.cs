@@ -6,26 +6,58 @@ namespace WordFinder.Models;
 public class GameDatabase
 {
     private SQLiteAsyncConnection _database;
-    private LicenseService _license;
+    private readonly LicenseService _license;
+    private readonly GameSettings _gameSettings;
 
-    public GameWordCategory[] Categories { get; private set; }
+    public List<GameWordCategory> Categories { get; private set; }
 
-    public GameDatabase(LicenseService license)
+    public GameDatabase(LicenseService license, GameSettings gameSettings)
     {
         _license = license;
+        _gameSettings = gameSettings;
     }
+
+    private string TableSuffix => _gameSettings.Language switch
+    {
+        GameLanguage.Ukrainian => "_uk_UA",
+        _ => string.Empty,
+    };
+
+    private GameLanguage? Language { get; set; }
 
     public async Task Init()
     {
         if (_database is not null)
+        {
+            if (Language != null && Language.Value != _gameSettings.Language)
+            {
+                Language = _gameSettings.Language;
+                await InitCategories();
+            }
             return;
+        }
 
+        Language = _gameSettings.Language;
         await DeployDB();
 
         _database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-        await _database.CreateTableAsync<GameScore>();
+        await CreateScoreDB("GameScore");
+        await CreateScoreDB("GameScore_uk_UA");
 
-        Categories = await _database.Table<GameWordCategory>().ToArrayAsync();
+        await InitCategories();
+    }
+
+    private async Task CreateScoreDB(string tableName)
+    {
+        var res = await _database.ExecuteAsync(@$"CREATE TABLE IF NOT EXISTS {tableName} (
+                                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                        Score INTEGER,
+                                        GameDuration INTEGER)");
+    }
+
+    private async Task InitCategories()
+    {
+        Categories = await _database.QueryAsync<GameWordCategory>($"SELECT * FROM GameWordCategories{TableSuffix}");
     }
 
     public async Task DeployDB()
@@ -46,7 +78,7 @@ public class GameDatabase
         await Init();
 
         string licenseFilter = _license.IsFree ? "IsPro = 0 AND" : string.Empty;
-        string RandomWordQuery = $"SELECT * FROM GameWords WHERE Id = (SELECT Id FROM GameWords WHERE {licenseFilter} IsPlayed = FALSE ORDER BY RANDOM() LIMIT 1)";
+        string RandomWordQuery = $"SELECT * FROM GameWords{TableSuffix} WHERE Id = (SELECT Id FROM GameWords WHERE {licenseFilter} IsPlayed = FALSE ORDER BY RANDOM() LIMIT 1)";
         var randomWord = await _database.QueryAsync<GameWord>(RandomWordQuery);
         var word = randomWord.FirstOrDefault();
 
@@ -60,7 +92,7 @@ public class GameDatabase
     {
         await Init();
 
-        string RandomWordQuery = $"SELECT * FROM GameWords ORDER BY RANDOM() LIMIT {count}";
+        string RandomWordQuery = $"SELECT * FROM GameWords{TableSuffix} ORDER BY RANDOM() LIMIT {count}";
         var randomWord = await _database.QueryAsync<GameWord>(RandomWordQuery);
         return randomWord.Select(SetWordCategory).ToArray();
     }
@@ -75,7 +107,7 @@ public class GameDatabase
     {
         await Init();
 
-        const string sql = $"UPDATE GameWords SET IsPlayed = ? WHERE Id = ?";
+        string sql = $"UPDATE GameWords{TableSuffix} SET IsPlayed = ? WHERE Id = ?";
         var res = await _database.ExecuteAsync(sql, isPlayed, id);
     }
 
@@ -83,7 +115,7 @@ public class GameDatabase
     {
         await Init();
 
-        const string sql = $"UPDATE GameWords SET IsPlayed = FALSE WHERE IsPlayed = TRUE AND IsAnswered = FALSE";
+        string sql = $"UPDATE GameWords{TableSuffix} SET IsPlayed = FALSE WHERE IsPlayed = TRUE AND IsAnswered = FALSE";
         return await _database.ExecuteAsync(sql);
     }
 
@@ -91,50 +123,53 @@ public class GameDatabase
     {
         await Init();
 
-        const string sql = $"UPDATE GameWords SET IsAnswered = ? WHERE Id = ?";
+        string sql = $"UPDATE GameWords{TableSuffix} SET IsAnswered = ? WHERE Id = ?";
         var res = await _database.ExecuteAsync(sql, isAnswered, id);
     }
 
     public async Task<int> CountWordsAnswered()
     {
-        System.Linq.Expressions.Expression<Func<GameWord, bool>> predicate;
+        string predicate;
         if (_license.IsFree)
-            predicate = w => w.IsAnswered && !w.IsPro;
+            predicate = "IsAnswered = TRUE AND IsPro = FALSE";
         else
-            predicate = w => w.IsAnswered;
+            predicate = "IsAnswered = TRUE";
 
         return await CountWords(predicate);
     }
     public async Task<int> CountWordsNotAnswered()
     {
-        System.Linq.Expressions.Expression<Func<GameWord, bool>> predicate;
+        string predicate;
         if (_license.IsFree)
-            predicate = w => !w.IsAnswered && !w.IsPro;
+            predicate = "IsAnswered = FALSE AND IsPro = FALSE";
         else
-            predicate = w => !w.IsAnswered;
+            predicate = "IsAnswered = FALSE";
 
         return await CountWords(predicate);
     }
-    public async Task<int> CountWordsPro() => await CountWords(w => w.IsPro);
+    public async Task<int> CountWordsPro() => await CountWords("IsPro = TRUE");
     public async Task<int> CountWords()
     {
-        System.Linq.Expressions.Expression<Func<GameWord, bool>> predicate;
+        string predicate;
         if (_license.IsFree)
-            predicate = w => !w.IsPro;
+            predicate = "IsPro = FALSE";
         else
-            predicate = w => true;
+            predicate = "1 = 1";
 
         return await CountWords(predicate);
     }
 
-    private async Task<int> CountWords(System.Linq.Expressions.Expression<Func<GameWord, bool>> predicate)
-        => await _database.Table<GameWord>().Where(predicate).CountAsync();
+    private async Task<int> CountWords(string where)
+    {
+        var words = await _database.QueryAsync<GameWord>($"SELECT * FROM GameWords{TableSuffix} WHERE {where}");
+        return words.Count();
+    }
 
     public async Task ResetIsAnswered()
     {
         await Init();
 
-        const string sql = $"UPDATE GameWords SET IsAnswered = FALSE";
+        string sql = $"UPDATE GameWords{TableSuffix} SET IsAnswered = FALSE";
         await _database.ExecuteAsync(sql);
     }
 
@@ -142,7 +177,7 @@ public class GameDatabase
     {
         await Init();
 
-        const string query = "SELECT * FROM GameScore WHERE ID = (SELECT MAX(ID) FROM GameScore);";
+        string query = $"SELECT * FROM GameScore{TableSuffix} WHERE ID = (SELECT MAX(ID) FROM GameScore{TableSuffix});";
         var result = await _database.QueryAsync<GameScore>(query);
         return result.FirstOrDefault();
     }
@@ -150,13 +185,14 @@ public class GameDatabase
     public async Task AddGameScore(GameScore gameScore)
     {
         await Init();
-        await _database.InsertAsync(gameScore);
+        await _database.ExecuteAsync(@$"INSERT INTO GameScore{TableSuffix} (Score, GameDuration) VALUES (?, ?)",
+                                  gameScore.Score, gameScore.GameDuration);
     }
 
     public async Task<GameScore> GetBestGameScore(int gameDuration)
     {
         await Init();
-        var query = "SELECT * FROM GameScore WHERE Score = (SELECT MAX(Score) FROM GameScore WHERE GameDuration = ?) LIMIT 1;";
+        var query = $"SELECT * FROM GameScore{TableSuffix} WHERE Score = (SELECT MAX(Score) FROM GameScore{TableSuffix} WHERE GameDuration = ?) LIMIT 1;";
         var result = await _database.QueryAsync<GameScore>(query, gameDuration);
         return result.FirstOrDefault();
     }

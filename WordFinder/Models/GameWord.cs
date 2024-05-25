@@ -26,21 +26,3 @@ public class GameWord
     [Ignore]
     public GameWordCategory Category { get; set; }
 }
-
-[Table("GameWordCategories")]
-public class GameWordCategory
-{
-    [PrimaryKey, AutoIncrement]
-    public int Id { get; set; }
-
-    public string Name { get; set; }
-
-    public override string ToString() => Name ?? base.ToString();
-}
-
-public enum ComplexityEnum
-{
-    Easy = 0,
-    Medium = 1,
-    Hard = 2
-}
