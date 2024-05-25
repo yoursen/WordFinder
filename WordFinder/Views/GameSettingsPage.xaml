@@ -63,6 +63,11 @@
                             IsToggled="{Binding Click}"/>
                 </Grid>
 
+                <Label Text="Dictionary"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Style="{StaticResource SubHeadline}"/>
+
                 <VerticalStackLayout Spacing="20">
                     <Grid HorizontalOptions="Fill"
                           ColumnDefinitions="*,*">

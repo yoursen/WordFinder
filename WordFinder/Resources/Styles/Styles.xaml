@@ -299,7 +299,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid WidthRequest="30" HeightRequest="30" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center">
                     <Ellipse x:Name="border_circle" StrokeThickness="2" Stroke="{TemplateBinding BorderColor}" Fill="White" WidthRequest="28" HeightRequest="28" HorizontalOptions="Center" VerticalOptions="Center" />
-                    <Ellipse x:Name="check" Fill="{TemplateBinding BorderColor}" WidthRequest="20" HeightRequest="20" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Ellipse x:Name="check" Fill="{TemplateBinding BorderColor}" WidthRequest="18" HeightRequest="18" HorizontalOptions="Center" VerticalOptions="Center" />
                 </Grid>
                 <ContentPresenter Margin="10,0,0,0" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" />
             </Grid>
