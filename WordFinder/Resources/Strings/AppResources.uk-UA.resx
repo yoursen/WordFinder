@@ -89,7 +89,7 @@
     <value>Кінець Гри</value>
   </data>
   <data name="Score" xml:space="preserve">
-    <value>Рузультат</value>
+    <value>Результат</value>
   </data>
   <data name="BestScoreGameOver" xml:space="preserve">
     <value>Найкращий</value>
