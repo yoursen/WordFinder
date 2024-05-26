@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+  <data name="PlayGame" xml:space="preserve">
+    <value>Почати гру</value>
+  </data>
+  <data name="BestScore" xml:space="preserve">
+    <value>Рeзультати</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Налаштування</value>
+  </data>
+  <data name="Vibrate" xml:space="preserve">
+    <value>Вібрація</value>
+  </data>
+  <data name="Sound" xml:space="preserve">
+    <value>Звук</value>
+  </data>
+  <data name="Dictionary" xml:space="preserve">
+    <value>Словничок</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Англійська</value>
+  </data>
+  <data name="Ukrainian" xml:space="preserve">
+    <value>Українська</value>
+  </data>
+  <data name="MainMenu" xml:space="preserve">
+    <value>Головне меню</value>
+  </data>
+  <data name="BuyPremiumVersion" xml:space="preserve">
+    <value>Придбати преміум</value>
+  </data>
+  <data name="RestorePurchase" xml:space="preserve">
+    <value>Відновити покупку</value>
+  </data>
+  <data name="PremiumUpgradeMessage" xml:space="preserve">
+    <value>Готові підняти свою гру на новий рівень? Розблокуйте ще {0} слів у преміум версії та розширте свої горизонти!</value>
+  </data>
+  <data name="GameDuration" xml:space="preserve">
+    <value>Тривалість гри</value>
+  </data>
+  <data name="TenMinutes" xml:space="preserve">
+    <value>10 хвилин</value>
+  </data>
+  <data name="FiveMinutes" xml:space="preserve">
+    <value>5 хвилин</value>
+  </data>
+  <data name="TwoMinutes" xml:space="preserve">
+    <value>2 хвилини</value>
+  </data>
+  <data name="FreePlayMode" xml:space="preserve">
+    <value>Без обмежень</value>
+  </data>
+  <data name="Answers" xml:space="preserve">
+    <value>Відповіді</value>
+  </data>
+  <data name="TimeLeft" xml:space="preserve">
+    <value>Час</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Далі</value>
+  </data>
+  <data name="Hint" xml:space="preserve">
+    <value>Поміч ({0})</value>
+  </data>
+  <data name="ExitGame" xml:space="preserve">
+    <value>Завершити гру?</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Так</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Ні</value>
+  </data>
+  <data name="GameOver" xml:space="preserve">
+    <value>Кінець Гри</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>Рузультат</value>
+  </data>
+  <data name="BestScoreGameOver" xml:space="preserve">
+    <value>Найкращий</value>
+  </data>
+  <data name="Freeplay" xml:space="preserve">
+    <value>Без обмежень</value>
+  </data>
+  <data name="PremiumUpgradeMessageGameOver" xml:space="preserve">
+    <value>Залишилось {0}{1} невгаданих слів у безкоштовній версії. Розблокуйте додаткові {2} слів у преміум версії та продовжуйте отримувати задоволення!</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Грати ще!</value>
+  </data>
+  <data name="GameDurationGameOver" xml:space="preserve">
+    <value>Гра</value>
+  </data>
+  <data name="GameDurationFormat" xml:space="preserve">
+    <value>{0} хв.</value>
+  </data>
+  <data name="Only" xml:space="preserve">
+    <value>Лише</value>
+  </data>
+  <data name="BestScoreTitle" xml:space="preserve">
+    <value>Найкращий результат</value>
+  </data>
+  <data name="AnsweredTotal" xml:space="preserve">
+    <value>Вгадано/Всього</value>
+  </data>
+  <data name="Play" xml:space="preserve">
+    <value>Грати</value>
+  </data>
+  <data name="HowToPlay" xml:space="preserve">
+    <value>Як грати?</value>
+  </data>
+  <data name="HowToPlay1" xml:space="preserve">
+    <value>Натисніть на літери, щоб утворити слово, яке відповідає опису.</value>
+  </data>
+  <data name="HowToPlay2" xml:space="preserve">
+    <value>Якщо ви застрягли, натисніть кнопку "Підказка". Ви можете використовувати до 3 підказок на слово і 20 підказок на день у безкоштовній версії.</value>
+  </data>
+  <data name="HowToPlay3" xml:space="preserve">
+    <value>Натисніть кнопку "Далі", щоб пропустити поточне слово і перейти до наступного.</value>
+  </data>
+    <data name="SkipTheWord" xml:space="preserve">
+    <value>Пропустіть слово</value>
+  </data>
+  <data name="GetAHint" xml:space="preserve">
+    <value>Візьміть підказку</value>
+  </data>
+  <data name="Congratulations" xml:space="preserve">
+    <value>Вітання!</value>
+  </data>
+  <data name="NoWordsFree" xml:space="preserve">
+  <value>Ви вгадали всі слова у безкоштовній версії додатка. Список слів буде скинуто. Розгляньте можливість оновлення до преміум-версії, щоб розблокувати більше слів і насолоджуватися покращеним досвідом.</value>
+ </data>
+ <data name="NoWordsPremium" xml:space="preserve">
+  <value>Ви успішно вгадали всі слова у преміум-версії додатка. Ми вдячні за ваш вибір цієї гри. Зверніть увагу, що список слів буде скинуто, щоб зберегти для вас свіжість виклику. Дякуємо, що ви є частиною нашої ігрової спільноти!</value>
+ </data>
+</root>

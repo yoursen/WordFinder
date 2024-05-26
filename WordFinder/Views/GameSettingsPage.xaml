@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:WordFinder.Views"
              x:Class="WordFinder.Views.GameSettingsPage"
              xmlns:vm="clr-namespace:WordFinder.ViewModels"
+             xmlns:strings="clr-namespace:WordFinder.Resources.Strings"
              x:DataType="vm:GameSettingsViewModel"
              Shell.NavBarIsVisible="False"
              BackgroundImageSource="main_background_image2.png">
@@ -25,7 +26,7 @@
                              HorizontalOptions="Fill"
                              Padding="40,0"
                              Spacing="40">
-            <Label Text="Settings"
+            <Label Text="{x:Static strings:AppResources.Settings}"
                    Style="{StaticResource Headline}"
                    CharacterSpacing="1">
                 <Label.Shadow>
@@ -42,7 +43,7 @@
 
                 <Grid HorizontalOptions="Fill"
                       ColumnDefinitions="*,*">
-                    <Label Text="Vibrate"
+                    <Label Text="{x:Static strings:AppResources.Vibrate}"
                            HorizontalOptions="Start"
                            VerticalOptions="Center"
                            Style="{StaticResource NormalLabel}"/>
@@ -54,7 +55,7 @@
                 <Grid HorizontalOptions="Fill"
                       ColumnDefinitions="*,*"
                       IsVisible="{Binding IsPlayerReady}">
-                    <Label Text="Sound"
+                    <Label Text="{x:Static strings:AppResources.Sound}"
                            HorizontalOptions="Start"
                            VerticalOptions="Center"
                            Style="{StaticResource NormalLabel}"/>
@@ -63,7 +64,7 @@
                             IsToggled="{Binding Click}"/>
                 </Grid>
 
-                <Label Text="Dictionary"
+                <Label Text="{x:Static strings:AppResources.Dictionary}"
                                HorizontalOptions="Center"
                                VerticalOptions="Center"
                                Style="{StaticResource SubHeadline}"/>
@@ -71,7 +72,7 @@
                 <VerticalStackLayout Spacing="20">
                     <Grid HorizontalOptions="Fill"
                           ColumnDefinitions="*,*">
-                        <Label Text="English"
+                        <Label Text="{x:Static strings:AppResources.English}"
                                HorizontalOptions="Start"
                                VerticalOptions="Center"
                                Style="{StaticResource NormalLabel}"/>
@@ -87,7 +88,7 @@
 
                     <Grid HorizontalOptions="Fill"
                           ColumnDefinitions="*,*">
-                        <Label Text="Ukrainian"
+                        <Label Text="{x:Static strings:AppResources.Ukrainian}"
                                HorizontalOptions="Start"
                                VerticalOptions="Center"
                                Style="{StaticResource NormalLabel}"/>
@@ -106,7 +107,7 @@
             <VerticalStackLayout Spacing="20"
                                  HorizontalOptions="Center">
                 <Button Style="{StaticResource MenuButtonStyle}"
-                        Text="Main menu"
+                        Text="{x:Static strings:AppResources.MainMenu}"
                         Clicked="OnMainMenuClicked"/>
             </VerticalStackLayout>
 
@@ -121,15 +122,15 @@
                IsVisible="{Binding IsFree}">
             <VerticalStackLayout Spacing="20">
 
-                <Label Text="{Binding TotalWordsPro, StringFormat='Ready to level up your game? Unlock {0} more words in the premium version and broaden your guessing horizons!'}"
+                <Label Text="{Binding TotalWordsPro, StringFormat={x:Static strings:AppResources.PremiumUpgradeMessage}}"
                        Style="{StaticResource NormalLabel}"/>
 
                 <Button Style="{StaticResource MenuButtonStyle}"
-                        Text="Buy premium version"
+                        Text="{x:Static strings:AppResources.BuyPremiumVersion}"
                         BackgroundColor="{StaticResource Accent}"
                         Clicked="OnBuyProClicked"/>
 
-                <Label Text="Restore purchase"
+                <Label Text="{x:Static strings:AppResources.RestorePurchase}"
                        HorizontalOptions="Center"
                        TextDecorations="Underline"
                        Style="{StaticResource NormalLabel}">

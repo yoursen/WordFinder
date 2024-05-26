@@ -1,30 +1,31 @@
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:strings="clr-namespace:WordFinder.Resources.Strings"
     x:Class="WordFinder.Views.GameModePopup"
     Color="White">
 
     <VerticalStackLayout Spacing="20"
         Padding="20">
 
-        <Label Text="Game duration"
+        <Label Text="{x:Static strings:AppResources.GameDuration}"
             Style="{StaticResource SubHeadline}"/>
 
         <Button Style="{StaticResource MenuButtonStyle}"
             Margin="5,0"
             Clicked="OnFreeplayClicked"
-            Text="Freeplay mode" />
+            Text="{x:Static strings:AppResources.FreePlayMode}" />
         <Button Style="{StaticResource MenuButtonStyle}"
             Margin="5,0"
             Clicked="On10minClicked"
-            Text="10 minutes" />
+            Text="{x:Static strings:AppResources.TenMinutes}" />
         <Button Style="{StaticResource MenuButtonStyle}"
            Margin="5,0"
             Clicked="On5minClicked"
-            Text="5 minutes" />
+            Text="{x:Static strings:AppResources.FiveMinutes}" />
         <Button Style="{StaticResource MenuButtonStyle}"
             Margin="5,0"
-            Text="2 minutes"
+            Text="{x:Static strings:AppResources.TwoMinutes}"
             Clicked="On2minClicked"/>
 
     </VerticalStackLayout>

@@ -5,6 +5,7 @@
     x:Class="WordFinder.Views.GameBestScorePage"
     xmlns:vm="clr-namespace:WordFinder.ViewModels"
     x:DataType="vm:GameBestScoreViewModel"
+    xmlns:strings="clr-namespace:WordFinder.Resources.Strings"
     Shell.NavBarIsVisible="False"
     BackgroundImageSource="main_background_image2.png">
 
@@ -25,7 +26,7 @@
             HorizontalOptions="CenterAndExpand"
             Padding="40,0"
             Spacing="40">
-            <Label Text="Best score"
+            <Label Text="{x:Static strings:AppResources.BestScore}"
                 Style="{StaticResource Headline}"
                 CharacterSpacing="1">
                 <Label.Shadow>
@@ -40,7 +41,7 @@
                 ColumnDefinitions="*,auto"
                 RowDefinitions="*,10,*,10,*,10,*,10,*"
                 HorizontalOptions="Center">
-                <Label Text="2 minutes"
+                <Label Text="{x:Static strings:AppResources.TwoMinutes}"
                     HorizontalOptions="Start"
                     Style="{StaticResource NormalLabel}"/>
                 <Label Grid.Column="1"
@@ -50,7 +51,7 @@
                     Style="{StaticResource NormalLabel}"/>
 
                 <Label Grid.Row="2"
-                    Text="5 minutes"
+                    Text="{x:Static strings:AppResources.FiveMinutes}"
                     HorizontalOptions="Start"
                     Style="{StaticResource NormalLabel}"/>
                 <Label Grid.Row = "2"
@@ -62,7 +63,7 @@
 
 
                 <Label Grid.Row="4"
-                    Text="10 minutes"
+                    Text="{x:Static strings:AppResources.TenMinutes}"
                     HorizontalOptions="Start"
                     Style="{StaticResource NormalLabel}"/>
                 <Label Grid.Row = "4"
@@ -73,7 +74,7 @@
                     Style="{StaticResource NormalLabel}"/>
 
                 <Label Grid.Row="6"
-                    Text="Freeplay"
+                    Text="{x:Static strings:AppResources.Freeplay}"
                     HorizontalOptions="Start"
                     Style="{StaticResource NormalLabel}"/>
                 <Label Grid.Row = "6"
@@ -84,7 +85,7 @@
                     Style="{StaticResource NormalLabel}"/>
 
                 <Label Grid.Row="8"
-                    Text="Answered/Total"
+                    Text="{x:Static strings:AppResources.AnsweredTotal}"
                     HorizontalOptions="Start"
                     Style="{StaticResource NormalLabel}"/>
                 <HorizontalStackLayout Grid.Row="8"
@@ -105,7 +106,7 @@
             <VerticalStackLayout Spacing="20"
                 HorizontalOptions="CenterAndExpand">
                 <Button Style="{StaticResource MenuButtonStyle}"
-                    Text="Main menu"
+                    Text="{x:Static strings:AppResources.MainMenu}"
                     Clicked="OnMainMenuClicked"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
@@ -119,16 +120,16 @@
             IsVisible="{Binding IsFree}">
             <VerticalStackLayout Spacing="20">
 
-                <Label Text="{Binding TotalWordsPro, StringFormat='Ready to level up your game? Unlock {0} more words in the premium version and broaden your guessing horizons!'}"
+                <Label Text="{Binding TotalWordsPro, StringFormat={x:Static strings:AppResources.PremiumUpgradeMessage}}"
                     Style="{StaticResource NormalLabel}"
                     />
 
                 <Button Style="{StaticResource MenuButtonStyle}"
-                    Text="Buy premium version"
+                    Text="{x:Static strings:AppResources.BuyPremiumVersion}"
                     BackgroundColor="{StaticResource Accent}"
                     Clicked="OnBuyProClicked"/>
 
-                <Label Text="Restore purchase"
+                <Label Text="{x:Static strings:AppResources.RestorePurchase}"
                     HorizontalOptions="Center"
                     TextDecorations="Underline"
                     Style="{StaticResource NormalLabel}">

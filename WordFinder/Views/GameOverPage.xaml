@@ -4,6 +4,7 @@
     xmlns:local="clr-namespace:WordFinder.Views"
     x:Class="WordFinder.Views.GameOverPage"
     xmlns:vm="clr-namespace:WordFinder.ViewModels"
+    xmlns:strings="clr-namespace:WordFinder.Resources.Strings"
     x:DataType="vm:GameOverViewModel"
     Shell.NavBarIsVisible="False"
     BackgroundImageSource="main_background_image2.png">
@@ -25,7 +26,7 @@
             HorizontalOptions="Fill"
             Padding="40,0"
             Spacing="40">
-            <Label Text="Game Over"
+            <Label Text="{x:Static strings:AppResources.GameOver}"
                 Style="{StaticResource Headline}"
                 CharacterSpacing="1">
                 <Label.Shadow>
@@ -40,7 +41,7 @@
                 <Grid ColumnDefinitions="*,40,*"
                     RowDefinitions="*,10,*,10,*"
                     HorizontalOptions="CenterAndExpand">
-                    <Label Text="Score"
+                    <Label Text="{x:Static strings:AppResources.Score}"
                         HorizontalOptions="Start"
                         Style="{StaticResource NormalLabel}"/>
                     <Label Grid.Column="2"
@@ -49,7 +50,7 @@
                         Style="{StaticResource NormalLabel}"/>
 
                     <Label Grid.Row="2"
-                        Text="Best score"
+                        Text="{x:Static strings:AppResources.BestScoreGameOver}"
                         HorizontalOptions="Start"
                         Style="{StaticResource NormalLabel}"/>
                     <Label Grid.Row = "2"
@@ -59,12 +60,12 @@
                         Style="{StaticResource NormalLabel}"/>
 
                     <Label Grid.Row="4"
-                        Text="Game duration"
+                        Text="{x:Static strings:AppResources.GameDurationGameOver}"
                         HorizontalOptions="Start"
                         Style="{StaticResource NormalLabel}"/>
                     <Label Grid.Row = "24"
                         Grid.Column="2"
-                        Text="{Binding GameDuration, StringFormat='{0} mins'}"
+                        Text="{Binding GameDuration, StringFormat={x:Static strings:AppResources.GameDurationFormat}}"
                         HorizontalOptions="End"
                         Style="{StaticResource NormalLabel}">
                         <Label.Triggers>
@@ -72,7 +73,7 @@
                                 Binding="{Binding GameDuration}"
                                 Value="-1">
                                 <Setter Property="Text"
-                                    Value="Freeplay"/>
+                                    Value="{x:Static strings:AppResources.Freeplay}"/>
                             </DataTrigger>
                         </Label.Triggers>
                     </Label>
@@ -83,10 +84,10 @@
                 HorizontalOptions="Center">
                 <Button BackgroundColor="{DynamicResource Accent}"
                     Style="{StaticResource MenuButtonStyle}"
-                    Text="Try again"
+                    Text="{x:Static strings:AppResources.TryAgain}"
                     Clicked="OnTryAgainClicked"/>
                 <Button Style="{StaticResource MenuButtonStyle}"
-                    Text="Main menu"
+                    Text="{x:Static strings:AppResources.MainMenu}"
                     Clicked="OnMainMenuClicked"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
@@ -104,11 +105,11 @@
                     Style="{StaticResource NormalLabel}" />
 
                 <Button Style="{StaticResource MenuButtonStyle}"
-                    Text="Buy premium version"
+                    Text="{x:Static strings:AppResources.BuyPremiumVersion}"
                     BackgroundColor="{StaticResource Accent}"
                     Clicked="OnBuyProClicked"/>
 
-                <Label Text="Restore purchase"
+                <Label Text="{x:Static strings:AppResources.RestorePurchase}"
                     HorizontalOptions="Center"
                     TextDecorations="Underline"
                     Style="{StaticResource NormalLabel}">

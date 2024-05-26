@@ -3,6 +3,7 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Class="WordFinder.Views.NoWordsPopup"
     xmlns:vm="clr-namespace:WordFinder.ViewModels"
+    xmlns:strings="clr-namespace:WordFinder.Resources.Strings"
     x:DataType="vm:NoWordsPopupViewModel"
     Color="White">
 
@@ -10,7 +11,7 @@
         MaximumWidthRequest="800"
         Padding="20">
 
-        <Label Text="Congratulations!"
+        <Label Text="{x:Static strings:AppResources.Congratulations}"
             Style="{StaticResource SubHeadline}"/>
 
         <Label Text="{Binding Message}"

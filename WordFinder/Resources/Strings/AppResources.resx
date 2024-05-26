@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PlayGame" xml:space="preserve">
+    <value>Play game</value>
+  </data>
+  <data name="BestScore" xml:space="preserve">
+    <value>Best score</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Vibrate" xml:space="preserve">
+    <value>Vibrate</value>
+  </data>
+  <data name="Sound" xml:space="preserve">
+    <value>Sound</value>
+  </data>
+  <data name="Dictionary" xml:space="preserve">
+    <value>Dictionary</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Ukrainian" xml:space="preserve">
+    <value>Ukrainian</value>
+  </data>
+  <data name="MainMenu" xml:space="preserve">
+    <value>Main menu</value>
+  </data>
+  <data name="BuyPremiumVersion" xml:space="preserve">
+    <value>Buy premium version</value>
+  </data>
+  <data name="RestorePurchase" xml:space="preserve">
+    <value>Restore purchase</value>
+  </data>
+  <data name="PremiumUpgradeMessage" xml:space="preserve">
+        <value>Ready to level up your game? Unlock {0} more words in the premium version and broaden your guessing horizons!</value>
+  </data>
+  <data name="GameDuration" xml:space="preserve">
+    <value>Game duration</value>
+  </data>
+  <data name="TenMinutes" xml:space="preserve">
+    <value>10 minutes</value>
+  </data>
+  <data name="FiveMinutes" xml:space="preserve">
+    <value>5 minutes</value>
+  </data>
+  <data name="TwoMinutes" xml:space="preserve">
+    <value>2 minutes</value>
+  </data>
+  <data name="FreePlayMode" xml:space="preserve">
+    <value>Freeplay mode</value>
+  </data>
+  <data name="Answers" xml:space="preserve">
+    <value>Answers</value>
+  </data>
+  <data name="TimeLeft" xml:space="preserve">
+    <value>Time left</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Hint" xml:space="preserve">
+    <value>Hint ({0})</value>
+  </data>
+  <data name="ExitGame" xml:space="preserve">
+    <value>Exit game?</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="GameOver" xml:space="preserve">
+    <value>Game Over</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="BestScoreGameOver" xml:space="preserve">
+    <value>Best score</value>
+  </data>
+  <data name="Freeplay" xml:space="preserve">
+    <value>Freeplay</value>
+  </data>
+  <data name="PremiumUpgradeMessageGameOver" xml:space="preserve">
+    <value>{0}{1} not guessed words left in the free version. Unlock an additional {2} words in the premium version and keep the excitement going!</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Try again!</value>
+  </data>
+  <data name="GameDurationGameOver" xml:space="preserve">
+    <value>Game duration</value>
+  </data>
+  <data name="GameDurationFormat" xml:space="preserve">
+    <value>{0} mins</value>
+  </data>
+  <data name="Only" xml:space="preserve">
+    <value>Only</value>
+  </data>
+  <data name="BestScoreTitle" xml:space="preserve">
+    <value>Best score</value>
+  </data>
+  <data name="AnsweredTotal" xml:space="preserve">
+    <value>Answered/Total</value>
+  </data>
+  <data name="Play" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="HowToPlay" xml:space="preserve">
+    <value>How to play?</value>
+  </data>
+  <data name="HowToPlay1" xml:space="preserve">
+    <value>Tap the letters to form the word that matches the description.</value>
+  </data>
+  <data name="HowToPlay2" xml:space="preserve">
+    <value>If you're stuck, tap the Hint button. You can use up to 3 hints per word and 20 hints per day in the free version.</value>
+  </data>
+  <data name="HowToPlay3" xml:space="preserve">
+    <value>Tap the Next button to skip the current word and move to the next one.</value>
+  </data>
+  <data name="SkipTheWord" xml:space="preserve">
+    <value>Skip the Word</value>
+  </data>
+  <data name="GetAHint" xml:space="preserve">
+    <value>Get a Hint</value>
+  </data>
+  <data name="Congratulations" xml:space="preserve">
+    <value>Congratulations!</value>
+  </data>
+  <data name="NoWordsFree" xml:space="preserve">
+    <value>You've guessed all the words in the free version of the application. The word list will now be reset. Consider upgrading to the premium version to unlock more words and enjoy an enhanced experience.</value>
+  </data>
+  <data name="NoWordsPremium" xml:space="preserve">
+    <value>You've successfully guessed all the words in the premium version of the application. We appreciate your choice in selecting this game. Please note that the word list will now be reset to keep the challenge fresh for you. Thank you for being part of our gaming community!</value>
+  </data>
+</root>

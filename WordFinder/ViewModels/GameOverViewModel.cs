@@ -3,6 +3,7 @@ using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using WordFinder.Models;
+using WordFinder.Resources.Strings;
 using WordFinder.Services;
 
 namespace WordFinder.ViewModels;
@@ -37,8 +38,15 @@ public partial class GameOverViewModel : ObservableObject
     [ObservableProperty] private int _totalWordsPro = 583;
 
     public string BuyProVersionText
-        => $"{(TotalWordsNotAnswered <= 20 ? "Only " : string.Empty)}{TotalWordsNotAnswered} not guessed words left in the free version. Unlock an additional {TotalWordsPro} words in the premium version and keep the excitement going!'";
-
+    {
+        get
+        {
+            return  string.Format(AppResources.PremiumUpgradeMessageGameOver,
+                TotalWordsNotAnswered <= 20 ? AppResources.Only + " " : string.Empty,
+                TotalWordsNotAnswered,
+                TotalWordsPro);
+        }
+    }
     public bool IsFree => _license.IsFree;
     public async Task Refresh()
     {

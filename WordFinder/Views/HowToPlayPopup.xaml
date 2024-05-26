@@ -3,6 +3,7 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Class="WordFinder.Views.HowToPlayPopup"
     xmlns:vm="clr-namespace:WordFinder.ViewModels"
+    xmlns:strings="clr-namespace:WordFinder.Resources.Strings"
     x:DataType="vm:HowToPlayPopupViewModel"
     CanBeDismissedByTappingOutsideOfPopup="false"
     Color="White">
@@ -15,9 +16,9 @@
 
             <VerticalStackLayout Spacing="5"
                 IsVisible="false">
-                <Label Text="How to play?"
+                <Label Text="{x:Static strings:AppResources.HowToPlay}"
                     Style="{StaticResource SubHeadline}"/>
-                <Label Text="Tap the letters to form the word that matches the description."
+                <Label Text="{x:Static strings:AppResources.HowToPlay1}"
                     Style="{StaticResource NormalLabel}" />
 
                 <Image Source="tap.png"
@@ -37,9 +38,9 @@
 
             <VerticalStackLayout Spacing="5"
                 IsVisible="false">
-                <Label Text="Get a Hint"
+                <Label Text="{x:Static strings:AppResources.GetAHint}"
                     Style="{StaticResource SubHeadline}"/>
-                <Label Text="If you're stuck, tap the Hint button. You can use up to 3 hints per word and 20 hints per day in the free version."
+                <Label Text="{x:Static strings:AppResources.HowToPlay2}"
                     Style="{StaticResource NormalLabel}" />
 
                 <Image Source="hint.png"
@@ -59,9 +60,9 @@
 
             <VerticalStackLayout Spacing="5"
                 IsVisible="false">
-                <Label Text="Skip the Word"
+                <Label Text="{x:Static strings:AppResources.SkipTheWord}"
                     Style="{StaticResource SubHeadline}"/>
-                <Label Text="Tap the Next button to skip the current word and move to the next one."
+                <Label Text="{x:Static strings:AppResources.HowToPlay3}"
                     Style="{StaticResource NormalLabel}" />
 
                 <Image Source="next.png"
@@ -86,7 +87,7 @@
             Margin="20">
             <Button Style="{StaticResource MenuButtonStyle}"
                 BackgroundColor="{StaticResource Accent}"
-                Text="Next"
+                Text="{x:Static strings:AppResources.Next}"
                 Clicked="NextClicked"
                 IsVisible="true">
                 <Button.Triggers>
@@ -101,7 +102,7 @@
 
             <Button Style="{StaticResource MenuButtonStyle}"
                 BackgroundColor="{StaticResource Accent}"
-                Text="Play"
+                Text="{x:Static strings:AppResources.Play}"
                 Clicked="CloseClicked"
                 IsVisible="false">
                 <Button.Triggers>

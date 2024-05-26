@@ -6,6 +6,7 @@
     x:Class="WordFinder.Views.GamePage"
     xmlns:vm="clr-namespace:WordFinder.ViewModels"
     xmlns:model="clr-namespace:WordFinder.Models"
+    xmlns:strings="clr-namespace:WordFinder.Resources.Strings"
     x:DataType="vm:GamePageViewModel"
     Shell.NavBarIsVisible="False"
     BackgroundColor="{DynamicResource PrimaryBackground}"
@@ -67,7 +68,7 @@
 
             <Grid ColumnDefinitions="*,*">
                 <VerticalStackLayout Margin="0,10,0,0">
-                    <Label Text="Answers"
+                    <Label Text="{x:Static strings:AppResources.Answers}"
                         TextColor="{DynamicResource Primary}"
                         FontSize="18"
                         FontFamily="MainFontMedium"
@@ -83,7 +84,7 @@
                 <!-- Time Left group -->
                 <VerticalStackLayout Grid.Column="1"
                     Margin="0,10,0,0">
-                    <Label Text="Time left"
+                    <Label Text="{x:Static strings:AppResources.TimeLeft}"
                         TextColor="{DynamicResource Primary}"
                         FontSize="18"
                         FontFamily="MainFontMedium"
@@ -191,12 +192,12 @@
                     <Button Margin="0,10,0,0"
                         WidthRequest="125"
                         BackgroundColor="{DynamicResource Primary}"
-                        Text="{Binding HintsLeft, StringFormat='Hint ({0})'}"
+                        Text="{Binding HintsLeft, StringFormat={x:Static strings:AppResources.Hint}}"
                         Clicked="OnHintClicked"/>
                     <Button Margin="0,10,0,0"
                         WidthRequest="125"
                         BackgroundColor="{DynamicResource Accent}"
-                        Text="Next"
+                        Text="{x:Static strings:AppResources.Next}"
                         Clicked="OnNextClicked"/>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
