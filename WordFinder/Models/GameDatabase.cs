@@ -1,4 +1,5 @@
 using SQLite;
+using WordFinder.Models.DbUpdaters;
 using WordFinder.Services;
 
 namespace WordFinder.Models;
@@ -38,9 +39,12 @@ public class GameDatabase
         }
 
         Language = _gameSettings.Language;
-        await DeployDB();
+        await ResourceManager.DeployDB(Constants.DatabaseFilename);
 
         _database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
+
+        await new DbUpdater(_database).Update();
+
         await CreateScoreDB("GameScore");
         await CreateScoreDB("GameScore_uk_UA");
 
@@ -58,19 +62,6 @@ public class GameDatabase
     private async Task InitCategories()
     {
         Categories = await _database.QueryAsync<GameWordCategory>($"SELECT * FROM GameWordCategories{TableSuffix}");
-    }
-
-    public async Task DeployDB()
-    {
-        string targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, Constants.DatabaseFilename);
-        if (File.Exists(targetFile))
-        {
-            return;
-        }
-
-        using Stream inputStream = await FileSystem.Current.OpenAppPackageFileAsync(Constants.DatabaseFilename);
-        using FileStream outputStream = File.Create(targetFile);
-        await inputStream.CopyToAsync(outputStream);
     }
 
     public async Task<GameWord> GameRandomGameWord()
