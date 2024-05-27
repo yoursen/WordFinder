@@ -225,7 +225,7 @@ public class WordFitter
             return true;
         }
 
-        var direction = letterIndex == 1 ? Direction.Right : GetRandomDirection(allowedDirections);
+        var direction = letterIndex == 1 ? Direction.Bottom : GetRandomDirection(allowedDirections);
         switch (direction)
         {
             case Direction.Left:

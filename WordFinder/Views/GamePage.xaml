@@ -1,46 +1,47 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    xmlns:local="clr-namespace:WordFinder.Views"
-    x:Class="WordFinder.Views.GamePage"
-    xmlns:vm="clr-namespace:WordFinder.ViewModels"
-    xmlns:model="clr-namespace:WordFinder.Models"
-    xmlns:strings="clr-namespace:WordFinder.Resources.Strings"
-    x:DataType="vm:GamePageViewModel"
-    Shell.NavBarIsVisible="False"
-    BackgroundColor="{DynamicResource PrimaryBackground}"
-    BackgroundImageSource="game_background_image2.png">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:local="clr-namespace:WordFinder.Views"
+             x:Class="WordFinder.Views.GamePage"
+             xmlns:vm="clr-namespace:WordFinder.ViewModels"
+             xmlns:model="clr-namespace:WordFinder.Models"
+             xmlns:strings="clr-namespace:WordFinder.Resources.Strings"
+             x:DataType="vm:GamePageViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{DynamicResource PrimaryBackground}"
+             BackgroundImageSource="game_background_image2.png">
     <ContentPage.Resources>
-        <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter"/>
 
         <ControlTemplate x:Key="CharButtonControlTemplate"
-            x:DataType="local:CharButtonView">
+                         x:DataType="local:CharButtonView">
             <Button BindingContext="{Binding Source={RelativeSource TemplatedParent}}"
-                BorderColor="Transparent"
-                CornerRadius="4"
-                WidthRequest="48"
-                HeightRequest="48"
-                Margin="{OnPlatform 4, Android=3}"
-                FontFamily="MainFontMedium"
-                FontSize="22"
-                TextColor="{DynamicResource White}"
-                BackgroundColor="{DynamicResource Primary}"
-                Text="{Binding Title}"
-                Clicked="OnLetterClicked">
+                    BorderColor="Transparent"
+                    CornerRadius="4"
+                    WidthRequest="48"
+                    HeightRequest="48"
+                    FontAutoScalingEnabled="False"
+                    Margin="4"
+                    FontFamily="MainFontMedium"
+                    FontSize="22"
+                    TextColor="{DynamicResource White}"
+                    BackgroundColor="{DynamicResource Primary}"
+                    Text="{Binding Title}"
+                    Clicked="OnLetterClicked">
 
                 <Button.Triggers>
                     <DataTrigger TargetType="Button"
-                        Binding="{Binding IsChecked}"
-                        Value="True">
+                                 Binding="{Binding IsChecked}"
+                                 Value="True">
                         <Setter Property="BackgroundColor"
-                            Value="{DynamicResource Accent}"/>
+                                Value="{DynamicResource Accent}"/>
                     </DataTrigger>
                     <DataTrigger TargetType="Button"
-                        Binding="{Binding IsFixed}"
-                        Value="True">
+                                 Binding="{Binding IsFixed}"
+                                 Value="True">
                         <Setter Property="BackgroundColor"
-                            Value="{DynamicResource Accent2}"/>
+                                Value="{DynamicResource Accent2}"/>
                     </DataTrigger>
                 </Button.Triggers>
             </Button>
@@ -52,55 +53,55 @@
 
         <Grid.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Right"
-                Swiped="OnSwipedRight"/>
+                                    Swiped="OnSwipedRight"/>
             <SwipeGestureRecognizer Direction="Left"
-                Swiped="OnSwipedLeft"/>
+                                    Swiped="OnSwipedLeft"/>
         </Grid.GestureRecognizers>
 
         <Image Source="game_background_image2.png"
-            Aspect="AspectFill"
-            VerticalOptions="Fill"
-            HorizontalOptions="Fill"
-            Margin="-10,-50"/>
+               Aspect="AspectFill"
+               VerticalOptions="Fill"
+               HorizontalOptions="Fill"
+               Margin="-10,-50"/>
 
         <FlexLayout Direction="Column"
-            JustifyContent="SpaceAround">
+                    JustifyContent="SpaceAround">
 
             <Grid ColumnDefinitions="*,*">
                 <VerticalStackLayout Margin="0,10,0,0">
                     <Label Text="{x:Static strings:AppResources.Answers}"
-                        TextColor="{DynamicResource Primary}"
-                        FontSize="18"
-                        FontFamily="MainFontMedium"
-                        HorizontalOptions="Center"/>
+                           TextColor="{DynamicResource Primary}"
+                           FontSize="18"
+                           FontFamily="MainFontMedium"
+                           HorizontalOptions="Center"/>
                     <Label Text="{Binding Score}"
-                        TextColor="{DynamicResource Primary}"
-                        x:Name="ScoreLabel"
-                        FontSize="20"
-                        FontFamily="MainFontMedium"
-                        HorizontalOptions="Center"/>
+                           TextColor="{DynamicResource Primary}"
+                           x:Name="ScoreLabel"
+                           FontSize="20"
+                           FontFamily="MainFontMedium"
+                           HorizontalOptions="Center"/>
                 </VerticalStackLayout>
 
                 <!-- Time Left group -->
                 <VerticalStackLayout Grid.Column="1"
-                    Margin="0,10,0,0">
+                                     Margin="0,10,0,0">
                     <Label Text="{x:Static strings:AppResources.TimeLeft}"
-                        TextColor="{DynamicResource Primary}"
-                        FontSize="18"
-                        FontFamily="MainFontMedium"
-                        HorizontalOptions="Center"/>
+                           TextColor="{DynamicResource Primary}"
+                           FontSize="18"
+                           FontFamily="MainFontMedium"
+                           HorizontalOptions="Center"/>
                     <Label Text="{Binding TimeLeft, StringFormat=\{0:mm\\:ss\}}"
-                        TextColor="{DynamicResource Primary}"
-                        x:Name="TimeLeftLabel"
-                        FontSize="20"
-                        FontFamily="MainFontMedium"
-                        HorizontalOptions="Center">
+                           TextColor="{DynamicResource Primary}"
+                           x:Name="TimeLeftLabel"
+                           FontSize="20"
+                           FontFamily="MainFontMedium"
+                           HorizontalOptions="Center">
                         <Label.Triggers>
                             <DataTrigger TargetType="Label"
-                                Binding="{Binding IsFreeplayMode}"
-                                Value="True">
+                                         Binding="{Binding IsFreeplayMode}"
+                                         Value="True">
                                 <Setter Property="Text"
-                                    Value="--:--"/>
+                                        Value="--:--"/>
                             </DataTrigger>
                         </Label.Triggers>
                     </Label>
@@ -109,111 +110,119 @@
 
             <VerticalStackLayout>
                 <Label Text="{Binding GuessWord.Category}"
-                    TextColor="{DynamicResource Primary}"
-                    FontSize="18"
-                    FontFamily="MainFont"
-                    HorizontalOptions="Center"/>
+                       TextColor="{DynamicResource Primary}"
+                       FontSize="18"
+                       FontFamily="MainFont"
+                       HorizontalOptions="Center"/>
 
                 <Label Text="{Binding GuessWord.Description}"
-                    HeightRequest="75"
-                    Margin="15,0,15,0"
-                    FontSize="18"
-                    FontFamily="MainFont"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Start"
-                    HorizontalTextAlignment="Center"
-                    VerticalTextAlignment="Center"/>
+                       HeightRequest="75"
+                       Margin="15,0,15,0"
+                       FontSize="18"
+                       FontFamily="MainFont"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
             </VerticalStackLayout>
 
             <!-- bottom group panel -->
-            <VerticalStackLayout Margin="0,0,0,25">
+            <VerticalStackLayout Margin="0,0,0,25"
+                                 HorizontalOptions="Center">
                 <!-- user word and matrix -->
-                <VerticalStackLayout>
+                <VerticalStackLayout HorizontalOptions="Center">
 
                     <!-- user word and buttons -->
                     <Grid ColumnDefinitions="40,auto,40"
-                        HorizontalOptions="Center">
+                          HorizontalOptions="Center">
                         <ImageButton Clicked="OnClearClicked"
-                            WidthRequest="40"
-                            HeightRequest="40"
-                            Grid.Column="0">
+                                     WidthRequest="40"
+                                     HeightRequest="40"
+                                     Grid.Column="0">
                             <ImageButton.Source>
                                 <!-- &#xf0c4; cut -->
                                 <FontImageSource Glyph="&#xf12d;"
-                                    Color="{DynamicResource Primary}"
-                                    FontFamily="FontAwesome" />
+                                                 Color="{DynamicResource Primary}"
+                                                 FontFamily="FontAwesome"/>
                             </ImageButton.Source>
                         </ImageButton>
 
                         <Label x:Name="UserTextLabel"
-                            Text="{Binding UserWord}"
-                            Grid.Column="1"
-                            CharacterSpacing="1"
-                            FontSize="22"
-                            FontFamily="MainFont"
-                            WidthRequest="280"
-                            HorizontalTextAlignment="Center"
-                            VerticalTextAlignment="Center">
+                               Text="{Binding UserWord}"
+                               Grid.Column="1"
+                               CharacterSpacing="1"
+                               FontSize="22"
+                               FontFamily="MainFont"
+                               WidthRequest="280"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center">
                         </Label>
 
                         <ImageButton Clicked="OnClearLastLetter"
-                            WidthRequest="40"
-                            HeightRequest="40"
-                            Grid.Column="2">
+                                     WidthRequest="40"
+                                     HeightRequest="40"
+                                     Grid.Column="2">
                             <ImageButton.Source>
                                 <FontImageSource Glyph="&#xf104;"
-                                    Color="{DynamicResource Primary}"
-                                    FontFamily="FontAwesome" />
+                                                 Color="{DynamicResource Primary}"
+                                                 FontFamily="FontAwesome"/>
                             </ImageButton.Source>
                         </ImageButton>
                     </Grid>
 
-                    <toolkit:UniformItemsLayout MaxRows="5"
-                        MaxColumns="5"
-                        Margin="0,10,0,0"
-                        MaximumWidthRequest="300"
-                        HorizontalOptions="Center"
-                        BindableLayout.ItemsSource="{Binding Letters}">
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate x:DataType="model:GameLetter">
-                                <local:CharButtonView ControlTemplate="{StaticResource CharButtonControlTemplate}"
-                                    Title="{Binding Letter}"
-                                    IsChecked="{Binding IsChecked, Mode=TwoWay}"
-                                    IsFixed="{Binding IsFixed, Mode=OneWay}"/>
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                    </toolkit:UniformItemsLayout>
+                    <Grid HorizontalOptions="Center"
+                            VerticalOptions="Center">
+                        <CollectionView ItemsSource="{Binding Letters}"
+                                        Margin="0,10,0,0"
+                                        HorizontalOptions="Center">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Horizontal"
+                                                 Span="5"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="model:GameLetter">
+                                    <local:CharButtonView ControlTemplate="{StaticResource CharButtonControlTemplate}"
+                                                          Title="{Binding Letter}"
+                                                          IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                                          IsFixed="{Binding IsFixed, Mode=OneWay}"
+                                                          HorizontalOptions="Center"
+                                                          VerticalOptions="Center"/>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+
                 </VerticalStackLayout>
 
                 <!-- bottom nagivation buttons -->
                 <HorizontalStackLayout Spacing="20"
-                    Margin="0,20,0,0"
-                    HorizontalOptions="Center">
+                                       Margin="0,20,0,0"
+                                       HorizontalOptions="Center">
                     <Button Margin="0,10,0,0"
-                        WidthRequest="125"
-                        BackgroundColor="{DynamicResource Primary}"
-                        Text="{Binding HintsLeft, StringFormat={x:Static strings:AppResources.Hint}}"
-                        Clicked="OnHintClicked"/>
+                            WidthRequest="125"
+                            BackgroundColor="{DynamicResource Primary}"
+                            Text="{Binding HintsLeft, StringFormat={x:Static strings:AppResources.Hint}}"
+                            Clicked="OnHintClicked"/>
                     <Button Margin="0,10,0,0"
-                        WidthRequest="125"
-                        BackgroundColor="{DynamicResource Accent}"
-                        Text="{x:Static strings:AppResources.Next}"
-                        Clicked="OnNextClicked"/>
+                            WidthRequest="125"
+                            BackgroundColor="{DynamicResource Accent}"
+                            Text="{x:Static strings:AppResources.Next}"
+                            Clicked="OnNextClicked"/>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </FlexLayout>
 
         <!-- navigate back button -->
         <ImageButton Clicked="OnBackClicked"
-            Margin="10,20,0,0"
-            WidthRequest="40"
-            HeightRequest="40"
-            VerticalOptions="Start"
-            HorizontalOptions="Start">
+                     Margin="10,20,0,0"
+                     WidthRequest="40"
+                     HeightRequest="40"
+                     VerticalOptions="Start"
+                     HorizontalOptions="Start">
             <ImageButton.Source>
                 <FontImageSource Glyph="&#xf104;"
-                    Color="{DynamicResource Primary}"
-                    FontFamily="FontAwesome" />
+                                 Color="{DynamicResource Primary}"
+                                 FontFamily="FontAwesome"/>
             </ImageButton.Source>
         </ImageButton>
     </Grid>

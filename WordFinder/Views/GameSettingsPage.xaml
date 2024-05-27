@@ -42,7 +42,7 @@
                                  HorizontalOptions="Center">
 
                 <Grid HorizontalOptions="Fill"
-                      ColumnDefinitions="*,*">
+                      ColumnDefinitions="auto,*">
                     <Label Text="{x:Static strings:AppResources.Vibrate}"
                            HorizontalOptions="Start"
                            VerticalOptions="Center"
@@ -53,7 +53,7 @@
                 </Grid>
 
                 <Grid HorizontalOptions="Fill"
-                      ColumnDefinitions="*,*"
+                      ColumnDefinitions="auto,*"
                       IsVisible="{Binding IsPlayerReady}">
                     <Label Text="{x:Static strings:AppResources.Sound}"
                            HorizontalOptions="Start"
@@ -71,7 +71,7 @@
 
                 <VerticalStackLayout Spacing="20">
                     <Grid HorizontalOptions="Fill"
-                          ColumnDefinitions="*,*">
+                          ColumnDefinitions="auto,*">
                         <Label Text="{x:Static strings:AppResources.English}"
                                HorizontalOptions="Start"
                                VerticalOptions="Center"
@@ -87,7 +87,7 @@
                     </Grid>
 
                     <Grid HorizontalOptions="Fill"
-                          ColumnDefinitions="*,*">
+                          ColumnDefinitions="auto,*">
                         <Label Text="{x:Static strings:AppResources.Ukrainian}"
                                HorizontalOptions="Start"
                                VerticalOptions="Center"
