@@ -2,13 +2,13 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="1024"
-   height="1024"
-   viewBox="0 0 270.93333 270.93333"
+   width="512"
+   height="512"
+   viewBox="0 0 135.46666 135.46667"
    version="1.1"
    id="svg1"
+   sodipodi:docname="appiconfg.svg"
    inkscape:version="1.3.2 (091e20e, 2023-11-25)"
-   sodipodi:docname="appicon.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -23,36 +23,227 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
-     showguides="true"
-     inkscape:zoom="0.060150654"
-     inkscape:cx="-3017.4236"
-     inkscape:cy="-989.18294"
+     inkscape:zoom="0.67914707"
+     inkscape:cx="221.60148"
+     inkscape:cy="293.75081"
      inkscape:window-width="1472"
      inkscape:window-height="822"
      inkscape:window-x="0"
      inkscape:window-y="37"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1">
-    <sodipodi:guide
-       position="136.35761,303.34119"
-       orientation="1,0"
-       id="guide4"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="311.23778,141.30188"
-       orientation="0,-1"
-       id="guide5"
-       inkscape:locked="false" />
-  </sodipodi:namedview>
+     inkscape:current-layer="layer1" />
   <defs
      id="defs1" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <path
-       id="text3"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:192.031px;font-family:Roboto;-inkscape-font-specification:'Roboto, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke-width:1.00016"
-       d="M 175.2787 66.521003 L 175.2787 66.550459 L 175.20894 66.550459 L 154.20557 169.31679 L 128.42007 66.550459 L 108.54169 66.550459 L 82.475068 169.12921 L 61.284114 66.550459 L 37.749117 66.550459 L 69.25417 203.07236 L 92.039342 203.07236 L 118.57467 103.39989 L 144.54776 203.07236 L 167.23889 203.07236 L 181.18635 142.63212 L 219.75351 142.63212 L 219.75351 118.81962 L 186.68163 118.81962 L 193.25538 90.333503 L 236.31839 90.333503 L 236.31839 66.521003 L 175.2787 66.521003 z " />
+    <g
+       id="g23"
+       transform="matrix(1.4814815,0,0,1.4814815,-37.213776,-35.868849)">
+      <rect
+         style="fill:#ed8952;fill-opacity:1;stroke-width:7.85734"
+         id="rect1-0-7"
+         width="21.166666"
+         height="21.166666"
+         x="35.120548"
+         y="34.212723"
+         ry="4.1181083" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;fill-opacity:1;stroke-width:10"
+         x="40.873859"
+         y="49.012848"
+         id="text1-4-0"><tspan
+           sodipodi:role="line"
+           id="tspan1-3-9"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;stroke-width:10"
+           x="40.873859"
+           y="49.012848">Q</tspan></text>
+    </g>
+    <g
+       id="g30"
+       transform="matrix(1.4814815,0,0,1.4814815,-37.213776,-41.748476)">
+      <rect
+         style="fill:#5c97ae;fill-opacity:1;stroke-width:7.85734"
+         id="rect1-0-7-1"
+         width="21.166666"
+         height="21.166666"
+         x="35.120548"
+         y="63.316887"
+         ry="4.1181083" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;fill-opacity:1;stroke-width:10"
+         x="41.445747"
+         y="78.916275"
+         id="text1-4-7"><tspan
+           sodipodi:role="line"
+           id="tspan1-3-2"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;stroke-width:10"
+           x="41.445747"
+           y="78.916275">S</tspan></text>
+    </g>
+    <g
+       id="g29"
+       transform="matrix(1.4814815,0,0,1.4814815,-37.121498,-41.748476)">
+      <rect
+         style="fill:#ed8952;fill-opacity:1;stroke-width:7.85734"
+         id="rect1-0-6-0-7"
+         width="21.166666"
+         height="21.166666"
+         x="60.193676"
+         y="63.316887"
+         ry="4.1181083" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;fill-opacity:1;stroke-width:10"
+         x="66.477531"
+         y="78.916275"
+         id="text1-4-6"><tspan
+           sodipodi:role="line"
+           id="tspan1-3-5"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;stroke-width:10"
+           x="66.477531"
+           y="78.916275">E</tspan></text>
+    </g>
+    <g
+       id="g24"
+       transform="matrix(1.4814815,0,0,1.4814815,-37.121498,-35.868849)">
+      <rect
+         style="fill:#ed8952;fill-opacity:1;stroke-width:7.85734"
+         id="rect1-0-6-0"
+         width="21.166666"
+         height="21.166666"
+         x="60.193676"
+         y="34.212723"
+         ry="4.1181083" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;fill-opacity:1;stroke-width:10"
+         x="66.167473"
+         y="49.74321"
+         id="text1-4-8"><tspan
+           sodipodi:role="line"
+           id="tspan1-3-55"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;stroke-width:10"
+           x="66.167473"
+           y="49.74321">U</tspan></text>
+    </g>
+    <g
+       id="g28"
+       transform="matrix(1.4814815,0,0,1.4814815,-38.255556,-41.748476)">
+      <rect
+         style="fill:#5c97ae;fill-opacity:1;stroke-width:7.85734"
+         id="rect1-0-6-0-7-8"
+         width="21.166666"
+         height="21.166666"
+         x="86.094582"
+         y="63.316887"
+         ry="4.1181083" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;fill-opacity:1;stroke-width:10"
+         x="91.813446"
+         y="78.916275"
+         id="text1-4-6-6"><tspan
+           sodipodi:role="line"
+           id="tspan1-3-5-7"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;stroke-width:10"
+           x="91.813446"
+           y="78.916275">O</tspan></text>
+    </g>
+    <g
+       id="g25"
+       transform="matrix(1.4814815,0,0,1.4814815,-38.255556,-35.868849)">
+      <rect
+         style="fill:#5c97ae;fill-opacity:1;stroke-width:7.85734"
+         id="rect1-0-6-0-76"
+         width="21.166666"
+         height="21.166666"
+         x="86.094582"
+         y="34.212723"
+         ry="4.1181083" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;fill-opacity:1;stroke-width:10"
+         x="91.989143"
+         y="49.812111"
+         id="text1-4-8-1"><tspan
+           sodipodi:role="line"
+           id="tspan1-3-55-8"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;stroke-width:10"
+           x="91.989143"
+           y="49.812111">C</tspan></text>
+    </g>
+    <g
+       id="g33"
+       transform="matrix(1.4814815,0,0,1.4814815,-37.213776,-43.025284)">
+      <rect
+         style="fill:#5c97ae;fill-opacity:1;stroke-width:7.85734"
+         id="rect1-0-7-1-2"
+         width="21.166666"
+         height="21.166666"
+         x="35.120548"
+         y="89.314148"
+         ry="4.1181083" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;fill-opacity:1;stroke-width:10"
+         x="41.404404"
+         y="104.91354"
+         id="text1-4-7-7"><tspan
+           sodipodi:role="line"
+           id="tspan1-3-2-1"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;stroke-width:10"
+           x="41.404404"
+           y="104.91354">E</tspan></text>
+    </g>
+    <g
+       id="g34"
+       transform="matrix(1.4814815,0,0,1.4814815,-37.121498,-43.025284)">
+      <rect
+         style="fill:#ed8952;fill-opacity:1;stroke-width:7.85734"
+         id="rect1-0-6-0-7-3"
+         width="21.166666"
+         height="21.166666"
+         x="60.193676"
+         y="89.314148"
+         ry="4.1181083" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;fill-opacity:1;stroke-width:10"
+         x="66.518875"
+         y="104.91354"
+         id="text1-4-6-8"><tspan
+           sodipodi:role="line"
+           id="tspan1-3-5-9"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;stroke-width:10"
+           x="66.518875"
+           y="104.91354">S</tspan></text>
+    </g>
+    <g
+       id="g35"
+       transform="matrix(1.4814815,0,0,1.4814815,-38.255556,-43.025284)">
+      <rect
+         style="fill:#ed8952;fill-opacity:1;stroke-width:7.85734"
+         id="rect1-0-6-0-7-8-3"
+         width="21.166666"
+         height="21.166666"
+         x="86.094582"
+         y="89.314148"
+         ry="4.1181083" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;fill-opacity:1;stroke-width:10"
+         x="92.388771"
+         y="104.91354"
+         id="text1-4-6-6-7"><tspan
+           sodipodi:role="line"
+           id="tspan1-3-5-7-4"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Roboto;-inkscape-font-specification:'Roboto Medium';fill:#f9f9f9;stroke-width:10"
+           x="92.388771"
+           y="104.91354">T</tspan></text>
+    </g>
   </g>
 </svg>
