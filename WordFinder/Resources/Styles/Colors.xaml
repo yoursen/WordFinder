@@ -12,6 +12,7 @@
 
     <Color x:Key="Accent">#f1a176</Color>    
     <Color x:Key="Accent2">#ed8952</Color>    
+    <Color x:Key="Accent3">#e86924</Color>    
     <Color x:Key="Text">#385e6e</Color>
 
     <Color x:Key="White">White</Color>

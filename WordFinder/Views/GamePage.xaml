@@ -105,6 +105,13 @@
                             </DataTrigger>
                         </Label.Triggers>
                     </Label>
+                    <Label Text="{Binding HintPenaltyTimeSpan.Seconds, StringFormat='-{0} sec'}"
+                           TextColor="{DynamicResource Accent3}"
+                           FontSize="20"
+                           FontFamily="MainFontMedium"
+                           HorizontalOptions="Center"
+                           Opacity="0"
+                           x:Name="PenaltyLabel"/>
                 </VerticalStackLayout>
             </Grid>
 
@@ -171,7 +178,7 @@
                     </Grid>
 
                     <Grid HorizontalOptions="Center"
-                            VerticalOptions="Center">
+                          VerticalOptions="Center">
                         <CollectionView ItemsSource="{Binding Letters}"
                                         Margin="0,10,0,0"
                                         HorizontalOptions="Center"

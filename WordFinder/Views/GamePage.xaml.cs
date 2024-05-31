@@ -64,10 +64,15 @@ public partial class GamePage : ContentPage, INavigationPage
         await Task.CompletedTask;
     }
 
-    private Task OnPenaltyApplied(object args)
+    private async Task OnPenaltyApplied(object args)
     {
-        TimeLeftLabel.AnimateShake(5);
-        return Task.CompletedTask;
+        try
+        {
+            await PenaltyLabel.FadeTo(1, 250, Easing.SinOut);
+            await Task.Delay(1000);
+            await PenaltyLabel.FadeTo(0, 250, Easing.SinOut);
+        }
+        catch { }
     }
 
     private bool _isExecuting = false;
