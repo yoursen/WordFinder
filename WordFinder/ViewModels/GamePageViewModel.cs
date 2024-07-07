@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.Messaging;
@@ -21,7 +22,7 @@ public class GamePageViewModel : BindableObject, IRecipient<AppSuspendedMessage>
         _gameSettings = gameSettings;
     }
 
-    public GameLetter[] Letters => _gameModel.Letters;
+    public ObservableCollection<GameLetter> Letters => _gameModel.Letters;
     public GameWord GuessWord => _gameModel.GuessWord;
     public string UserWord => _gameModel.UserWord;
     public int Score => _gameModel.Score;

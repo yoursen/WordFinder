@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.Text;
 using CommunityToolkit.Mvvm.ComponentModel;
 using WordFinder.Services;
@@ -31,10 +32,10 @@ public partial class GameModel : ObservableObject
         _hintsModel.PropertyChanged += (s, e) => OnPropertyChanged(e);
 
         GuessWord = GameWord.Empty;
-        
+
         _wordFitter.Initialize(GridSize);
         _wordFitter.FitBlank(_gameSettings.Language);
-        Letters = _wordFitter.Flush();
+        Letters = new ObservableCollection<GameLetter>(_wordFitter.Flush());
     }
 
     private List<GameLetter> _userWordLetters = new List<GameLetter>();
@@ -43,7 +44,7 @@ public partial class GameModel : ObservableObject
 
     [ObservableProperty] private GameWord _guessWord;
     [ObservableProperty] private string _userWord;
-    [ObservableProperty] private GameLetter[] _letters;
+    [ObservableProperty] private ObservableCollection<GameLetter> _letters;
     [ObservableProperty] private int _score;
     [ObservableProperty] private int _gameDuration;
     [ObservableProperty] private bool _isFreeplayMode;
@@ -198,7 +199,7 @@ public partial class GameModel : ObservableObject
 
             await ToggleLetter(letter);
 #if __IOS__
-                    _touchFeedback.Vibrate();
+            _touchFeedback.Vibrate();
 #endif
             await Task.Delay(40);
         }
@@ -223,8 +224,25 @@ public partial class GameModel : ObservableObject
             }
         }
         _wordFitter.FitBlank(_gameSettings.Language);
-        Letters = _wordFitter.Flush();
+
+        var letters = _wordFitter.Flush();
+        foreach (var idx in RandomNumbers(letters.Length)){
+            Letters[idx] = letters[idx];
+            await Task.Delay(2);
+        }
+
         return true;
+    }
+
+    private IEnumerable<int> RandomNumbers(int count)
+    {
+        var rnd = new Random();
+        var numbers = new HashSet<int>();
+        while (numbers.Count < count)
+        {
+            numbers.Add(rnd.Next(0, count));
+        }
+        return numbers;
     }
 
     private void UpdateUserWord()
