@@ -64,15 +64,21 @@ public partial class GamePage : ContentPage, INavigationPage
         await Task.CompletedTask;
     }
 
-    private async Task OnPenaltyApplied(object args)
+    private Task OnPenaltyApplied(object args)
     {
-        try
+        Task.Run(async () =>
         {
-            await PenaltyLabel.FadeTo(1, 250, Easing.SinOut);
-            await Task.Delay(1000);
-            await PenaltyLabel.FadeTo(0, 250, Easing.SinOut);
-        }
-        catch { }
+            try
+            {
+                await PenaltyLabel.FadeTo(1, 250, Easing.SinOut);
+                await Task.Delay(1000);
+                await PenaltyLabel.FadeTo(0, 250, Easing.SinOut);
+            }
+            catch { }
+
+        });
+
+        return Task.CompletedTask;
     }
 
     private bool _isExecuting = false;

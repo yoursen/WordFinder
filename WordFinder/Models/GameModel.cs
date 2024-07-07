@@ -31,7 +31,10 @@ public partial class GameModel : ObservableObject
         _hintsModel.PropertyChanged += (s, e) => OnPropertyChanged(e);
 
         GuessWord = GameWord.Empty;
-        Letters = Enumerable.Range(0, GridSize * GridSize).Select(r => new GameLetter("")).ToArray();
+        
+        _wordFitter.Initialize(GridSize);
+        _wordFitter.FitBlank(_gameSettings.Language);
+        Letters = _wordFitter.Flush();
     }
 
     private List<GameLetter> _userWordLetters = new List<GameLetter>();
