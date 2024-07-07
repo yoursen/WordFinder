@@ -51,14 +51,17 @@ public class Sound : ISound
         if (!IsPlayerReady)
             return;
 
-        try
+        Task.Run(() =>
         {
-            if (player.Playing)
+            try
             {
-                player.Stop();
+                if (player.Playing)
+                {
+                    player.Stop();
+                }
+                player.Play();
             }
-            player.Play();
-        }
-        catch { }
+            catch { }
+        });
     }
 }
