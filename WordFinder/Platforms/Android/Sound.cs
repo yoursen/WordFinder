@@ -1,5 +1,6 @@
 using Android.Media;
 using WordFinder.Interfaces;
+using WordFinder.Models;
 
 namespace WordFinder;
 
@@ -10,9 +11,11 @@ public class Sound : ISound
     private MediaPlayer _mediaPlayerTap;
     private MediaPlayer _mediaPlayerFail;
     private MediaPlayer _mediaPlayerSuccess;
+    private GameSettings _gameSettings;
 
-    public Sound()
+    public Sound(GameSettings gameSettings)
     {
+        _gameSettings = gameSettings;
         var context = Android.App.Application.Context;
 
         try
@@ -43,6 +46,9 @@ public class Sound : ISound
 
     private void Play(MediaPlayer player)
     {
+        if (!_gameSettings.Click)
+            return;
+
         if (!IsPlayerReady)
             return;
 

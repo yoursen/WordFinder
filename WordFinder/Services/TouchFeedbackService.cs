@@ -26,11 +26,7 @@ public class TouchFeedbackService
         }
     }
 
-    public void KeyboardClick()
-    {
-        if (_settings.Click)
-            _sound.KeyboardClick();
-    }
+    public void KeyboardClick() => _sound.KeyboardClick();
 
     public void Perform()
     {

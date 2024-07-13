@@ -1,6 +1,7 @@
 using WordFinder.Interfaces;
 using AVFoundation;
 using Foundation;
+using WordFinder.Models;
 
 namespace WordFinder;
 
@@ -10,9 +11,11 @@ public class Sound : ISound
     private readonly AVAudioPlayer _playerSuccess;
     private readonly AVAudioPlayer _playerFail;
     public bool IsPlayerReady { get; init; }
+    private GameSettings _gameSettings;
 
-    public Sound()
+    public Sound(GameSettings gameSettings)
     {
+        _gameSettings = gameSettings;
         try
         {
             NSError error;
@@ -48,6 +51,9 @@ public class Sound : ISound
 
     private void Play(AVAudioPlayer player)
     {
+        if (!_gameSettings.Click)
+            return;
+            
         if (!IsPlayerReady)
             return;
 
