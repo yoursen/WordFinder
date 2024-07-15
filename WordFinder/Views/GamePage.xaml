@@ -10,7 +10,7 @@
              x:DataType="vm:GamePageViewModel"
              Shell.NavBarIsVisible="False"
              BackgroundColor="{DynamicResource PrimaryBackground}"
-             BackgroundImageSource="game_background_image2.png">
+             BackgroundImageSource="{AppThemeBinding Light=game_background_image2.png, Dark=game_background_image2_dark.png}">
     <ContentPage.Resources>
         <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter"/>
 
@@ -25,7 +25,7 @@
                     Margin="4"
                     FontFamily="MainFontMedium"
                     FontSize="22"
-                    TextColor="{DynamicResource White}"
+                    TextColor="White"
                     BackgroundColor="{DynamicResource Primary}"
                     Text="{Binding Title}"
                     Clicked="OnLetterClicked">
@@ -58,7 +58,7 @@
                                     Swiped="OnSwipedLeft"/>
         </Grid.GestureRecognizers>
 
-        <Image Source="game_background_image2.png"
+        <Image Source="{AppThemeBinding Light=game_background_image2.png, Dark=game_background_image2_dark.png}"
                Aspect="AspectFill"
                VerticalOptions="Fill"
                HorizontalOptions="Fill"
@@ -70,12 +70,10 @@
             <Grid ColumnDefinitions="*,*">
                 <VerticalStackLayout Margin="0,10,0,0">
                     <Label Text="{x:Static strings:AppResources.Answers}"
-                           TextColor="{DynamicResource Primary}"
                            FontSize="18"
                            FontFamily="MainFontMedium"
                            HorizontalOptions="Center"/>
                     <Label Text="{Binding Score}"
-                           TextColor="{DynamicResource Primary}"
                            x:Name="ScoreLabel"
                            FontSize="20"
                            FontFamily="MainFontMedium"
@@ -86,12 +84,10 @@
                 <VerticalStackLayout Grid.Column="1"
                                      Margin="0,10,0,0">
                     <Label Text="{x:Static strings:AppResources.TimeLeft}"
-                           TextColor="{DynamicResource Primary}"
                            FontSize="18"
                            FontFamily="MainFontMedium"
                            HorizontalOptions="Center"/>
                     <Label Text="{Binding TimeLeft, StringFormat=\{0:mm\\:ss\}}"
-                           TextColor="{DynamicResource Primary}"
                            x:Name="TimeLeftLabel"
                            FontSize="20"
                            FontFamily="MainFontMedium"
@@ -106,7 +102,6 @@
                         </Label.Triggers>
                     </Label>
                     <Label Text="{Binding HintPenaltyTimeSpan.Seconds, StringFormat='-{0} sec'}"
-                           TextColor="{DynamicResource Accent3}"
                            FontSize="20"
                            FontFamily="MainFontMedium"
                            HorizontalOptions="Center"
@@ -117,7 +112,6 @@
 
             <VerticalStackLayout>
                 <Label Text="{Binding GuessWord.Category}"
-                       TextColor="{DynamicResource Primary}"
                        FontSize="18"
                        FontFamily="MainFont"
                        HorizontalOptions="Center"/>

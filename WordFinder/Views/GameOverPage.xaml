@@ -7,7 +7,7 @@
     xmlns:strings="clr-namespace:WordFinder.Resources.Strings"
     x:DataType="vm:GameOverViewModel"
     Shell.NavBarIsVisible="False"
-    BackgroundImageSource="main_background_image2.png">
+    BackgroundImageSource="{AppThemeBinding Light=game_background_image2.png, Dark=game_background_image2_dark.png}">
 
     <Grid RowDefinitions="*,auto">
         <Grid.GestureRecognizers>
@@ -15,7 +15,7 @@
                 Swiped="OnSwipedRight"/>
         </Grid.GestureRecognizers>
 
-        <Image Source="game_background_image2.png"
+        <Image Source="{AppThemeBinding Light=game_background_image2.png, Dark=game_background_image2_dark.png}"
             Grid.RowSpan="2"
             Aspect="AspectFill"
             VerticalOptions="Fill"
@@ -29,12 +29,6 @@
             <Label Text="{x:Static strings:AppResources.GameOver}"
                 Style="{StaticResource Headline}"
                 CharacterSpacing="1">
-                <Label.Shadow>
-                    <Shadow Brush="White"
-                        Offset="2,2"
-                        Radius="2"
-                        Opacity="0.5" />
-                </Label.Shadow>
             </Label>
 
             <VerticalStackLayout HorizontalOptions="CenterAndExpand">
@@ -95,7 +89,7 @@
         <Frame VerticalOptions="End"
             Grid.Row="1"
             Margin="20,0,20,20"
-            BackgroundColor="White"
+            BackgroundColor="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}"
             MaximumWidthRequest="500"
             CornerRadius="20"
             IsVisible="{Binding IsFree}">

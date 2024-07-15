@@ -6,7 +6,7 @@
     xmlns:strings="clr-namespace:WordFinder.Resources.Strings"
     x:DataType="vm:HowToPlayPopupViewModel"
     CanBeDismissedByTappingOutsideOfPopup="false"
-    Color="White">
+    Color="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}">
 
 
     <Grid RowDefinitions="*,auto">

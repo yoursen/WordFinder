@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:WordFinder"
     xmlns:views="clr-namespace:WordFinder.Views"
     Shell.FlyoutBehavior="Disabled"
-    BackgroundColor="White">
+    BackgroundColor="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}">
 
     <ShellContent
         ContentTemplate="{DataTemplate views:MainPage}"

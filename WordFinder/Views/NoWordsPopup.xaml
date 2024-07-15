@@ -5,7 +5,7 @@
     xmlns:vm="clr-namespace:WordFinder.ViewModels"
     xmlns:strings="clr-namespace:WordFinder.Resources.Strings"
     x:DataType="vm:NoWordsPopupViewModel"
-    Color="White">
+    Color="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource BackgroundDark}}">
 
     <VerticalStackLayout Spacing="20"
         MaximumWidthRequest="800"

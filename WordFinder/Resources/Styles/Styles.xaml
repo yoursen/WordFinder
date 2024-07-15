@@ -184,7 +184,7 @@
     </Style>
 
     <Style TargetType="Label">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource Text}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="MainFont" />
         <Setter Property="FontSize" Value="14" />
@@ -207,7 +207,7 @@
     </Style>
 
     <Style TargetType="Label" x:Key="Headline">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource Text}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}" />
         <Setter Property="FontSize" Value="32" />
         <Setter Property="FontFamily" Value="MainFont" />
         <Setter Property="HorizontalOptions" Value="Center" />
@@ -215,7 +215,7 @@
     </Style>
 
     <Style TargetType="Label" x:Key="SubHeadline">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource Text}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}" />
         <Setter Property="FontSize" Value="24" />
         <Setter Property="FontFamily" Value="MainFont" />
         <Setter Property="HorizontalOptions" Value="Center" />
@@ -223,7 +223,7 @@
     </Style>
 
     <Style TargetType="Label" x:Key="NormalLabel">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource Text}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Text}, Dark={StaticResource TextDark}}" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="FontFamily" Value="MainFont" />
         <Setter Property="HorizontalOptions" Value="Center" />

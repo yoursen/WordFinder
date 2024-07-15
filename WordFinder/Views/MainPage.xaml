@@ -5,10 +5,10 @@
     xmlns:strings="clr-namespace:WordFinder.Resources.Strings"
     x:Class="WordFinder.Views.MainPage"
     Shell.NavBarIsVisible="False"
-    BackgroundImageSource="main_background_image2.png">
+    BackgroundImageSource="{AppThemeBinding Light=game_background_image2.png, Dark=game_background_image2_dark.png}">
 
     <Grid>
-        <Image Source="main_background_image2.png"
+        <Image Source="{AppThemeBinding Light=game_background_image2.png, Dark=game_background_image2_dark.png}"
             Aspect="AspectFill"
             VerticalOptions="Fill"
             HorizontalOptions="Fill"
@@ -21,12 +21,6 @@
             <Label Text="Word Finder"
                 Style="{StaticResource Headline}"
                 CharacterSpacing="1">
-                <Label.Shadow>
-                    <Shadow Brush="White"
-                        Offset="2,2"
-                        Radius="2"
-                        Opacity="0.5" />
-                </Label.Shadow>
             </Label>
 
             <Button Text="{x:Static strings:AppResources.PlayGame}"
