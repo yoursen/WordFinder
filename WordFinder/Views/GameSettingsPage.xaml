@@ -25,14 +25,14 @@
         <VerticalStackLayout VerticalOptions="CenterAndExpand"
                              HorizontalOptions="Fill"
                              Padding="40,0"
-                             Spacing="40">
+                             Spacing="20">
             <Label Text="{x:Static strings:AppResources.Settings}"
                    Style="{StaticResource Headline}"
                    CharacterSpacing="1">
             </Label>
 
             <VerticalStackLayout Spacing="20"
-                                 WidthRequest="210"
+                                 WidthRequest="230"
                                  HorizontalOptions="Center">
 
                 <Grid HorizontalOptions="Fill"
@@ -58,51 +58,70 @@
                             IsToggled="{Binding Click}"/>
                 </Grid>
 
-                <Label Text="{x:Static strings:AppResources.Dictionary}"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               Style="{StaticResource SubHeadline}"/>
+                <Grid HorizontalOptions="Fill"
+                      ColumnDefinitions="auto,*">
+                    <Label Text="{x:Static strings:AppResources.Dictionary}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           Style="{StaticResource NormalLabel}"/>
+                    <Button HorizontalOptions="End"
+                            Grid.Column="1"
+                            Command="{Binding ChangeLanguageCommand}"
+                            WidthRequest="125">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button"
+                                         Binding="{Binding Language}"
+                                         Value="Ukrainian">
+                                <Setter Property="Text"
+                                        Value="{x:Static strings:AppResources.Ukrainian}"/>
+                            </DataTrigger>
+                            <DataTrigger TargetType="Button"
+                                         Binding="{Binding Language}"
+                                         Value="English">
+                                <Setter Property="Text"
+                                        Value="{x:Static strings:AppResources.English}"/>
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </Grid>
 
-                <VerticalStackLayout Spacing="20">
-                    <Grid HorizontalOptions="Fill"
-                          ColumnDefinitions="auto,*">
-                        <Label Text="{x:Static strings:AppResources.English}"
-                               HorizontalOptions="Start"
-                               VerticalOptions="Center"
-                               Style="{StaticResource NormalLabel}"/>
-                        <RadioButton HorizontalOptions="End"
-                                     Grid.Column="1"
-                                     IsChecked="{Binding IsEnglish}">
-                            <RadioButton.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnIsEnglishTapped"
-                                                      NumberOfTapsRequired="1"/>
-                            </RadioButton.GestureRecognizers>
-                        </RadioButton>
-                    </Grid>
+                <Grid HorizontalOptions="Fill"
+                      ColumnDefinitions="auto,*">
+                    <Label Text="{x:Static strings:AppResources.Theme}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           Style="{StaticResource NormalLabel}"/>
+                    <Button HorizontalOptions="End"
+                            Grid.Column="1"
+                            Command="{Binding ChangeThemeCommand}"
+                            WidthRequest="125">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button"
+                                         Binding="{Binding Theme}"
+                                         Value="Auto">
+                                <Setter Property="Text"
+                                        Value="{x:Static strings:AppResources.Auto}"/>
+                            </DataTrigger>
+                            <DataTrigger TargetType="Button"
+                                         Binding="{Binding Theme}"
+                                         Value="Light">
+                                <Setter Property="Text"
+                                        Value="{x:Static strings:AppResources.Light}"/>
+                            </DataTrigger>
+                            <DataTrigger TargetType="Button"
+                                         Binding="{Binding Theme}"
+                                         Value="Dark">
+                                <Setter Property="Text"
+                                        Value="{x:Static strings:AppResources.Dark}"/>
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </Grid>
 
-                    <Grid HorizontalOptions="Fill"
-                          ColumnDefinitions="auto,*">
-                        <Label Text="{x:Static strings:AppResources.Ukrainian}"
-                               HorizontalOptions="Start"
-                               VerticalOptions="Center"
-                               Style="{StaticResource NormalLabel}"/>
-                        <RadioButton HorizontalOptions="End"
-                                     Grid.Column="1"
-                                     IsChecked="{Binding IsUkrainian}">
-                            <RadioButton.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnIsUkrainianTapped"
-                                                      NumberOfTapsRequired="1"/>
-                            </RadioButton.GestureRecognizers>
-                        </RadioButton>
-                    </Grid>
-                </VerticalStackLayout>
-            </VerticalStackLayout>
-
-            <VerticalStackLayout Spacing="20"
-                                 HorizontalOptions="Center">
                 <Button Style="{StaticResource MenuButtonStyle}"
                         Text="{x:Static strings:AppResources.MainMenu}"
-                        Clicked="OnMainMenuClicked"/>
+                        Clicked="OnMainMenuClicked"
+                        WidthRequest="230"/>
             </VerticalStackLayout>
 
         </VerticalStackLayout>

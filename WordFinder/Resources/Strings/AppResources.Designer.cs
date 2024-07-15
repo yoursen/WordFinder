@@ -114,5 +114,9 @@ namespace WordFinder.Resources.Strings
         internal static string Congratulations => ResourceManager.GetString("Congratulations", resourceCulture);
         internal static string NoWordsFree => ResourceManager.GetString("NoWordsFree", resourceCulture);
         internal static string NoWordsPremium => ResourceManager.GetString("NoWordsPremium", resourceCulture);
+        internal static string Theme => ResourceManager.GetString("Theme", resourceCulture);
+        internal static string Dark => ResourceManager.GetString("Dark", resourceCulture);
+        internal static string Light => ResourceManager.GetString("Light", resourceCulture);
+        internal static string Auto => ResourceManager.GetString("Auto", resourceCulture);
     }
 }

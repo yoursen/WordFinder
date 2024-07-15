@@ -193,4 +193,16 @@
   <data name="NoWordsPremium" xml:space="preserve">
     <value>You've successfully guessed all the words in the premium version of the application. We appreciate your choice in selecting this game. Please note that the word list will now be reset to keep the challenge fresh for you. Thank you for being part of our gaming community!</value>
   </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="Auto" xml:space="preserve">
+    <value>Auto</value>
+  </data>
 </root>

@@ -148,4 +148,16 @@
  <data name="NoWordsPremium" xml:space="preserve">
   <value>Ви успішно вгадали всі слова у преміум-версії додатка. Ми вдячні за ваш вибір цієї гри. Зверніть увагу, що список слів буде скинуто, щоб зберегти для вас свіжість виклику. Дякуємо, що ви є частиною нашої ігрової спільноти!</value>
  </data>
+   <data name="Theme" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Світла</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Темна</value>
+  </data>
+  <data name="Auto" xml:space="preserve">
+    <value>Авто</value>
+  </data>
 </root>

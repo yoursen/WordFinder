@@ -20,17 +20,22 @@ public partial class GameSettingsViewModel : ObservableObject
     public bool IsPro => _license.IsPro;
     [ObservableProperty] private int _totalWordsPro = 583;
     public ICommand RestorePurchaseCommand { get; }
+    public ICommand ChangeLanguageCommand { get; }
+    public ICommand ChangeThemeCommand { get; }
 
     public GameSettingsViewModel(GameSettings gameSettings, ISound sound, LicenseService license,
         TouchFeedbackService feedback, GameDatabase db)
     {
         _gameSettings = gameSettings;
+
         _sound = sound;
         _license = license;
         _feedback = feedback;
         _db = db;
 
         RestorePurchaseCommand = new Command(RestorePurchaseCommandHandler);
+        ChangeLanguageCommand = new Command(ChangeLanguageCommandHandler);
+        ChangeThemeCommand = new Command(ChangeThemeCommandHandler);
     }
 
     public bool Vibrate
@@ -45,29 +50,23 @@ public partial class GameSettingsViewModel : ObservableObject
         set => _gameSettings.Click = value;
     }
 
-    public bool IsEnglish
+    public GameTheme Theme
     {
-        get => _gameSettings.Language == GameLanguage.English;
+        get => _gameSettings.Theme;
         set
         {
-            if (value)
-                _gameSettings.Language = GameLanguage.English;
-
-            OnPropertyChanged(nameof(IsUkrainian));
-            OnPropertyChanged(nameof(IsEnglish));
+            _gameSettings.Theme = value;
+            OnPropertyChanged(nameof(Theme));
         }
     }
 
-    public bool IsUkrainian
+    public GameLanguage Language
     {
-        get => _gameSettings.Language == GameLanguage.Ukrainian;
+        get => _gameSettings.Language;
         set
         {
-            if (value)
-                _gameSettings.Language = GameLanguage.Ukrainian;
-
-            OnPropertyChanged(nameof(IsUkrainian));
-            OnPropertyChanged(nameof(IsEnglish));
+            _gameSettings.Language = value;
+            OnPropertyChanged(nameof(Language));
         }
     }
 
@@ -85,6 +84,29 @@ public partial class GameSettingsViewModel : ObservableObject
         finally
         {
             _isPurchangeInProgress = false;
+        }
+    }
+
+    private void ChangeLanguageCommandHandler(object obj)
+    {
+        _feedback.Perform();
+        Language = Language == GameLanguage.English ? GameLanguage.Ukrainian : GameLanguage.English;
+    }
+
+    private void ChangeThemeCommandHandler(object obj)
+    {
+        _feedback.Perform();
+        switch (Theme)
+        {
+            case GameTheme.Auto:
+                Theme = GameTheme.Light;
+                break;
+            case GameTheme.Light:
+                Theme = GameTheme.Dark;
+                break;
+            case GameTheme.Dark:
+                Theme = GameTheme.Auto;
+                break;
         }
     }
 

@@ -8,6 +8,7 @@ public class GameSettings
         _click = Preferences.Default.Get(nameof(Click), true);
         _isFirstGame = Preferences.Default.Get(nameof(IsFirstGame), true);
         _language = (GameLanguage)Preferences.Default.Get(nameof(Language), (int)GameLanguage.English);
+        Theme = (GameTheme)Preferences.Default.Get(nameof(Theme), (int)GameTheme.Auto);
     }
 
     private GameLanguage _language;
@@ -18,6 +19,29 @@ public class GameSettings
         {
             _language = value;
             Preferences.Default.Set(nameof(Language), (int)_language);
+        }
+    }
+
+    private GameTheme _gameTheme;
+    public GameTheme Theme
+    {
+        get => _gameTheme;
+        set
+        {
+            _gameTheme = value;
+            switch (_gameTheme)
+            {
+                case GameTheme.Auto:
+                    Application.Current.UserAppTheme = AppTheme.Unspecified;
+                    break;
+                case GameTheme.Light:
+                    Application.Current.UserAppTheme = AppTheme.Light;
+                    break;
+                case GameTheme.Dark:
+                    Application.Current.UserAppTheme = AppTheme.Dark;
+                    break;
+            }
+            Preferences.Default.Set(nameof(Theme), (int)_gameTheme);
         }
     }
 

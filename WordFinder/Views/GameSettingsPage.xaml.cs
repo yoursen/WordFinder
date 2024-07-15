@@ -52,7 +52,4 @@ public partial class GameSettingsPage : ContentPage, INavigationPage
         _ = GoHome();
         return true;
     }
-
-    public void OnIsEnglishTapped(object sendeer, EventArgs e) => _viewModel.IsEnglish = true;
-    public void OnIsUkrainianTapped(object sendeer, EventArgs e) => _viewModel.IsUkrainian = true;
 }
