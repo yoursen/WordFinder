@@ -21,7 +21,7 @@
                 <Label Text="{x:Static strings:AppResources.HowToPlay1}"
                     Style="{StaticResource NormalLabel}" />
 
-                <Image Source="tap.png"
+                <Image Source="{AppThemeBinding Light=tap.png, Dark=tap_dark.png}"
                     Margin="0,10,0,0"
                     HeightRequest="200"
                     HorizontalOptions="Center" />
@@ -43,7 +43,7 @@
                 <Label Text="{x:Static strings:AppResources.HowToPlay2}"
                     Style="{StaticResource NormalLabel}" />
 
-                <Image Source="hint.png"
+                <Image Source="{AppThemeBinding Light=hint.png, Dark=hint_dark.png}"
                     Margin="0,10,0,0"
                     HeightRequest="200"
                     HorizontalOptions="Center" />
@@ -65,7 +65,7 @@
                 <Label Text="{x:Static strings:AppResources.HowToPlay3}"
                     Style="{StaticResource NormalLabel}" />
 
-                <Image Source="next.png"
+                <Image Source="{AppThemeBinding Light=next.png, Dark=next_dark.png}"
                     Margin="0,10,0,0"
                     HeightRequest="200"
                     VerticalOptions="End"/>
