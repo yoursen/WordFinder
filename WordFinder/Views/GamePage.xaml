@@ -117,7 +117,7 @@
                        HorizontalOptions="Center"/>
 
                 <Label Text="{Binding GuessWord.Description}"
-                       HeightRequest="75"
+                       MinimumHeightRequest="75"
                        Margin="15,0,15,0"
                        FontSize="18"
                        FontFamily="MainFont"
